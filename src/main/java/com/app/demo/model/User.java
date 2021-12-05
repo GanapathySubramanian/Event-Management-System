@@ -8,9 +8,13 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 @Entity
 public class User {
-	    @GeneratedValue(strategy = GenerationType.AUTO)
-		private int id;		
-		@Id
+	   
+	    
+	
+	    @Id
+	    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	    private int id;		
+		
 		@Column(name="email")
 		private String email;
 		
@@ -34,6 +38,17 @@ public class User {
 		
 		@Column(name="confirm_password")
 		private String ConfirmPassword;
+		
+		@Column(name="role")
+		private String role;
+		
+		
+		public String getRole() {
+			return role;
+		}
+		public void setRole(String role) {
+			this.role = role;
+		}
 		public int getId() {
 			return id;
 		}
@@ -91,9 +106,10 @@ public class User {
 		}
 		@Override
 		public String toString() {
-			return "User [Id=" + id + ", FirstName=" + FirstName + ", LastName=" + LastName + ", email=" + email
-					+ ", Address=" + Address + ", Gender=" + Gender + ", contactno=" + contactno + ", Password="
-					+ Password + ", ConfirmPassword=" + ConfirmPassword + "]";
+			return "User [id=" + id + ", email=" + email + ", FirstName=" + FirstName + ", LastName=" + LastName
+					+ ", Address=" + Address + ", contactno=" + contactno + ", Gender=" + Gender + ", Password="
+					+ Password + ", ConfirmPassword=" + ConfirmPassword + ", role=" + role + "]";
 		}
+		
 		
 }
