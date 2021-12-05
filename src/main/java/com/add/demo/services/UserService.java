@@ -29,7 +29,7 @@ public class UserService {
 	public void save(User user)
 	{
 		userRepository.save(user);
-		System.out.println("heelo");
+		System.out.println("hello");
 	}
 
 
