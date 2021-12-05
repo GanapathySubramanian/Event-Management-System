@@ -7,25 +7,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.add.demo.services.UserService;
 import com.app.demo.model.User;
+import com.app.demo.services.UserServices;
 
 @Controller
 public class UserController {
 	
 	@Autowired
-	private UserService service;
+	private UserServices service;
 	
 	
 	@RequestMapping(value="/registerForm",method= RequestMethod.POST)
 	public String UserRegister(@ModelAttribute("registerForm") User user,Model model)
 	{
 		System.out.println(user);
-		model.addAttribute("user",user);
-		service.save(user);
 		
-		System.out.println("Success");
-		return "Login";
+		model.addAttribute("user",user);
+		System.out.println(user.getEmail());
+//		String result=service.findByEmail(user.getEmail());
+			service.save(user);
+			System.out.println("Success");
+			return "Login";
+		
 	}
 	
 }
