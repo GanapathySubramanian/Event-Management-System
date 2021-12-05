@@ -11,5 +11,5 @@ import com.app.demo.model.User;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, String> {
-  
+	public User findByEmail(String email);
 }

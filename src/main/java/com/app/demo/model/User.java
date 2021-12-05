@@ -1,32 +1,44 @@
 package com.app.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 @Entity
-@Table(name="user")
 public class User {
-	
-		
 	    @GeneratedValue(strategy = GenerationType.AUTO)
-		private int Id;
+		private int id;		
+		@Id
+		@Column(name="email")
+		private String email;
+		
+		@Column(name="first_name")
 		private String FirstName;
+		
+		@Column(name="last_name")
 		private String LastName;
 		
-		@Id
-		private String email;
+		@Column(name="Address")
 		private String Address;
-		private String Gender;
+		
+		@Column(name="contact_no")
 		private String contactno;
+		
+		@Column(name="gender")
+		private String Gender;
+		
+		@Column(name="password")
 		private String Password;
+		
+		@Column(name="confirm_password")
 		private String ConfirmPassword;
 		public int getId() {
-			return Id;
+			return id;
 		}
 		public void setId(int id) {
-			Id = id;
+			this.id = id;
 		}
 		public String getFirstName() {
 			return FirstName;
@@ -70,21 +82,18 @@ public class User {
 		public void setConfirmPassword(String confirmPassword) {
 			ConfirmPassword = confirmPassword;
 		}
-		@Override
-		public String toString() {
-			return "User [Id=" + Id + ", FirstName=" + FirstName + ", LastName=" + LastName + ", email=" + email
-					+ ", Address=" + Address + ", Gender=" + Gender + ", Password=" + Password + ", ConfirmPassword="
-					+ ConfirmPassword + "]";
-		}
+		
 		public String getContactno() {
 			return contactno;
 		}
 		public void setContactno(String contactno) {
 			this.contactno = contactno;
 		}
-		
-		
-		
-		
+		@Override
+		public String toString() {
+			return "User [Id=" + id + ", FirstName=" + FirstName + ", LastName=" + LastName + ", email=" + email
+					+ ", Address=" + Address + ", Gender=" + Gender + ", contactno=" + contactno + ", Password="
+					+ Password + ", ConfirmPassword=" + ConfirmPassword + "]";
+		}
 		
 }
