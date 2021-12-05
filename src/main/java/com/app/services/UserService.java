@@ -10,7 +10,7 @@ import com.app.Repository.UserRepo;
 import com.app.model.User;
 
 
-@Component
+@Service
 public class UserService {
     
 	@Autowired
