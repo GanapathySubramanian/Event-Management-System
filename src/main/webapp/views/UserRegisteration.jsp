@@ -30,7 +30,7 @@
 				                                <i class="fa fa-user text-muted"></i>
 				                            </span>
 				                        </div>
-				                        <input id="firstName" type="text" name="firstname" placeholder="First Name" class="form-control bg-white border-left-0 border-md" required>
+				                        <input id="firstName" type="text" name="FirstName" placeholder="First Name" class="form-control bg-white border-left-0 border-md" required>
 				                    </div>
 
 				                    <!-- Last Name -->
@@ -40,7 +40,7 @@
 				                                <i class="fa fa-user text-muted"></i>
 				                            </span>
 				                        </div>
-				                        <input id="lastName" type="text" name="lastname" placeholder="Last Name" class="form-control bg-white border-left-0 border-md" required>
+				                        <input id="lastName" type="text" name="LastName" placeholder="Last Name" class="form-control bg-white border-left-0 border-md" required>
 				                    </div>
 
 				                    <!-- Email Address -->
@@ -71,7 +71,7 @@
 				                                <i class="fas fa-map-marker-alt text-muted"></i>
 				                            </span>
 				                        </div>
-										<textarea class="form-control" placeholder="Address" id="floatingTextarea"></textarea>
+										<textarea class="form-control" name="Address" placeholder="Address" id="floatingTextarea"></textarea>
   										                      
 				                    </div>
 									
@@ -106,7 +106,7 @@
 				                                <i class="fa fa-lock text-muted"></i>
 				                            </span>
 				                        </div>
-				                        <input id="passwordConfirmation" type="password" name="conformPassword" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md" required>
+				                        <input id="passwordConfirmation" type="password" name="ConfirmPassword" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md" required>
 				                    </div>
                     
                     
