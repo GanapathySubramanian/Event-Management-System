@@ -6,7 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.app"})
+@ComponentScan({"com"})
 public class EventManagementSystemApplication {
 
 	public static void main(String[] args) {

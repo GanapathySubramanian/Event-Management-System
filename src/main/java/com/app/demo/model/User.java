@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,11 +19,9 @@ public class User {
 		private String email;
 		private String Address;
 		private String Gender;
+		private String contactno;
 		private String Password;
 		private String ConfirmPassword;
-		private String Role;
-		
-		
 		public int getId() {
 			return Id;
 		}
@@ -72,18 +70,19 @@ public class User {
 		public void setConfirmPassword(String confirmPassword) {
 			ConfirmPassword = confirmPassword;
 		}
-		public String getRole() {
-			return Role;
-		}
-		public void setRole(String role) {
-			Role = role;
-		}
 		@Override
 		public String toString() {
 			return "User [Id=" + Id + ", FirstName=" + FirstName + ", LastName=" + LastName + ", email=" + email
 					+ ", Address=" + Address + ", Gender=" + Gender + ", Password=" + Password + ", ConfirmPassword="
-					+ ConfirmPassword + ", Role=" + Role + "]";
+					+ ConfirmPassword + "]";
 		}
+		public String getContactno() {
+			return contactno;
+		}
+		public void setContactno(String contactno) {
+			this.contactno = contactno;
+		}
+		
 		
 		
 		
