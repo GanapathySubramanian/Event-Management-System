@@ -24,25 +24,25 @@
                 </li>
                  -->
                 <li>
-                    <a href="#">User</a>
+                    <a href="/adminuserdetails">User</a>
                 </li>
                 <li>
-                    <a href="#">Hotels</a>
+                    <a href="/adminhoteldetails">Hotels</a>
                 </li>
                 <li>
-                    <a href="#">Caterings</a>
+                    <a href="/admincateringdetails">Caterings</a>
                 </li>
                 <li>
-                    <a href="#">Vendors</a>
+                    <a href="/adminvendordetails">Vendors</a>
                 </li>
                 <li>
-                    <a href="#">Booking</a>
+                    <a href="/adminbookingdetails">Booking</a>
                 </li>
             </ul>
 
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="" class="download text-warning">Accounts</a>
+                    <a href="/adminaccount" class="download text-warning">Accounts</a>
                 </li>
                 <li>
                     <a href="/logout" class="article">Logout</a>

@@ -24,16 +24,16 @@
                 </li>
                  -->
                 <li>
-                    <a href="#">New Booking</a>
+                    <a href="/usernewbooking">New Booking</a>
                 </li>
                 <li>
-                    <a href="#">Booking Details</a>
+                    <a href="/userbookingdetails">Booking Details</a>
                 </li>
              </ul>
 
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="" class="download text-warning">Accounts</a>
+                    <a href="/useraccount" class="download text-warning">Accounts</a>
                 </li>
                 <li>
                     <a href="/logout" class="article">Logout</a>
