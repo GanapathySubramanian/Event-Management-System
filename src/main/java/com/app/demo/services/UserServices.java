@@ -1,5 +1,7 @@
 package com.app.demo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +33,16 @@ public class UserServices {
 		
 		return user;
 	}
+
+	public List<User> findAll() {
+		
+		return userrepo.findAll();
+	}
 	
+
+	public void deleteUser(int id) {
+		// TODO Auto-generated method stub
+		System.out.println("deleting....");
+		userrepo.deleteById(id);
+	}
 }

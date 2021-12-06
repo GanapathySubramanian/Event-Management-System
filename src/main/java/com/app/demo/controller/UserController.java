@@ -29,6 +29,7 @@ public class UserController {
 //		String result=service.findByEmail(user.getEmail());
 			service.save(user);
 			System.out.println("Success");
+			
 			return "redirect:/signin";
 		
 	}

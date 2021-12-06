@@ -23,11 +23,14 @@
                     </ul>
                 </li>
                  -->
+                  <li>
+                    <a href="/userhome">Dashboard</a>
+                </li>
                 <li>
                     <a href="/usernewbooking">New Booking</a>
                 </li>
                 <li>
-                    <a href="/userbookingdetails">Booking Details</a>
+                    <a href="/userbookingdetails">My Bookings</a>
                 </li>
              </ul>
 

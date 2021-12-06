@@ -17,97 +17,116 @@ public class User {
 		private String email;
 		
 		@Column(name="first_name")
-		private String FirstName;
+		private String firstName;
 		
 		@Column(name="last_name")
-		private String LastName;
+		private String lastName;
 		
 		@Column(name="Address")
-		private String Address;
+		private String address;
 		
 		@Column(name="contact_no")
 		private String contactno;
 		
 		@Column(name="gender")
-		private String Gender;
+		private String gender;
 		
 		@Column(name="password")
-		private String Password;
+		private String password;
 		
 		@Column(name="confirm_password")
-		private String ConfirmPassword;
+		private String confirmPassword;
 		
 		@Column(name="role")
 		private String role;
-		
-		
-		public String getRole() {
-			return role;
-		}
-		public void setRole(String role) {
-			this.role = role;
-		}
+
 		public int getId() {
 			return id;
 		}
+
 		public void setId(int id) {
 			this.id = id;
 		}
-		public String getFirstName() {
-			return FirstName;
-		}
-		public void setFirstName(String firstName) {
-			FirstName = firstName;
-		}
-		public String getLastName() {
-			return LastName;
-		}
-		public void setLastName(String lastName) {
-			LastName = lastName;
-		}
+
 		public String getEmail() {
 			return email;
 		}
+
 		public void setEmail(String email) {
 			this.email = email;
 		}
+
+		public String getFirstName() {
+			return firstName;
+		}
+
+		public void setFirstName(String firstName) {
+			this.firstName = firstName;
+		}
+
+		public String getLastName() {
+			return lastName;
+		}
+
+		public void setLastName(String lastName) {
+			this.lastName = lastName;
+		}
+
 		public String getAddress() {
-			return Address;
+			return address;
 		}
+
 		public void setAddress(String address) {
-			Address = address;
+			this.address = address;
 		}
-		public String getGender() {
-			return Gender;
-		}
-		public void setGender(String gender) {
-			Gender = gender;
-		}
-		public String getPassword() {
-			return Password;
-		}
-		public void setPassword(String password) {
-			Password = password;
-		}
-		public String getConfirmPassword() {
-			return ConfirmPassword;
-		}
-		public void setConfirmPassword(String confirmPassword) {
-			ConfirmPassword = confirmPassword;
-		}
-		
+
 		public String getContactno() {
 			return contactno;
 		}
+
 		public void setContactno(String contactno) {
 			this.contactno = contactno;
 		}
+
+		public String getGender() {
+			return gender;
+		}
+
+		public void setGender(String gender) {
+			this.gender = gender;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+		public String getConfirmPassword() {
+			return confirmPassword;
+		}
+
+		public void setConfirmPassword(String confirmPassword) {
+			this.confirmPassword = confirmPassword;
+		}
+
+		public String getRole() {
+			return role;
+		}
+
+		public void setRole(String role) {
+			this.role = role;
+		}
+
 		@Override
 		public String toString() {
-			return "User [id=" + id + ", email=" + email + ", FirstName=" + FirstName + ", LastName=" + LastName
-					+ ", Address=" + Address + ", contactno=" + contactno + ", Gender=" + Gender + ", Password="
-					+ Password + ", ConfirmPassword=" + ConfirmPassword + ", role=" + role + "]";
+			return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+					+ ", address=" + address + ", contactno=" + contactno + ", gender=" + gender + ", password="
+					+ password + ", confirmPassword=" + confirmPassword + ", role=" + role + "]";
 		}
+		
 		
 		
 }

@@ -26,6 +26,12 @@ public class Hotel {
     @Column(name="hotel_img1")
 	private String hotelImg1;
 
+    @Column(name="price")
+    private int price;
+    
+    @Column(name="location")
+    private String location;
+
 	public int getId() {
 		return Id;
 	}
@@ -58,12 +64,27 @@ public class Hotel {
 		this.hotelImg1 = hotelImg1;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	@Override
 	public String toString() {
 		return "Hotel [Id=" + Id + ", hotelName=" + hotelName + ", hotelDesc=" + hotelDesc + ", hotelImg1=" + hotelImg1
-				+ "]";
+				+ ", price=" + price + ", location=" + location + "]";
 	}
-    
-    
-    
+
+	
 }

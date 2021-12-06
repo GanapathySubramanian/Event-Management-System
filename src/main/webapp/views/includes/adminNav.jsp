@@ -4,7 +4,7 @@
             <div class="sidebar-header bg-dark">
                 <h3>ADMIN</h3>
             </div>
-
+				<hr class="bg-info">
             <ul class="list-unstyled components">
                 <p></p>
                 <!-- 
@@ -24,6 +24,9 @@
                 </li>
                  -->
                 <li>
+                    <a href="/adminhome">Dashboard</a>
+                </li>
+                <li>
                     <a href="/adminuserdetails">User</a>
                 </li>
                 <li>
@@ -42,7 +45,7 @@
 
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="/adminaccount" class="download text-warning">Accounts</a>
+                    <a href="/adminaccount" class="download">Accounts</a>
                 </li>
                 <li>
                     <a href="/logout" class="article">Logout</a>
