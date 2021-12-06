@@ -2,7 +2,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar" class="bg-dark">
             <div class="sidebar-header bg-dark">
-                <h3>ADMIN</h3>
+                <h3>User</h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -24,21 +24,12 @@
                 </li>
                  -->
                 <li>
-                    <a href="#">User</a>
+                    <a href="#">New Booking</a>
                 </li>
                 <li>
-                    <a href="#">Hotels</a>
+                    <a href="#">Booking Details</a>
                 </li>
-                <li>
-                    <a href="#">Caterings</a>
-                </li>
-                <li>
-                    <a href="#">Vendors</a>
-                </li>
-                <li>
-                    <a href="#">Booking</a>
-                </li>
-            </ul>
+             </ul>
 
             <ul class="list-unstyled CTAs">
                 <li>

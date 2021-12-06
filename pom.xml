@@ -30,12 +30,7 @@
 		    <artifactId>tomcat-jasper</artifactId>
 		    <version>9.0.55</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-security</artifactId>
-		    <version>2.6.1</version>
-		</dependency>
+		
 					
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -58,11 +53,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+		
 	</dependencies>
 
 	<build>

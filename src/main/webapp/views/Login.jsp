@@ -23,7 +23,7 @@
 		        <!-- Registeration Form -->
 		        <div class="col-lg-6 col-md-12 col-sm-12 mt-5">
 		        <div class="login-form">
-		         <form action="validation.php" method="POST" enctype="multipart/form-data" >
+		         <form action="/login-validation" modelAttribute="loginForm" method="POST" >
 		        <h2 class="text-center mb-4">Sign in</h2>
 		        <div class="form-group mt-3">
 		        	<div class="input-group">
