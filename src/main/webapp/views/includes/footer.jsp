@@ -13,5 +13,6 @@
             });
         });
     </script>
+    <script src="../assets/js/pagination.js"></script>
 </body>
 </html>

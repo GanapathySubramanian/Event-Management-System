@@ -60,6 +60,20 @@ public class UserController {
 	}
 	
 	
+	@RequestMapping(value="/usernewbooking",method=RequestMethod.GET)
+	public String userBookingForm() {
+	    return "UserBookingForm";  //Where you go after logout here.
+	}
+	@RequestMapping(value="/userbookingdetails",method=RequestMethod.GET)
+	public String userBookingDetails() {
+	    return "UserBookingDetails";  //Where you go after logout here.
+	}
+	@RequestMapping(value="/useraccount",method=RequestMethod.GET)
+	public String userAccount() {
+	    return "UserAccount";  //Where you go after logout here.
+	}
+
+	
 	
 	
 	
