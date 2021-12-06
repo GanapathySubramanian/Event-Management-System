@@ -22,6 +22,8 @@
 				        <!-- Registeration Form -->
 				        <div class="col-md-12 col-lg-6 col-sm-12 mt-3">
 				           <form action="/registerForm" modelAttribute="registerForm" method="POST">
+				           		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				           		<input type="hidden" name="role" value="User" />
 				                <div class="row">
 				                    <!-- First Name -->
 				                    <div class="input-group col-lg-6 mb-4">
