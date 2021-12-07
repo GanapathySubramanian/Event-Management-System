@@ -1,8 +1,10 @@
 package com.app.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.app.demo.model.User;
@@ -34,8 +36,11 @@ public class UserServices {
 		return user;
 	}
 
+
 	public List<User> findAll() {
-		
+//		if(keyword!=null) {
+//			return userrepo.findAll(keyword);
+//		}
 		return userrepo.findAll();
 	}
 	
@@ -45,4 +50,14 @@ public class UserServices {
 		System.out.println("deleting....");
 		userrepo.deleteById(id);
 	}
+
+	public User findById(int id) {
+		return userrepo.findById(id).orElse(null);
+	}
+	
+	public void updateUserDetails(String email,String firstName,String lastName,String gender,String contactno,String address,String role,int id) {
+		userrepo.updateUser(email, firstName, lastName, gender, contactno, address, role, id);
+	}
+	
+	
 }

@@ -13,6 +13,7 @@ import com.app.demo.model.User;
 import com.app.demo.services.UserServices;
 
 @Controller
+
 public class UserController {
 	
 	@Autowired
@@ -45,12 +46,22 @@ public class UserController {
 		if(userDetail!=null) {
 			if(userDetail.getPassword().equals(user.getPassword())) {
 				System.out.println(userDetail.toString());
-				session.setAttribute("Loggeduser",userDetail);
+				
 				if(userDetail.getRole().equals("Admin")) {
+					session.setAttribute("LoggedasAdmin",userDetail);
 					return "redirect:/adminhome";
 				}
 				else if(userDetail.getRole().equals("User")) {
+					session.setAttribute("username",userDetail.getFirstName());
 					return "redirect:/userhome";
+				}
+				else if(userDetail.getRole().equals("SubAdmin")) {
+					session.setAttribute("LoggedassubAdmin",userDetail);
+					return "redirect:/subadminhome";
+				}
+				else if(userDetail.getRole().equals("SuperAdmin")) {
+					session.setAttribute("LoggedasuperAdmin",userDetail);
+					return "redirect:/superadminhome";
 				}
 			}
 		}
@@ -60,6 +71,15 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="/subadminhome",method=RequestMethod.GET)
+	public String subAdminHome() {
+	    return "SubAdminHome";  
+	}
+	
+	@RequestMapping(value="/superadminhome",method=RequestMethod.GET)
+	public String superAdminHome() {
+	    return "SuperAdminHome";  
+	}
 	
 	@RequestMapping(value="/usernewbooking",method=RequestMethod.GET)
 	public String userBookingForm() {
@@ -75,6 +95,30 @@ public class UserController {
 	}
 
 	
+	
+	@RequestMapping(value="/usercateringdetails",method=RequestMethod.GET)
+	public String userCateringDetails() {
+	    return "UserCateringDetails"; 
+	}
+	
+	@RequestMapping(value="/userhoteldetails",method=RequestMethod.GET)
+	public String userHotelDetails() {
+	    return "UserHotelDetails"; 
+	}
+	
+	@RequestMapping(value="/uservendordetails",method=RequestMethod.GET)
+	public String userVendorDetails() {
+	    return "UserVendorDetails";  
+	}
+	
+	
+	
+	@RequestMapping(value="/usereventdetails",method=RequestMethod.GET)
+	public String userEventDetails() {
+	    return "UserEventDetails";  
+	}
+	
+
 	
 	
 	

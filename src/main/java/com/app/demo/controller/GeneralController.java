@@ -50,13 +50,14 @@ public class GeneralController {
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
-	public String logout() {
-	    return "redirect:/signin";  //Where you go after logout here.
+	public String logout(HttpSession session) {
+		session.invalidate();
+	    return "redirect:/signin"; 
 	}
 	
 	@RequestMapping(value="/loginfailed",method=RequestMethod.GET)
 	public String loginfailed() {
-	    return "LoginFailed";  //Where you go after logout here.
+	    return "LoginFailed";
 	}
 	
 	

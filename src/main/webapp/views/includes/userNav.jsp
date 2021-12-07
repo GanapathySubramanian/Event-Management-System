@@ -1,8 +1,10 @@
+
  <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar" class="bg-dark">
             <div class="sidebar-header bg-dark">
                 <h3>User</h3>
+                <h3 class="text-white"><%= session.getAttribute("username") %></h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -27,6 +29,18 @@
                     <a href="/userhome">Dashboard</a>
                 </li>
                 <li>
+                    <a href="/userhoteldetails">Hotels</a>
+                </li>
+                 <li>
+                    <a href="/usereventdetails">Events</a>
+                </li>
+                <li>
+                    <a href="/usercateringdetails">Catering</a>
+                </li>
+                <li>
+                    <a href="/uservendordetails">Vendor</a>
+                </li>
+                <li>
                     <a href="/usernewbooking">New Booking</a>
                 </li>
                 <li>
@@ -34,9 +48,9 @@
                 </li>
              </ul>
 
-            <ul class="list-unstyled CTAs">
+           <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="/useraccount" class="download text-warning">Accounts</a>
+                    <a href="/useraccount" class="download">Accounts</a>
                 </li>
                 <li>
                     <a href="/logout" class="article">Logout</a>

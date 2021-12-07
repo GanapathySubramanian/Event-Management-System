@@ -2,8 +2,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar" class="bg-dark">
             <div class="sidebar-header bg-dark">
-                <h3>ADMIN</h3>
-                
+                <h3>SUPERADMIN</h3>
             </div>
 				<hr class="bg-info">
             <ul class="list-unstyled components">
@@ -25,31 +24,28 @@
                 </li>
                  -->
                 <li>
-                    <a href="/adminhome">Dashboard</a>
+                    <a href="/superadminhome">Dashboard</a>
                 </li>
                 <li>
-                    <a href="/adminuserdetails">User</a>
+                    <a href="/superadminhoteldetails">Hotels</a>
                 </li>
                 <li>
-                    <a href="/adminhoteldetails">Hotels</a>
+                    <a href="/superadmincateringdetails">Caterings</a>
                 </li>
                 <li>
-                    <a href="/admincateringdetails">Caterings</a>
-                </li>
-                <li>
-                    <a href="/adminvendordetails">Vendors</a>
+                    <a href="/superadminvendordetails">Vendors</a>
                 </li>
                  <li>
-                    <a href="/admineventdetails">EventS</a>
+                    <a href="/superadmineventdetails">EventS</a>
                 </li>
                 <li>
-                    <a href="/adminbookingdetails">Booking</a>
+                    <a href="/superadminbookingdetails">Booking</a>
                 </li>
             </ul>
 
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="/adminaccount" class="download">Accounts</a>
+                    <a href="/superadminaccount" class="download">Accounts</a>
                 </li>
                 <li>
                     <a href="/logout" class="article">Logout</a>

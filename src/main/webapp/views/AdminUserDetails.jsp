@@ -22,15 +22,16 @@
         <div>
         
     <nav class="navbar navbar-light">
-        <a class="navbar-brand text-info font-weight-bold" ><h3>Users List</h3></a>
+        <a class="navbar-brand text-info font-weight-bold" ><h3>USERS LIST</h3></a>
         
         
         <form class="d-flex">
             <button type="button" class="btn btn-info ml-2" name="add_user" data-toggle="modal" data-target="#AdduserModal" data-whatever="@mdo">Add User</button>
         </form>
 		
-		<form class="d-flex"  action="" method="POST" autocomplete="off">
-            <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
+		<form class="d-flex"  action="" modelAttribute="searchValue" method="POST" autocomplete="off">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
             <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
         </form>
         
@@ -51,27 +52,27 @@
 
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">First Name:</label>
-                        <input type="text" class="form-control" placeholder="FirstName" name="FirstName" id="firstName" required>
+                        <input type="text" class="form-control" placeholder="FirstName" name="FirstName" id="f_name" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Last Name:</label>
-                        <input type="text" class="form-control" placeholder="LastName" name="LastName" id="lastName" required>
+                        <input type="text" class="form-control" placeholder="LastName" name="LastName" id="L_Name" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Email Id:</label>
-                        <input type="text" class="form-control" name="email" placeholder="Email Id"id="email" required>
+                        <input type="text" class="form-control"  placeholder="Email Id" name="email" id="email_id" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Phone Number:</label>
-						<input  class="form-control"  type="tel" name="contactno" pattern="[6789][0-9]{9}" placeholder="Phone Number" id="phoneNumber" required>
+						<input  class="form-control"  type="tel" name="contactno" pattern="[6789][0-9]{9}" placeholder="Phone Number" id="contact" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Address:</label>
-						<textarea class="form-control" name="Address" placeholder="Address" id="floatingTextarea"></textarea>
+						<textarea class="form-control" name="Address" placeholder="Address" id="add"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Gender:</label>
-                        <select id="gender" name="gender" class="form-control" required>
+                        <select id="gen" name="gender"  class="form-control" required>
 							<option value="">Choose the Gender</option>
 							<option value="male">Male</option>
 							<option value="female">Female</option>
@@ -79,11 +80,11 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Password:</label>
-                        <input id="password" type="password" name="password" placeholder="Password" class="form-control" required>
+                        <input id="pass" type="password" name="password" placeholder="Password" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Confirm Password:</label>
-                        <input id="passwordConfirmation" type="password" name="ConfirmPassword" placeholder="Confirm Password" class="form-control" required>
+                        <input id="passwordConfirmation" type="password" name="ConfirmPassword" placeholder="Confirm Pass" class="form-control" required>
                     </div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label">Role</label>
@@ -137,7 +138,6 @@
 		                </tr>
 		            </thead>
 		                <tbody>
-		                ${Uselist}
 		                	 <c:forEach var="user" items="${Userlist}" >
 					            <tr>
 					            <td>${user.firstName}</td>
@@ -148,8 +148,9 @@
 					            <td>${user.address}</td>
 					            <td>${user.role}</td>
 					            <td class="d-flex">
-					            	<a href="" class="btn btn-info">EDIT</a>
-					            	<a href="/admindeleteuser/${user.email}" class="btn btn-danger ml-2">DELETE</a>
+					            	<a href="/adminedituser/${user.email}" class="btn btn-info edit" data-toggle="modal" name="edit_user" data-target="#EdituserModal" data-whatever="@mdo">EDIT</a>
+					            	<input type="hidden" value="${user.id}" id="edit_id">
+									<a href="/admindeleteuser/${user.email}" class="btn btn-danger ml-2">DELETE</a>
 					            </td>
 					            </tr>
 		        			</c:forEach>
@@ -171,5 +172,104 @@
 		        </div>
 		        </div>
 		    </div>
+
+
+	
+			 <!-- Edit User modal -->
+			 <div class="modal fade" id="EdituserModal" tabindex="-1" role="dialog" aria-labelledby="AdduserModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="/EdituserForm" modelAttribute="userEditForm" method="POST">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<input type="hidden" name="id" id="User_id">
+						<div class="modal-body">
+		
+							<div class="modal-body">
+
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">First Name:</label>
+									<input type="text" class="form-control" placeholder="FirstName" name="FirstName" id="FirstName" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Last Name:</label>
+									<input type="text" class="form-control" placeholder="LastName" name="LastName" id="LastName" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Email Id:</label>
+									<input type="text" class="form-control"  placeholder="Email Id" name="email" id="email" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Phone Number:</label>
+									<input  class="form-control"  type="tel" name="contactno" id="contactno" pattern="[6789][0-9]{9}" placeholder="Phone Number"  required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Address:</label>
+									<textarea class="form-control" name="Address" placeholder="Address" id="Address"></textarea>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Gender:</label>
+									<select id="gender" name="gender"  class="form-control" required>
+										<option value="">Choose the Gender</option>
+										<option value="male">Male</option>
+										<option value="female">Female</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Role</label>
+									<select id="role" name="role" class="form-control" required>
+										<option value="">Choose the role</option>
+										<option value="User">User</option>
+										<option value="Admin">Admin</option>
+										<option value="SubAdmin">SubAdmin</option>
+										<option value="SuperAdmin">SuperAdmin</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-info" name="adduser" >Edit User</button>
+						</div>
+					</form>
+					</div>
+				</div>
+				</div>
+
+		
 	
 <jsp:include page="includes/footer.jsp" />  
+
+
+</script>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $('table .edit').click(function ()
+            {
+				var id=$(this).parent().find('#edit_id').val();
+
+				console.log(id)
+                $.ajax({
+                    type: "GET",
+                    url: "${pageContext.request.contextPath}/find/"+id, //this is my servlet
+                    data: "input=" +$('#ip').val()+"&output="+$('#op').val(),
+                    success: function(user){      
+                            $('#EdituserModal #User_id').val(user.id);
+							$('#EdituserModal #FirstName').val(user.firstName);
+							$('#EdituserModal #LastName').val(user.lastName);
+							$('#EdituserModal #email').val(user.email);
+							$('#EdituserModal #contactno').val(user.contactno);
+							$('#EdituserModal #Address').val(user.address);
+							$('#EdituserModal #gender').val(user.gender);
+							$('#EdituserModal #role').val(user.role);
+                    }
+                });
+            });
+
+        });
+    </script>
