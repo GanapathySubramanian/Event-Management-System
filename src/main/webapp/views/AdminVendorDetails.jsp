@@ -1,25 +1,142 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="includes/header.jsp" />  
 	
-	<jsp:include page="includes/adminNav.jsp" />  
-	
-	
-	    <!-- Page Content  -->
-        <div id="content">
+<jsp:include page="includes/adminNav.jsp" />  
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
-                    </button>
-                    
+    <!-- Page Content  -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
+                
+            </div>
+        </nav>
+
+    <div>
+    
+<nav class="navbar navbar-light">
+    <a class="navbar-brand text-info font-weight-bold" ><h3>VENDOR LIST</h3></a>
+
+    <form class="d-flex">
+        <button type="button" class="btn btn-info ml-2" name="add_vendor" data-toggle="modal" data-target="#AddvendorModal" data-whatever="@mdo">Add vendor</button>
+    </form>
+
+
+    <form class="d-flex"  action="" method="POST" autocomplete="off">
+        <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
+        <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
+    </form>
+
+
+     <!-- Add User modal -->
+     <div class="modal fade" id="AddvendorModal" tabindex="-1" role="dialog" aria-labelledby="AdduserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Vendor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/addvendorForm" modelAttribute="vendorForm"  method="POST" enctype= "multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">vendor Name:</label>
+                        <input type="text" class="form-control" placeholder="Vendor Name" name="vendorname" id="vendorname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">vendor Description</label>
+						<textarea class="form-control" name="vendor_desc" placeholder="Hotel Description" id="vendor_desc"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">vendor Image:</label>
+                        <input type="file" class="form-control" name="vendor_img" id="vendor_img" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">vendor Price:</label>
+						<input  class="form-control"  type="text" name="vendor_price"  placeholder="Hotel Price" id="vendor_price" required>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">vendor Location:</label>
+						<textarea class="form-control" name="vendor_location" placeholder="Hotel Location" id="vendor_location"></textarea>
+                    </div>
                 </div>
-            </nav>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info" name="addvendor" >Add vendor</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
 
-        <div>
-        	AdminVendorDetails
+</nav>
+
+
+    <label class="text-info font-weight-bold"> Select No.of.rows to display :</label>
+      <select class  ="form-control" name="state" id="maxRows">
+            <option value="5000">Show ALL Rows</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="70">70</option>
+            <option value="100">100</option>
+        </select>
+
+
+        <div class="table-responsive">
+            <table class="content-table table" id="table-id">
+                <thead>
+                    <tr>
+                    <th>VENDOR NAME</th>
+                    <th>VENDOR DESCRIPTION</th>
+                    <th>VENDOR IMG1</th>
+                    <th>VENDOR PRICE</th>
+                    <th>LOCATION</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+                <tbody>
+                	 <c:forEach var="allvendor" items="${vendorlist}" >
+			            <tr>
+			            <td>${allvendor.vendorname}</td>
+			            <td>${allvendor.vendor_desc}</td>
+			           <td ><img src="data:image/jpeg;base64,${allvendor.vendor_img}" width="100" height="100"/></td>
+			            <td>${allvendor.vendor_price}</td>
+			            <td>${allvendor.vendor_location}</td>
+                        <td class="d-flex">
+                            <a href="" class="btn btn-info">EDIT</a>
+                            <a href="/admindeletevendor/${allvendor.vendorname}" class="btn btn-danger ml-2">DELETE</a>
+                        </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+                    
+                </table> 
+            </div>
+            
+              <div class='pagination-container mt-2'>
+            <nav>
+                <ul class="pagination">
+                   <li class="page-item" style="cursor:pointer;" data-page="prev" ><span class="page-link"> < <span class="sr-only">(current)</span></span></li>
+                   <!--	Here the JS Function Will Add the Rows -->
+                    <li class="page-item" style="cursor:pointer;"  data-page="next" id="prev"><span class="page-link"> > <span class="sr-only">(current)</span></span></li>
+                </ul>
+            </nav>
+        </div>
+        
+        </div>
         </div>
     </div>
-	
 <jsp:include page="includes/footer.jsp" />  

@@ -15,7 +15,7 @@ public class Hotel {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private int Id;
+	private int id;
     
     @Column(name="hotel_name")
 	private String hotelName;
@@ -33,11 +33,11 @@ public class Hotel {
     private String location;
 
 	public int getId() {
-		return Id;
+		return this.id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getHotelName() {
@@ -82,7 +82,7 @@ public class Hotel {
 
 	@Override
 	public String toString() {
-		return "Hotel [Id=" + Id + ", hotelName=" + hotelName + ", hotelDesc=" + hotelDesc + ", hotelImg1=" + hotelImg1
+		return "Hotel [Id=" + id + ", hotelName=" + hotelName + ", hotelDesc=" + hotelDesc + ", hotelImg1=" + hotelImg1
 				+ ", price=" + price + ", location=" + location + "]";
 	}
 

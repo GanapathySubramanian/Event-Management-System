@@ -44,30 +44,30 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/addhotelForm" modelAttribute="hotelForm" method="POST">
+            <form action="/addhotelForm" modelAttribute="hotelForm"  method="POST" enctype= "multipart/form-data">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <div class="modal-body">
 
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Hotel Name:</label>
-                        <input type="text" class="form-control" placeholder="Hotel Name" name="HotelName" id="hotelName" required>
+                        <input type="text" class="form-control" placeholder="Hotel Name" name="hotelName" id="hotelName" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Hotel Description</label>
-						<textarea class="form-control" name="HotelDescription" placeholder="Hotel Description" id="HotelDescription"></textarea>
+						<textarea class="form-control" name="hotelDesc" placeholder="Hotel Description" id="hotelDesc"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Hotel Image:</label>
-                        <input type="file" class="form-control" name="HotelImg1" id="HotelImg1" required>
+                        <input type="file" class="form-control" name="hotelImg1" id="hotelImg1" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Hotel Price:</label>
-						<input  class="form-control"  type="text" name="Price"  placeholder="Hotel Price" id="HotelPrice" required>
+						<input  class="form-control"  type="text" name="price"  placeholder="Hotel Price" id="price" required>
                     </div>
                    
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Hotel Location:</label>
-						<textarea class="form-control" name="Hotellocation" placeholder="Hotel Location" id="Hotellocation"></textarea>
+						<textarea class="form-control" name="location" placeholder="Hotel Location" id="location"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -112,12 +112,12 @@
 			            <tr>
 			            <td>${allhotel.hotelName}</td>
 			            <td>${allhotel.hotelDesc}</td>
-			            <td>${allhotel.hotelImg1}</td>
+			           <td ><img src="data:image/jpeg;base64,${allhotel.hotelImg1}" class="rounded-circle" width="100" height="100"/></td>
 			            <td>${allhotel.price}</td>
-			                      <td>${allhotel.location}</td>
+			            <td>${allhotel.location}</td>
                         <td class="d-flex">
                             <a href="" class="btn btn-info">EDIT</a>
-                            <a href="" class="btn btn-danger ml-2">DELETE</a>
+                            <a href="/admindeletehotel/${allhotel.id}" class="btn btn-danger ml-2">DELETE</a>
                         </td>
                         </tr>
                     </c:forEach>
