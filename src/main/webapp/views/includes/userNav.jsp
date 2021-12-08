@@ -4,9 +4,12 @@
         <nav id="sidebar" class="bg-dark">
             <div class="sidebar-header bg-dark">
                 <h3>User</h3>
-                <h3 class="text-white"><%= session.getAttribute("username") %></h3>
+                
+                <br />
+                
+                <h3 class="text-white"><%= session.getAttribute("User_firstname") %></h3>
             </div>
-
+<hr class="bg-info">
             <ul class="list-unstyled components">
                 <p></p>
                 <!-- 

@@ -8,11 +8,12 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.CollectionId;
 
-@Entity
+@Entity(name="vendor")
 public class Vendor {
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
 	@Id
+	private int id;
+	
 	@Column(name="vendorname")
 	private String vendorname;
 	

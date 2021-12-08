@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.app.demo.model.Catering;
+import com.app.demo.model.Event;
 import com.app.demo.model.Hotel;
 import com.app.demo.model.User;
 import com.app.demo.model.Vendor;
@@ -28,6 +29,7 @@ import com.app.demo.repository.CateringRepo;
 import com.app.demo.repository.HotelRepo;
 import com.app.demo.repository.VendorRepo;
 import com.app.demo.services.CateringServices;
+import com.app.demo.services.EventServices;
 import com.app.demo.services.HotelServices;
 import com.app.demo.services.UserServices;
 import com.app.demo.services.VendorServices;
@@ -48,12 +50,10 @@ public class AdminController {
 	@Autowired
 	private VendorServices vendorservice;
 
-	
 	@Autowired
-	private VendorRepo vendorrepo;
+	private EventServices eventservice;
 	
-	@Autowired
-	private CateringRepo caterrepo;
+
 	
 	//User Registration
 	@RequestMapping(value="/adduserForm",method= RequestMethod.POST)
@@ -98,7 +98,7 @@ public class AdminController {
 	
 
 	//Model find and fill for User
-		@RequestMapping(value="find/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+		@RequestMapping(value="userfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
 		public ResponseEntity<User> adminEditDetails(@PathVariable("id") int id) {
 			try {
 				return new ResponseEntity<User>(userservice.findById(id),HttpStatus.OK);
@@ -134,18 +134,72 @@ public class AdminController {
 	@RequestMapping(value="/admindeletehotel/{id}")
 	public String admindeleteHotel(@PathVariable int id)
 	{
-		Optional<Hotel> h = hotelservice.findById(id);
-		System.out.println(h);
-		hotelservice.deleteHotel(id);
+		Hotel hotel=hotelservice.findById(id);
+		System.out.println(hotel);
+		if(hotel.getHotelName()!=null) {
+			hotelservice.deleteHotel(id);
+			return "redirect:/adminhoteldetails";
+		}
 		return "redirect:/adminhoteldetails";
 	}
 	
 	//Add Hotel 
 	@RequestMapping(value="/addhotelForm")
-	public String savehotel(@RequestParam("hotelName") String hotelname,@RequestParam("hotelDesc") String hotelDesc,@RequestParam("location") String hotelLoc,@RequestParam("price") int hotelPrice,@RequestParam("hotelImg1") MultipartFile file) {
+	public String savehotel(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("hotelName") String hotelname,@RequestParam("hotelDesc") String hotelDesc,@RequestParam("location") String hotelLoc,@RequestParam("price") int hotelPrice,@RequestParam("hotelImg1") MultipartFile file) {
 		hotelservice.savehoteltoDB(file, hotelname, hotelDesc, hotelLoc, hotelPrice);
-		return "redirect:/adminhoteldetails";
+		
+		if(role1.equals("subadmin")&& role2.equals("not"))
+		{
+			return "redirect:/subadminhoteldetails";
+		}
+		else if(role1.equals("not")&& role2.equals("superadmin"))
+		{
+			return "redirect:/superadminhoteldetails";
+		}
+		else {
+			return "redirect:/adminhoteldetails";
+			}
 	}
+	
+	//Hotel find
+	@RequestMapping(value="hotelfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Hotel> adminhoteEditDetails(@PathVariable("id") int id) {
+		try {
+			return new ResponseEntity<Hotel>(hotelservice.findById(id),HttpStatus.OK);
+		}
+	    catch(Exception e) {
+	    	return new ResponseEntity<Hotel>(HttpStatus.BAD_REQUEST);
+	    }
+		
+	}
+	
+	//Edit hotel
+	@RequestMapping(value="/EdithotelForm",method=RequestMethod.POST)
+	public String updateHotel(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("hotelName") String hotelname,@RequestParam("hotelDesc") String hotelDesc,@RequestParam("location") String hotelLoc,@RequestParam("price") int hotelPrice,@RequestParam("hotelImg1") MultipartFile file ,@RequestParam("id") int id)  {
+		
+		if(file.isEmpty())
+		{
+			hotelservice.updateHotelDetails(hotelname,hotelDesc,hotelLoc,hotelPrice,id);
+		}
+		else 
+		{
+			hotelservice.updateHotelDetailswithImage(hotelname,hotelDesc,hotelLoc,hotelPrice,file,id);
+		}
+		if(role1.equals("subadmin")&& role2.equals("not"))
+		{
+			return "redirect:/subadminhoteldetails";
+		}
+		else if(role1.equals("not")&& role2.equals("superadmin"))
+		{
+			return "redirect:/superadminhoteldetails";
+		}
+		else 
+		{
+			return "redirect:/adminhoteldetails";
+		}
+		
+	}
+	
 	
 	
 	//Catering Table
@@ -157,22 +211,72 @@ public class AdminController {
 	}
 	
 	//Delete Catering
-	@RequestMapping(value="/admindeletecater/{catername}")
-	public String admindeleteCater(@PathVariable String catername)
+	@RequestMapping(value="/admindeletecater/{id}")
+	public String admindeleteCater(@PathVariable int id)
 	{
-		Catering c = caterservice.findByCatername(catername);
-		System.out.println(c);
-		caterrepo.deleteById(catername);
+		Catering c=caterservice.findById(id);
+		if(c.getCatername()!=null) {
+			caterservice.deletecater(id);
+			return "redirect:/admincateringdetails";
+		}
 		return "redirect:/admincateringdetails";
 	}
+	
 	
 	//Add Catering
 	@RequestMapping(value="/addcaterForm")
-	public String saveCater(@RequestParam("catername") String catername,@RequestParam("cater_desc") String caterDesc,@RequestParam("cater_location") String caterLoc,@RequestParam("cater_price") int caterprice,@RequestParam("cater_img") MultipartFile file) {
+	public String saveCater(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("catername") String catername,@RequestParam("cater_desc") String caterDesc,@RequestParam("cater_location") String caterLoc,@RequestParam("cater_price") int caterprice,@RequestParam("cater_img") MultipartFile file) {
 		caterservice.savecatertoDB(file, catername, caterDesc, caterLoc, caterprice);
-		return "redirect:/admincateringdetails";
+		if(role1.equals("subadmin")&& role2.equals("not"))
+		{
+			return "redirect:/subadmincateringdetails";
+		}
+		else if(role1.equals("not")&& role2.equals("superadmin"))
+		{
+			return "redirect:/superadmincateringdetails";
+		}
+		else {
+			return "redirect:/admincateringdetails";
+
+			
+		}
 	}
 	
+	@RequestMapping(value="caterfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Catering> admincaterEditDetails(@PathVariable("id") int id) {
+		try {
+			return new ResponseEntity<Catering>(caterservice.findById(id),HttpStatus.OK);
+		}
+	    catch(Exception e) {
+	    	return new ResponseEntity<Catering>(HttpStatus.BAD_REQUEST);
+	    }
+		
+	}
+	
+	@RequestMapping(value="/EditcaterForm",method=RequestMethod.POST)
+	public String updateCater(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("catername") String catername,@RequestParam("cater_desc") String caterdesc,@RequestParam("cater_location") String caterloc,@RequestParam("cater_price") int caterprice,@RequestParam("cater_img") MultipartFile file ,@RequestParam("id") int id)  {
+		
+		if(file.isEmpty())
+		{
+			caterservice.updateCaterDetails(catername,caterdesc,caterloc,caterprice,id);
+		}
+		else {
+			caterservice.updateCaterDetailswithImage(catername,caterdesc,caterloc,caterprice,file,id);
+		}
+		if(role1.equals("subadmin")&& role2.equals("not"))
+		{
+			return "redirect:/subadmincateringdetails";
+		}
+		else if(role1.equals("not")&& role2.equals("superadmin"))
+		{
+			return "redirect:/superadmincateringdetails";
+		}
+		else {
+			return "redirect:/admincateringdetails";
+
+			
+		}
+	}
 	
 	//Vendor Table
 	@RequestMapping(value="/adminvendordetails",method=RequestMethod.GET)
@@ -184,27 +288,73 @@ public class AdminController {
 	
 	
 	//Delete Vendor
-	@RequestMapping(value="/admindeletevendor/{vendorname}")
-	public String admindeleteVendor(@PathVariable String vendorname) {
-		Vendor v = vendorservice.findByVendorname(vendorname);
+	@RequestMapping(value="/admindeletevendor/{id}")
+	public String admindeleteVendor(@PathVariable int id ) {
+		Vendor v =vendorservice.findById(id);
 		System.out.println(v);
-		vendorrepo.deleteById(vendorname);
+		vendorservice.deletevendor(id);
 		return "redirect:/adminvendordetails";
 	}
 	
 	//Add Vendor
 	@RequestMapping(value="/addvendorForm")
-	public String saveVendor(@RequestParam("vendorname") String vendorname,@RequestParam("vendor_desc") String vendorDesc,@RequestParam("vendor_location") String vendorLoc,@RequestParam("vendor_price") int vendorprice,@RequestParam("vendor_img") MultipartFile file) {
+	public String saveVendor(@RequestParam("subadmin") String role1 ,@RequestParam("superadmin") String role2,@RequestParam("vendorname") String vendorname,@RequestParam("vendor_desc") String vendorDesc,@RequestParam("vendor_location") String vendorLoc,@RequestParam("vendor_price") int vendorprice,@RequestParam("vendor_img") MultipartFile file) {
 		vendorservice.savevendortodb(file, vendorname,vendorDesc,vendorLoc,vendorprice);
-		return "redirect:/adminvendordetails";
+		if(role1.equals("subadmin")&& role2.equals("not"))
+		{
+			return "redirect:/subadminvendordetails";
+		}
+		else if(role1.equals("not")&& role2.equals("superadmin"))
+		{
+			return "redirect:/superadminvendordetails";
+		}
+		else {
+			return "redirect:/adminvendordetails";
+
+			
+		}
 		
 	}
 	
-	
-	@RequestMapping(value="/admineventdetails",method=RequestMethod.GET)
-	public String adminEventDetails() {
-	    return "AdminEventDetails";  
+	@RequestMapping(value="vendorfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Vendor> adminvendorEditDetails(@PathVariable("id") int id) {
+		try {
+			return new ResponseEntity<Vendor>(vendorservice.findById(id),HttpStatus.OK);
+		}
+	    catch(Exception e) {
+	    	return new ResponseEntity<Vendor>(HttpStatus.BAD_REQUEST);
+	    }
+		
 	}
+	
+	@RequestMapping(value="/EditvendorForm",method=RequestMethod.POST)
+	public String updatevendor(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("vendorname") String vendorname,@RequestParam("vendor_desc") String vendordesc,@RequestParam("vendor_location") String vendorloc,@RequestParam("vendor_price") int vendorprice,@RequestParam("vendor_img") MultipartFile file ,@RequestParam("id") int id)  {
+		if(file.isEmpty())
+		{
+			vendorservice.updatevendorDetails(vendorname,vendordesc,vendorloc,vendorprice,id);
+		}
+		else {
+			vendorservice.updateVendorDetailswithImage(vendorname,vendordesc,vendorloc,vendorprice,file,id);
+		}
+		
+		if(role1.equals("subadmin")&& role2.equals("not"))
+		{
+			return "redirect:/subadminvendordetails";
+		}
+		else if(role1.equals("not")&& role2.equals("superadmin"))
+		{
+			return "redirect:/superadminvendordetails";
+		}
+		else {
+			return "redirect:/adminvendordetails";
+
+			
+		}
+		
+	}
+
+	
+	
 	
 	//Booking details
 	@RequestMapping(value="/adminbookingdetails",method=RequestMethod.GET)
@@ -217,4 +367,82 @@ public class AdminController {
 	public String adminAccount() {
 	    return "AdminAccount";  
 	}
+	
+	
+	
+	
+	//Event Table
+		@RequestMapping(value="/admineventdetails",method=RequestMethod.GET)
+		public String adminEventDetails(ModelMap model) {
+			List<Event> event=eventservice.findAll();
+			model.addAttribute("eventlist",event);
+		    return "AdminEventDetails"; 
+			
+		}
+		
+		@RequestMapping(value="/admindeleteevent/{id}")
+		public String admindeleteEvent(@PathVariable int id ) {
+			Event v =eventservice.findById(id);
+			System.out.println(v);
+			eventservice.deleteevent(id);
+			return "redirect:/admineventdetails";
+		}
+		
+		
+		//Add event
+		@RequestMapping(value="/addeventForm")
+		public String saveevent(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("eventname") String eventname,@RequestParam("event_desc") String eventDesc,@RequestParam("event_img") MultipartFile file) {
+			eventservice.saveeventtoDB(file, eventname,eventDesc);
+			if(role1.equals("subadmin")&& role2.equals("not"))
+			{
+				return "redirect:/subadmineventdetails";
+			}
+			else if(role1.equals("not")&& role2.equals("superadmin"))
+			{
+				return "redirect:/superadmineventdetails";
+			}
+			else 
+			{
+				return "redirect:/admineventdetails";
+			}
+			
+			}
+				@RequestMapping(value="eventfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+				public ResponseEntity<Event> admineventEditDetails(@PathVariable("id") int id) {
+					try {
+						return new ResponseEntity<Event>(eventservice.findById(id),HttpStatus.OK);
+					}
+				    catch(Exception e) {
+				    	return new ResponseEntity<Event>(HttpStatus.BAD_REQUEST);
+				    }
+					
+				}
+				
+				@RequestMapping(value="/EditeventForm",method=RequestMethod.POST)
+				public String updateevent(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("eventname") String eventname,@RequestParam("event_desc") String eventdesc,@RequestParam("event_img") MultipartFile file ,@RequestParam("id") int id)  {
+					
+					if(file.isEmpty())
+					{
+						eventservice.updateeventDetails(eventname,eventdesc,id);
+					}
+					else {
+						eventservice.updateeventDetailswithImage(eventname,eventdesc,file,id);
+					}
+					if(role1.equals("subadmin")&& role2.equals("not"))
+					{
+						return "redirect:/subadmineventdetails";
+					}
+					else if(role1.equals("not")&& role2.equals("superadmin"))
+					{
+						return "redirect:/superadmineventdetails";
+					}
+					else {
+						return "redirect:/admineventdetails";
+
+						
+					}
+					
+				}
+
+
 }

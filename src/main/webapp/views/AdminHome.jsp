@@ -1,3 +1,4 @@
+<%if (session.getAttribute("Admin_email") == null) {response.sendRedirect("/signin"); } else {%> 
 <jsp:include page="includes/header.jsp" />  
 	
 	<jsp:include page="includes/adminNav.jsp" />  
@@ -6,15 +7,23 @@
 	    <!-- Page Content  -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-                    
                    
+                   <div>
+                    	<p>Welcome 
+                    	<% if(session.getAttribute("Admin_gender").equals("male")){ %> 
+                    		Mr.
+                    	<%}else{%> 
+                    		Miss.
+                    	<%}%> 
+                    	<span class="font-weight-bold text-info">${Admin_firstname} ${Admin_lastname}</span></p>
+                    </div>
                 </div>
             </nav>
 
@@ -47,3 +56,4 @@
 	
 
 <jsp:include page="includes/footer.jsp" />  
+<%}%>

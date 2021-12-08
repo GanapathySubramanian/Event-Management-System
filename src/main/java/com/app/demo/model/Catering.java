@@ -1,18 +1,24 @@
 package com.app.demo.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-@Entity
+@Entity(name="catering")
 public class Catering {
 	
 
 	@GeneratedValue( strategy = GenerationType.AUTO)
-	private int id;
 	@Id
+	private int id;
+	
 	@Column(name="catername")
 	private String catername;
 	
@@ -28,6 +34,9 @@ public class Catering {
 	@Column(name="cater_img")
 	private String cater_img;
 
+	@OneToMany(mappedBy="catering",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private List<Booking> booking;
+	
 	public int getId() {
 		return id;
 	}

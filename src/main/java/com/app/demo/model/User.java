@@ -1,11 +1,16 @@
 package com.app.demo.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 @Entity(name="user")
 public class User {
 	   
@@ -40,6 +45,10 @@ public class User {
 		@Column(name="role")
 		private String role;
 
+		@OneToMany(mappedBy="user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+		private List<Booking> booking;
+		
+		
 		public int getId() {
 			return id;
 		}

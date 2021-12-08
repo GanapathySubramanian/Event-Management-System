@@ -1,8 +1,15 @@
+<%if (session.getAttribute("User_email") == null) {
+            response.sendRedirect("/signin");
+        } else {%> 
+
+
 <jsp:include page="includes/header.jsp" />  
 	
 	<jsp:include page="includes/userNav.jsp" />  
 	
-	
+
+
+               
 	    <!-- Page Content  -->
         <div id="content">
 
@@ -13,7 +20,18 @@
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-                    
+                    <div>
+                    	<h3 class="text-info">USER DASHBOARD</h3>
+                    </div>
+                    <div>
+                    	<p>Welcome 
+                    	<% if(session.getAttribute("User_gender").equals("male")){ %> 
+                    		Mr.
+                    	<%}else{%> 
+                    		Miss.
+                    	<%}%> 
+                    	<span class="font-weight-bold text-info">${User_firstname} ${User_lastname}</span></p>
+                    </div>
                 </div>
             </nav>
 
@@ -36,6 +54,10 @@
             <h3>Lorem Ipsum Dolor</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
+        
+        
     </div>
 
+
 <jsp:include page="includes/footer.jsp" />  
+<%}%> 

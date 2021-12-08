@@ -62,19 +62,39 @@ public class CateringServices {
 		
 	}
 
-	public Catering findById(String id){
-		Catering  cater = new Catering();
-		Catering c = cateringrepo.findByCatername(cater.getCatername());
-		return c;
-	}
-	public void deletecater(String id)
+	
+	public void deletecater(int id)
 	{
 		System.out.println("deleting...");
 		cateringrepo.deleteById(id);
 	}
 
-	public Catering findByCatername(String catername) {
-		cateringrepo.findByCatername(catername);
-		return null;
+
+
+	public Catering findById(int id) {
+		return cateringrepo.findById(id).orElse(null);
+		
 	}
+
+	
+
+	public void updateCaterDetailswithImage(String catername, String caterdesc, String caterloc, int caterprice, MultipartFile file, int id) {
+		String image="";
+		try {
+			
+			image= Base64.getEncoder().encodeToString(file.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cateringrepo.updateCaterwithImage(catername, caterdesc,  caterloc, caterprice ,image, id);
+		
+		
+	}
+
+	public void updateCaterDetails(String catername, String caterdesc, String caterloc, int caterprice, int id) {
+		cateringrepo.updateCater(catername, caterdesc, caterloc, caterprice, id);
+	}
+
+	
 }

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.app.demo.model.Catering;
+
 import com.app.demo.model.Vendor;
 
 import com.app.demo.repository.VendorRepo;
@@ -35,11 +35,7 @@ public class VendorServices {
 		vendorrepo.save(vendor);
 	}
 	
-	public Vendor findByVendorname(String vendorname) {
-		Vendor vendor =vendorrepo.findByVendorname(vendorname);
-		
-		return vendor;
-	}
+	
 
 	public List<Vendor> findAll() {
 		
@@ -64,14 +60,33 @@ public class VendorServices {
 			vendorrepo.save(v);
 		
 	}
-	public void deletevendor(String id)
+	public void deletevendor(int id)
 	{
 		System.out.println("deleting...");
 		vendorrepo.deleteById(id);
 	}
 
-	public Vendor findByCatername(String catername) {
-		vendorrepo.findByVendorname(catername);
-		return null;
+	public Vendor findById(int id) {
+		return vendorrepo.findById(id).orElse(null);
 	}
+	
+	public void updateVendorDetailswithImage(String vendorname, String vendordesc, String vendorloc, int vendorprice, MultipartFile file, int id) {
+		String image="";
+		try {
+			
+			image= Base64.getEncoder().encodeToString(file.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		vendorrepo.updatevendorwithImage(vendorname, vendordesc,  vendorloc, vendorprice ,image, id);
+		
+		
+		}
+	public void updatevendorDetails(String vendorname, String vendordesc, String vendorloc, int vendorprice, int id) {
+		vendorrepo.updatevendor(vendorname, vendordesc, vendorloc, vendorprice, id);
+	}
+
+
+	
 }

@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.demo.model.Hotel;
+import com.app.demo.model.User;
 import com.app.demo.repository.HotelRepo;
 
 @Service
@@ -49,14 +50,28 @@ public class HotelServices {
 		}
 
 		
-		public Optional<Hotel> findById(int id){
-			Hotel hotel = new Hotel();
-			Optional<Hotel> h = hotelrepo.findById(hotel.getId());
-			return h;
+		public Hotel findById(int id) {
+			return hotelrepo.findById(id).orElse(null);
 		}
 		public void deleteHotel(int id)
 		{
 			System.out.println("deleting...");
 			hotelrepo.deleteById(id);
 		}
+		public void updateHotelDetails(String hotelname,String hoteldesc, String location,int price,int id) {
+			hotelrepo.updateHotel(hotelname, hoteldesc, location, price,id);
+		}
+		public void updateHotelDetailswithImage(String hotelName, String hotelDesc, String location, int price,MultipartFile file,int id) {
+			String image="";
+			try {
+				
+				image= Base64.getEncoder().encodeToString(file.getBytes());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			hotelrepo.updateHotelwithImage(hotelName, hotelDesc,  location, price ,image, id);
+			
+		}
+		
 }

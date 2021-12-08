@@ -1,16 +1,20 @@
 package com.app.demo.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.mysql.cj.jdbc.Blob;
 
-@Entity
-@Table(name="hotel")
+@Entity(name="hotel")
 public class Hotel {
 
     @Id
@@ -32,6 +36,9 @@ public class Hotel {
     @Column(name="location")
     private String location;
 
+    @OneToMany(mappedBy="hotel",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private List<Booking> booking;
+    
 	public int getId() {
 		return this.id;
 	}

@@ -1,3 +1,4 @@
+<%if (session.getAttribute("Admin_email") == null) {response.sendRedirect("/signin"); } else {%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="includes/header.jsp" />  
 	
@@ -7,16 +8,27 @@
     <!-- Page Content  -->
     <div id="content">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
 
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>Toggle Sidebar</span>
-                </button>
-                
-            </div>
-        </nav>
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <div>
+                    	<h3 class="text-info">HOTEL DETAILS</h3>
+                    </div>
+                   <div>
+                    	<p>Welcome 
+                    	<% if(session.getAttribute("Admin_gender").equals("male")){ %> 
+                    		Mr.
+                    	<%}else{%> 
+                    		Miss.
+                    	<%}%> 
+                    	<span class="font-weight-bold text-info">${Admin_firstname} ${Admin_lastname}</span></p>
+                    </div>
+                </div>
+            </nav>
 
     <div>
     
@@ -46,6 +58,8 @@
             </div>
             <form action="/addhotelForm" modelAttribute="hotelForm"  method="POST" enctype= "multipart/form-data">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<input type="hidden" name="subadmin" value="not"/>
+				<input type="hidden" name="superadmin" value="not"/>
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -116,7 +130,8 @@
 			            <td>${allhotel.price}</td>
 			            <td>${allhotel.location}</td>
                         <td class="d-flex">
-                            <a href="" class="btn btn-info">EDIT</a>
+                            <a class="btn btn-info edit" data-toggle="modal" name="edit_user" data-target="#EdithotelModal" data-whatever="@mdo">EDIT</a>
+					         <input type="hidden" value="${allhotel.id}" id="edit_id">
                             <a href="/admindeletehotel/${allhotel.id}" class="btn btn-danger ml-2">DELETE</a>
                         </td>
                         </tr>
@@ -139,4 +154,82 @@
         </div>
         </div>
     </div>
+    
+     <!-- Edit User modal -->
+			 <div class="modal fade" id="EdithotelModal" tabindex="-1" role="dialog" aria-labelledby="AdduserModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="/EdithotelForm" modelAttribute="hotelEditForm" method="POST" enctype= "multipart/form-data">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<input type="hidden" name="subadmin" value="not"/>
+							<input type="hidden" name="superadmin" value="not"/>
+						<input type="hidden" name="id" id="hotel_id">
+						<div class="modal-body">
+		
+							<div class="modal-body">
+
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Hotel Name:</label>
+									<input type="text" class="form-control" placeholder="FirstName" name="hotelName" id="hotelName1" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Hotel Description:</label>
+									<input type="text" class="form-control" placeholder="HotelDesc" name="hotelDesc" id="hotelDesc1" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Hotel price:</label>
+									<input type="text" class="form-control"  placeholder="hotel price Id" name="price" id="price1" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Address:</label>
+									<textarea class="form-control" name="location" placeholder="Hotel location" id="location1"></textarea>
+								</div>
+								<div class="form-group">
+                       			 <label for="message-text" class="col-form-label">Hotel Image:</label>
+                     		   <input type="file" class="form-control" name="hotelImg1" id="hotelImg11" >
+                  			  </div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-info" name="EditHotel" >Edit Hotel</button>
+						</div>
+					</form>
+					</div>
+				</div>
+				</div>
+				
+				
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $('table .edit').click(function ()
+            {
+				var id=$(this).parent().find('#edit_id').val();
+
+				console.log(id)
+                $.ajax({
+                    type: "GET",
+                    url: "${pageContext.request.contextPath}/hotelfind/"+id, //this is my servlet
+                    data: "input=" +$('#ip').val()+"&output="+$('#op').val(),
+                    success: function(allhotel){ 
+                    		$('#EdithotelModal #hotel_id').val(allhotel.id);
+                            $('#EdithotelModal #hotelName1').val(allhotel.hotelName);
+							$('#EdithotelModal #hotelDesc1').val(allhotel.hotelDesc);
+							$('#EdithotelModal #location1').val(allhotel.location);
+							$('#EdithotelModal #price1').val(allhotel.price);
+							$('#EdithotelModal #hotelImg11').val(allhotel.hotelImg1);
+							
+                    }
+                });
+            });
+
+        });
+    </script>
 <jsp:include page="includes/footer.jsp" />  
+<%}%>

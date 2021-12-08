@@ -1,3 +1,5 @@
+<%if (session.getAttribute("Admin_email") == null) {response.sendRedirect("/signin"); } else {%> 
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="includes/header.jsp" />  
 	
@@ -7,16 +9,27 @@
     <!-- Page Content  -->
     <div id="content">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
 
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>Toggle Sidebar</span>
-                </button>
-                
-            </div>
-        </nav>
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <div>
+                    	<h3 class="text-info">VENDOR DETAILS</h3>
+                    </div>
+                   <div>
+                    	<p>Welcome 
+                    	<% if(session.getAttribute("Admin_gender").equals("male")){ %> 
+                    		Mr.
+                    	<%}else{%> 
+                    		Miss.
+                    	<%}%> 
+                    	<span class="font-weight-bold text-info">${Admin_firstname} ${Admin_lastname}</span></p>
+                    </div>
+                </div>
+            </nav>
 
     <div>
     
@@ -46,6 +59,8 @@
             </div>
             <form action="/addvendorForm" modelAttribute="vendorForm"  method="POST" enctype= "multipart/form-data">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<input type="hidden" name="superadmin" value="not"/>
+						<input type="hidden" name="subadmin" value="not"/>
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -54,7 +69,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">vendor Description</label>
-						<textarea class="form-control" name="vendor_desc" placeholder="Hotel Description" id="vendor_desc"></textarea>
+						<textarea class="form-control" name="vendor_desc" placeholder="Vendor Description" id="vendor_desc"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">vendor Image:</label>
@@ -62,12 +77,12 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">vendor Price:</label>
-						<input  class="form-control"  type="text" name="vendor_price"  placeholder="Hotel Price" id="vendor_price" required>
+						<input  class="form-control"  type="text" name="vendor_price"  placeholder="Vendor Price" id="vendor_price" required>
                     </div>
                    
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">vendor Location:</label>
-						<textarea class="form-control" name="vendor_location" placeholder="Hotel Location" id="vendor_location"></textarea>
+						<textarea class="form-control" name="vendor_location" placeholder="Vendor Location" id="vendor_location"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -116,8 +131,9 @@
 			            <td>${allvendor.vendor_price}</td>
 			            <td>${allvendor.vendor_location}</td>
                         <td class="d-flex">
-                            <a href="" class="btn btn-info">EDIT</a>
-                            <a href="/admindeletevendor/${allvendor.vendorname}" class="btn btn-danger ml-2">DELETE</a>
+                            <a class="btn btn-info edit" data-toggle="modal" name="edit_vendor" data-target="#EditvendorModal" data-whatever="@mdo">EDIT</a>
+					         <input type="hidden" value="${allvendor.id}" id="edit_id">
+                            <a href="/admindeletevendor/${allvendor.id}" class="btn btn-danger ml-2">DELETE</a>
                         </td>
                         </tr>
                     </c:forEach>
@@ -139,4 +155,82 @@
         </div>
         </div>
     </div>
+     <!-- Edit User modal -->
+			 <div class="modal fade" id="EditvendorModal" tabindex="-1" role="dialog" aria-labelledby="AdduserModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="/EditvendorForm" modelAttribute="vendorEditForm" method="POST" enctype= "multipart/form-data">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<input type="hidden" name="superadmin" value="not"/>
+						<input type="hidden" name="subadmin" value="not"/>
+						<input type="hidden" name="id" id="vendor_id">
+						<div class="modal-body">
+		
+							<div class="modal-body">
+
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">vendor Name:</label>
+									<input type="text" class="form-control" placeholder="vendorName" name="vendorname" id="vendorName1" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">vendor Description:</label>
+									<input type="text" class="form-control" placeholder="vendorDesc" name="vendor_desc" id="vendorDesc1" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">vendor price:</label>
+									<input type="text" class="form-control"  placeholder="vendor price Id" name="vendor_price" id="price1" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Address:</label>
+									<textarea class="form-control" name="vendor_location" placeholder="vendor location" id="location1"></textarea>
+								</div>
+								<div class="form-group">
+                       			 <label for="message-text" class="col-form-label">vendor Image:</label>
+                     		   <input type="file" class="form-control" name="vendor_img" id="vendorImg11" >
+                  			  </div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-info" name="Editvendor" >Edit vendor</button>
+						</div>
+					</form>
+					</div>
+				</div>
+				</div>
+				
+				
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $('table .edit').click(function ()
+            {
+				var id=$(this).parent().find('#edit_id').val();
+
+				console.log(id)
+                $.ajax({
+                    type: "GET",
+                    url: "${pageContext.request.contextPath}/vendorfind/"+id, //this is my servlet
+                    data: "input=" +$('#ip').val()+"&output="+$('#op').val(),
+                    success: function(allvendor){ 
+                    		$('#EditvendorModal #vendor_id').val(allvendor.id);
+                            $('#EditvendorModal #vendorName1').val(allvendor.vendorname);
+							$('#EditvendorModal #vendorDesc1').val(allvendor.vendor_desc);
+							$('#EditvendorModal #location1').val(allvendor.vendor_location);
+							$('#EditvendorModal #price1').val(allvendor.vendor_price);
+							$('#EditvendorModal #vendorImg11').val(allvendor.vendor_img);
+							
+                    }
+                });
+            });
+
+        });
+    </script>
+    
 <jsp:include page="includes/footer.jsp" />  
+<%}%>

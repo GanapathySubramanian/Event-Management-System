@@ -1,3 +1,5 @@
+<%if (session.getAttribute("Admin_email") == null) {response.sendRedirect("/signin"); } else {%> 
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="includes/header.jsp" />  
@@ -8,14 +10,25 @@
 	    <!-- Page Content  -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-                    
+                    <div>
+                    	<h3 class="text-info">USER DETAILS</h3>
+                    </div>
+                   <div>
+                    	<p>Welcome 
+                    	<% if(session.getAttribute("Admin_gender").equals("male")){ %> 
+                    		Mr.
+                    	<%}else{%> 
+                    		Miss.
+                    	<%}%> 
+                    	<span class="font-weight-bold text-info">${Admin_firstname} ${Admin_lastname}</span></p>
+                    </div>
                 </div>
             </nav>
 
@@ -148,7 +161,7 @@
 					            <td>${user.address}</td>
 					            <td>${user.role}</td>
 					            <td class="d-flex">
-					            	<a href="/adminedituser/${user.email}" class="btn btn-info edit" data-toggle="modal" name="edit_user" data-target="#EdituserModal" data-whatever="@mdo">EDIT</a>
+					            	<a class="btn btn-info edit" data-toggle="modal" name="edit_user" data-target="#EdituserModal" data-whatever="@mdo">EDIT</a>
 					            	<input type="hidden" value="${user.id}" id="edit_id">
 									<a href="/admindeleteuser/${user.email}" class="btn btn-danger ml-2">DELETE</a>
 					            </td>
@@ -243,7 +256,6 @@
 
 		
 	
-<jsp:include page="includes/footer.jsp" />  
 
 
 </script>
@@ -256,7 +268,7 @@
 				console.log(id)
                 $.ajax({
                     type: "GET",
-                    url: "${pageContext.request.contextPath}/find/"+id, //this is my servlet
+                    url: "${pageContext.request.contextPath}/userfind/"+id, //this is my servlet
                     data: "input=" +$('#ip').val()+"&output="+$('#op').val(),
                     success: function(user){      
                             $('#EdituserModal #User_id').val(user.id);
@@ -273,3 +285,6 @@
 
         });
     </script>
+    <jsp:include page="includes/footer.jsp" />  
+    <%}%>
+    

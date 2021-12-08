@@ -1,24 +1,34 @@
+<%if (session.getAttribute("Admin_email") == null) {response.sendRedirect("/signin"); } else {%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="includes/header.jsp" />  
 	
 <jsp:include page="includes/adminNav.jsp" />  
 
+	    <!-- Page Content  -->
+                <div id="content">
 
-    <!-- Page Content  -->
-    <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <div>
+                    	<h3 class="text-info">CATER DETAILS</h3>
+                    </div>
+                   <div>
+                    	<p>Welcome 
+                    	<% if(session.getAttribute("Admin_gender").equals("male")){ %> 
+                    		Mr.
+                    	<%}else{%> 
+                    		Miss.
+                    	<%}%> 
+                    	<span class="font-weight-bold text-info">${Admin_firstname} ${Admin_lastname}</span></p>
+                    </div>
+                </div>
+            </nav>
 
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>Toggle Sidebar</span>
-                </button>
-                
-            </div>
-        </nav>
-
-    <div>
     
 <nav class="navbar navbar-light">
     <a class="navbar-brand text-info font-weight-bold" ><h3>CATERING LIST</h3></a>
@@ -46,6 +56,8 @@
             </div>
             <form action="/addcaterForm" modelAttribute="caterForm"  method="POST" enctype= "multipart/form-data">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<input type="hidden" name="superadmin" value="not" />
+						<input type="hidden" name="subadmin" value="not" />
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -54,7 +66,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">cater Description</label>
-						<textarea class="form-control" name="cater_desc" placeholder="Hotel Description" id="cater_desc"></textarea>
+						<textarea class="form-control" name="cater_desc" placeholder="cater Description" id="cater_desc"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">cater Image:</label>
@@ -62,12 +74,12 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">cater Price:</label>
-						<input  class="form-control"  type="text" name="cater_price"  placeholder="Hotel Price" id="cater_price" required>
+						<input  class="form-control"  type="text" name="cater_price"  placeholder="cater Price" id="cater_price" required>
                     </div>
                    
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">cater Location:</label>
-						<textarea class="form-control" name="cater_location" placeholder="Hotel Location" id="cater_location"></textarea>
+						<textarea class="form-control" name="cater_location" placeholder="cater Location" id="cater_location"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -116,8 +128,9 @@
 			            <td>${allcater.cater_price}</td>
 			            <td>${allcater.cater_location}</td>
                         <td class="d-flex">
-                            <a href="" class="btn btn-info">EDIT</a>
-                            <a href="/admindeletecater/${allcater.catername}" class="btn btn-danger ml-2">DELETE</a>
+                            <a class="btn btn-info edit" data-toggle="modal" name="edit_cater" data-target="#EditcaterModal" data-whatever="@mdo">EDIT</a>
+					         <input type="hidden" value="${allcater.id}" id="edit_id">
+                            <a href="/admindeletecater/${allcater.id}" class="btn btn-danger ml-2">DELETE</a>
                         </td>
                         </tr>
                     </c:forEach>
@@ -139,4 +152,85 @@
         </div>
         </div>
     </div>
+      <!-- Edit User modal -->
+			 <div class="modal fade" id="EditcaterModal" tabindex="-1" role="dialog" aria-labelledby="AdduserModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="/EditcaterForm" modelAttribute="caterEditForm" method="POST" enctype= "multipart/form-data">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<input type="hidden" name="superadmin" value="not" />
+						<input type="hidden" name="subadmin" value="not" />
+						<input type="hidden" name="id" id="cater_id">
+						<div class="modal-body">
+		
+							<div class="modal-body">
+
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">cater Name:</label>
+									<input type="text" class="form-control" placeholder="caterName" name="catername" id="caterName1" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">cater Description:</label>
+									<input type="text" class="form-control" placeholder="caterDesc" name="cater_desc" id="caterDesc1" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">cater price:</label>
+									<input type="text" class="form-control"  placeholder="cater price Id" name="cater_price" id="price1" required>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Address:</label>
+									<textarea class="form-control" name="cater_location" placeholder="cater location" id="location1"></textarea>
+								</div>
+								<div class="form-group">
+                       			 <label for="message-text" class="col-form-label">cater Image:</label>
+                     		   <input type="file" class="form-control" name="cater_img" id="caterImg11" >
+                  			  </div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-info" name="Editcater" >Edit cater</button>
+						</div>
+					</form>
+					</div>
+				</div>
+				</div>
+				
+				
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $('table .edit').click(function ()
+            {
+				var id=$(this).parent().find('#edit_id').val();
+
+				console.log(id)
+                $.ajax({
+                    type: "GET",
+                    url: "${pageContext.request.contextPath}/caterfind/"+id, //this is my servlet
+                    data: "input=" +$('#ip').val()+"&output="+$('#op').val(),
+                    success: function(allcater){ 
+                    		$('#EditcaterModal #cater_id').val(allcater.id);
+                            $('#EditcaterModal #caterName1').val(allcater.catername);
+							$('#EditcaterModal #caterDesc1').val(allcater.cater_desc);
+							$('#EditcaterModal #location1').val(allcater.cater_location);
+							$('#EditcaterModal #price1').val(allcater.cater_price);
+							$('#EditcaterModal #caterImg11').val(allcater.cater_img);
+							
+                    }
+                });
+            });
+
+        });
+    </script>
+
+
+    
 <jsp:include page="includes/footer.jsp" />  
+
+<%}%>
