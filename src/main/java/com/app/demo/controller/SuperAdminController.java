@@ -8,11 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.app.demo.model.Event;
+import com.app.demo.model.Booking;
 import com.app.demo.model.Catering;
 
 import com.app.demo.model.Hotel;
 import com.app.demo.model.Vendor;
+import com.app.demo.services.BookingServices;
 import com.app.demo.services.CateringServices;
 import com.app.demo.services.EventServices;
 import com.app.demo.services.HotelServices;
@@ -33,6 +37,9 @@ public class SuperAdminController {
 	
 	@Autowired
 	private EventServices eventservices;
+	
+	@Autowired
+	private BookingServices	bookingservice;
 	
 	@RequestMapping(value="/superadmincateringdetails",method=RequestMethod.GET)
 	public String superAdminCateringDetails(ModelMap model) {
@@ -56,10 +63,12 @@ public class SuperAdminController {
 	}
 	
 	@RequestMapping(value="/superadminbookingdetails",method=RequestMethod.GET)
-	public String superAdminBookingDetails() {
+	public String superAdminBookingDetails(ModelMap model) {
+		List<Booking> booking=bookingservice.findAll();
+		model.addAttribute("superadmin_booking",booking);
 	    return "SuperAdminBookingDetails";  
 	}
-	
+
 	
 	@RequestMapping(value="/superadmineventdetails",method=RequestMethod.GET)
 	public String superAdminEventDetails(ModelMap model) {
@@ -72,4 +81,21 @@ public class SuperAdminController {
 	public String adminAccount() {
 	    return "SuperAdminAccount";  
 	}
+	
+	@RequestMapping(value="/bookcancelbysuperadmin",method= RequestMethod.POST)
+	public String UserBookingCancelAdmin(@RequestParam("booking_id") int booking_id)
+	{
+			bookingservice.bookingcancelByAdmin(booking_id);
+			return "redirect:/superadminbookingdetails";
+	}
+	
+	
+	@RequestMapping(value="/bookacceptbysuperadmin",method= RequestMethod.POST)
+	public String UserBookingAcceptAdmin(@RequestParam("booking_id") int booking_id)
+	{
+			bookingservice.bookingacceptByAdmin(booking_id);
+			return "redirect:/superadminbookingdetails";
+	
+	}
+
 }

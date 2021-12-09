@@ -1,23 +1,23 @@
 <%if (session.getAttribute("Admin_email") == null) {response.sendRedirect("/signin"); } else {%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <jsp:include page="includes/header.jsp" />  
 	
 <jsp:include page="includes/adminNav.jsp" />  
 
 	    <!-- Page Content  -->
-                <div id="content">
+        <div id="content">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
                     <div>
-                    	<h3 class="text-info">CATER DETAILS</h3>
+                        <h3 class="text-info">CATER DETAILS</h3>
                     </div>
-                   <div>
+                    <div>
                     	<p>Welcome 
                     	<% if(session.getAttribute("Admin_gender").equals("male")){ %> 
                     		Mr.
@@ -29,71 +29,69 @@
                 </div>
             </nav>
 
+        <div>
     
-<nav class="navbar navbar-light">
-    <a class="navbar-brand text-info font-weight-bold" ><h3>CATERING LIST</h3></a>
+            <div class="d-flex justify-content-between mt-5">
+                
+                <form class="d-flex"  action="" method="POST" autocomplete="off">
+                    <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
+                    <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
+                </form>
 
-    <form class="d-flex">
-        <button type="button" class="btn btn-info ml-2" name="add_cater" data-toggle="modal" data-target="#AddcaterModal" data-whatever="@mdo">Add cater</button>
-    </form>
+                <form class="d-flex">
+                    <button type="button" class="btn btn-info ml-2" name="add_cater" data-toggle="modal" data-target="#AddcaterModal" data-whatever="@mdo">Add cater</button>
+                </form>
 
+                <!-- Add User modal -->
+                <div class="modal fade" id="AddcaterModal" tabindex="-1" role="dialog" aria-labelledby="AdduserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Cater</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <form action="/addcaterForm" modelAttribute="caterForm"  method="POST" enctype= "multipart/form-data">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <input type="hidden" name="superadmin" value="not" />
+                                <input type="hidden" name="subadmin" value="not" />
+                        <div class="modal-body">
 
-    <form class="d-flex"  action="" method="POST" autocomplete="off">
-        <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
-        <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
-    </form>
-
-
-     <!-- Add User modal -->
-     <div class="modal fade" id="AddcaterModal" tabindex="-1" role="dialog" aria-labelledby="AdduserModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Cater</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="/addcaterForm" modelAttribute="caterForm"  method="POST" enctype= "multipart/form-data">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<input type="hidden" name="superadmin" value="not" />
-						<input type="hidden" name="subadmin" value="not" />
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">Cater Name:</label>
-                        <input type="text" class="form-control" placeholder="Cater Name" name="catername" id="catername" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">cater Description</label>
-						<textarea class="form-control" name="cater_desc" placeholder="cater Description" id="cater_desc"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">cater Image:</label>
-                        <input type="file" class="form-control" name="cater_img" id="cater_img" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">cater Price:</label>
-						<input  class="form-control"  type="text" name="cater_price"  placeholder="cater Price" id="cater_price" required>
-                    </div>
-                   
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">cater Location:</label>
-						<textarea class="form-control" name="cater_location" placeholder="cater Location" id="cater_location"></textarea>
-                    </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Cater Name:</label>
+                                <input type="text" class="form-control" placeholder="Cater Name" name="catername" id="catername" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">cater Description</label>
+                                <textarea class="form-control" name="cater_desc" placeholder="cater Description" id="cater_desc"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">cater Image:</label>
+                                <input type="file" class="form-control" name="cater_img" id="cater_img" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">cater Price:</label>
+                                <input  class="form-control"  type="text" name="cater_price"  placeholder="cater Price" id="cater_price" required>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">cater Location:</label>
+                                <textarea class="form-control" name="cater_location" placeholder="cater Location" id="cater_location"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-info" name="addcater" >Add cater</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-info" name="addcater" >Add cater</button>
-                </div>
-            </form>
             </div>
         </div>
-        </div>
+    </div>
 
-</nav>
-
-
+<br />
+<br />
     <label class="text-info font-weight-bold"> Select No.of.rows to display :</label>
       <select class  ="form-control" name="state" id="maxRows">
             <option value="5000">Show ALL Rows</option>
@@ -113,7 +111,7 @@
                     <tr>
                     <th>CATER_NAME</th>
                     <th>CATER_DESCRIPTION</th>
-                    <th>CATER_IMG1</th>
+                    <th>CATER_IMG</th>
                     <th>CATER_PRICE</th>
                     <th>LOCATION</th>
                     <th>ACTION</th>
@@ -124,7 +122,7 @@
 			            <tr>
 			            <td>${allcater.catername}</td>
 			            <td>${allcater.cater_desc}</td>
-			           <td ><img src="data:image/jpeg;base64,${allcater.cater_img}" width="100" height="100"/></td>
+			           <td ><img src="data:image/jpeg;base64,${allcater.cater_img}" class="rounded-circle" width="100" height="100"/></td>
 			            <td>${allcater.cater_price}</td>
 			            <td>${allcater.cater_location}</td>
                         <td class="d-flex">

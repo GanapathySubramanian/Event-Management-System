@@ -87,11 +87,13 @@ public class UserController {
 					session.setAttribute("Admin_address", userDetail.getAddress());
 					session.setAttribute("Admin_gender", userDetail.getGender());
 					session.setAttribute("Admin_id", userDetail.getId());
+					
 					return "redirect:/adminhome";
 				}
 					
 				
 				else if(userDetail.getRole().equals("User")) {
+
 					session.setAttribute("User_firstname",userDetail.getFirstName());
 					session.setAttribute("User_lastname", userDetail.getLastName());
 					session.setAttribute("User_email", userDetail.getEmail());
@@ -99,6 +101,7 @@ public class UserController {
 					session.setAttribute("User_address", userDetail.getAddress());
 					session.setAttribute("User_gender", userDetail.getGender());
 					session.setAttribute("User_id", userDetail.getId());
+					
 					return "redirect:/userhome";
 				}
 				else if(userDetail.getRole().equals("SubAdmin")) {
@@ -157,18 +160,23 @@ public class UserController {
 	}
 	@RequestMapping(value="/userbookingdetails",method=RequestMethod.GET)
 	public String userBookingDetails(HttpSession session,ModelMap model) {
-		int id=(int) session.getAttribute("User_id");
-		User user=userservice.findById(id);
+		if(session.getAttribute("User_id")==null) {
+			return "redirect:/signin";
+		}else {
+			int id=(int) session.getAttribute("User_id");
+			User user=userservice.findById(id);
+			
+			
+			List<Booking> bookings=bookingservice.findAllByUser(user);
+			
 		
-		List<Booking> bookings=bookingservice.findAllByUser(user);
-		
-		
-		
-		System.out.println(id);
-		
-		System.out.println(bookings);
-	    
-		return "UserBookingDetails"; 
+			
+			System.out.println(id);
+			
+			System.out.println(bookings);
+		    session.setAttribute("User_bookings",bookings);
+			return "UserBookingDetails"; 
+		}
 	}
 	@RequestMapping(value="/useraccount",method=RequestMethod.GET)
 	public String userAccount() {
@@ -271,8 +279,24 @@ public class UserController {
 			
 			return "redirect:/userbookingdetails";
 	
+	}
 	
-		
+	
+	@RequestMapping(value="/bookcancelbyuser",method= RequestMethod.POST)
+	public String UserBookingCancel(@RequestParam("booking_id") int booking_id)
+	{
+			bookingservice.bookingcancelByUser(booking_id);
+			return "redirect:/userbookingdetails";
+	
+	}
+	
+	
+	@RequestMapping(value="/userpayment",method= RequestMethod.POST)
+	public String UserBookingPayment(@RequestParam("booking_id") int booking_id)
+	{
+			bookingservice.bookingPayment(booking_id);
+			return "redirect:/userbookingdetails";
+	
 	}
 	
 }

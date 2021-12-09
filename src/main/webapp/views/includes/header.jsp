@@ -28,5 +28,6 @@
   <link rel="stylesheet" href="../../assets/css/home.css" />
   <link rel="stylesheet" href="../../assets/css/admin.css" />
   <link rel="stylesheet" href="../../assets/css/card.css" />
+
 </head>
 <body>

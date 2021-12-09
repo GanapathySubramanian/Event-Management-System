@@ -1,5 +1,7 @@
 <%if (session.getAttribute("Admin_email") == null) {response.sendRedirect("/signin"); } else {%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+
 <jsp:include page="includes/header.jsp" />  
 	
 <jsp:include page="includes/adminNav.jsp" />  
@@ -30,20 +32,20 @@
                 </div>
             </nav>
 
-    <div>
+   <div>
+      
+<div class="d-flex justify-content-between">
     
-<nav class="navbar navbar-light">
-    <a class="navbar-brand text-info font-weight-bold" ><h3>HOTEL LIST</h3></a>
+    <form class="d-flex"  action="" method="POST" autocomplete="off">
+        <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
+        <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
+    </form>
+
 
     <form class="d-flex">
         <button type="button" class="btn btn-info ml-2" name="add_hotel" data-toggle="modal" data-target="#AddhotelModal" data-whatever="@mdo">Add Hotel</button>
     </form>
 
-
-    <form class="d-flex"  action="" method="POST" autocomplete="off">
-        <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
-        <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
-    </form>
 
 
      <!-- Add User modal -->
@@ -93,9 +95,10 @@
         </div>
         </div>
 
-</nav>
+</div>
 
-
+<br />
+<br/>
     <label class="text-info font-weight-bold"> Select No.of.rows to display :</label>
       <select class  ="form-control" name="state" id="maxRows">
             <option value="5000">Show ALL Rows</option>
@@ -115,7 +118,7 @@
                     <tr>
                     <th>HOTEL_NAME</th>
                     <th>HOTEL_DESCRIPTION</th>
-                    <th>HOTEL_IMG1</th>
+                    <th>HOTEL_IMG</th>
                     <th>HOTEL_PRICE</th>
                     <th>LOCATION</th>
                     <th>ACTION</th>
@@ -125,7 +128,7 @@
                 	 <c:forEach var="allhotel" items="${Hotellist}" >
 			            <tr>
 			            <td>${allhotel.hotelName}</td>
-			            <td>${allhotel.hotelDesc}</td>
+			            <td>${fn:substring(allhotel.hotelDesc, 0, 100)}...  </td>
 			           <td ><img src="data:image/jpeg;base64,${allhotel.hotelImg1}" class="rounded-circle" width="100" height="100"/></td>
 			            <td>${allhotel.price}</td>
 			            <td>${allhotel.location}</td>
@@ -176,11 +179,11 @@
 
 								<div class="form-group">
 									<label for="message-text" class="col-form-label">Hotel Name:</label>
-									<input type="text" class="form-control" placeholder="FirstName" name="hotelName" id="hotelName1" required>
+									<input type="text" class="form-control" placeholder="Hotel name" name="hotelName" id="hotelName1" required>
 								</div>
 								<div class="form-group">
 									<label for="message-text" class="col-form-label">Hotel Description:</label>
-									<input type="text" class="form-control" placeholder="HotelDesc" name="hotelDesc" id="hotelDesc1" required>
+									<input type="text" class="form-control" placeholder="Hotel Desc" name="hotelDesc" id="hotelDesc1" required>
 								</div>
 								<div class="form-group">
 									<label for="message-text" class="col-form-label">Hotel price:</label>

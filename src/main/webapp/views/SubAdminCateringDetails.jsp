@@ -32,19 +32,18 @@
             </nav>
     <div>
     
-<nav class="navbar navbar-light">
-    <a class="navbar-brand text-info font-weight-bold" ><h3>CATER LIST</h3></a>
+<nav class="d-flex justify-content-between">
 
-    <form class="d-flex">
-        <button type="button" class="btn btn-info ml-2" name="add_cater" data-toggle="modal" data-target="#AddcaterModal" data-whatever="@mdo">Add cater</button>
-    </form>
-
+   
 
     <form class="d-flex"  action="" method="POST" autocomplete="off">
         <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
         <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
     </form>
 
+ <form class="d-flex">
+        <button type="button" class="btn btn-info ml-2" name="add_cater" data-toggle="modal" data-target="#AddcaterModal" data-whatever="@mdo">Add cater</button>
+    </form>
 
      <!-- Add User modal -->
      <div class="modal fade" id="AddcaterModal" tabindex="-1" role="dialog" aria-labelledby="AdduserModalLabel" aria-hidden="true">
@@ -95,7 +94,8 @@
 
 </nav>
 
-
+<br />
+<br/>
     <label class="text-info font-weight-bold"> Select No.of.rows to display :</label>
       <select class  ="form-control" name="state" id="maxRows">
             <option value="5000">Show ALL Rows</option>
@@ -113,10 +113,10 @@
             <table class="content-table table" id="table-id">
                 <thead>
                     <tr>
-                    <th>CATER NAME</th>
-                    <th>CATER DESCRIPTION</th>
-                    <th>CATER IMG1</th>
-                    <th>CATER PRICE</th>
+                    <th>CATER_NAME</th>
+                    <th>CATER_DESCRIPTION</th>
+                    <th>CATER_IMG</th>
+                    <th>CATER_PRICE</th>
                     <th>LOCATION</th>
                     <th>ACTION</th>
                 </tr>

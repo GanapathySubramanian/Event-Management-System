@@ -1,7 +1,7 @@
 <%if (session.getAttribute("Admin_email") == null) {response.sendRedirect("/signin"); } else {%> 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <jsp:include page="includes/header.jsp" />  
 	
 	<jsp:include page="includes/adminNav.jsp" />  
@@ -34,13 +34,9 @@
 
         <div>
         
-    <nav class="navbar navbar-light">
-        <a class="navbar-brand text-info font-weight-bold" ><h3>USERS LIST</h3></a>
-        
-        
-        <form class="d-flex">
-            <button type="button" class="btn btn-info ml-2" name="add_user" data-toggle="modal" data-target="#AdduserModal" data-whatever="@mdo">Add User</button>
-        </form>
+    <div class="d-flex justify-content-between">
+
+       
 		
 		<form class="d-flex"  action="" modelAttribute="searchValue" method="POST" autocomplete="off">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -48,6 +44,9 @@
             <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
         </form>
         
+         <form class="d-flex">
+            <button type="button" class="btn btn-info ml-2" name="add_user" data-toggle="modal" data-target="#AdduserModal" data-whatever="@mdo">Add User</button>
+        </form>
         <!-- Add User modal -->
         <div class="modal fade" id="AdduserModal" tabindex="-1" role="dialog" aria-labelledby="AdduserModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -119,8 +118,8 @@
         </div>
 
 
-    </nav>
-
+    </div>
+<br/><br/>
 
 		<label class="text-info font-weight-bold"> Select No.of.rows to display :</label>
 		  <select class  ="form-control" name="state" id="maxRows">
@@ -255,10 +254,6 @@
 				</div>
 
 		
-	
-
-
-</script>
 	<script type="text/javascript">
         $(document).ready(function() {
             $('table .edit').click(function ()

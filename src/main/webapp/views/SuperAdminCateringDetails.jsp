@@ -34,17 +34,17 @@
 
     <div>
     
-<nav class="navbar navbar-light">
-    <a class="navbar-brand text-info font-weight-bold" ><h3>CATER LIST</h3></a>
+<nav class="d-flex justify-content-between">
+   
 
-    <form class="d-flex">
-        <button type="button" class="btn btn-info ml-2" name="add_cater" data-toggle="modal" data-target="#AddcaterModal" data-whatever="@mdo">Add cater</button>
-    </form>
-
+   
 
     <form class="d-flex"  action="" method="POST" autocomplete="off">
         <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
         <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
+    </form>
+ <form class="d-flex">
+        <button type="button" class="btn btn-info ml-2" name="add_cater" data-toggle="modal" data-target="#AddcaterModal" data-whatever="@mdo">Add cater</button>
     </form>
 
 
@@ -96,7 +96,8 @@
         </div>
 
 </nav>
-
+<br/>
+<br/>
 
     <label class="text-info font-weight-bold"> Select No.of.rows to display :</label>
       <select class  ="form-control" name="state" id="maxRows">
@@ -115,10 +116,10 @@
             <table class="content-table table" id="table-id">
                 <thead>
                     <tr>
-                    <th>CATER NAME</th>
-                    <th>CATER DESCRIPTION</th>
-                    <th>CATER IMG1</th>
-                    <th>CATER PRICE</th>
+                    <th>CATER_NAME</th>
+                    <th>CATER_DESCRIPTION</th>
+                    <th>CATER_IMG</th>
+                    <th>CATER_PRICE</th>
                     <th>LOCATION</th>
                     <th>ACTION</th>
                 </tr>
@@ -128,7 +129,7 @@
 			            <tr>
 			            <td>${allcater.catername}</td>
 			            <td>${allcater.cater_desc}</td>
-			           <td ><img src="data:image/jpeg;base64,${allcater.cater_img}" width="100" height="100"/></td>
+			           <td ><img src="data:image/jpeg;base64,${allcater.cater_img}" class="rounded-circle"width="100" height="100"/></td>
 			            <td>${allcater.cater_price}</td>
 			            <td>${allcater.cater_location}</td>
                         <td class="d-flex">

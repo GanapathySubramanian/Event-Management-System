@@ -155,7 +155,7 @@
 												<option value="">Choose the Photographer</option>
 												<c:forEach var="vendorData" items="${vendor_for_booking}">
 													<c:if test = "${vendorData.vendor_desc == 'Photographer'}">
-														<option id="${vendorData.id}" value="${vendorData.vendorname} - ${vendorData.vendor_desc}">${vendorData.vendorname} - ${vendorData.vendor_location} - Rs.${vendorData.vendor_price}</option>
+														<option id="${vendorData.id}" value="${vendorData.vendor_desc} : ${vendorData.vendorname}">${vendorData.vendorname} - ${vendorData.vendor_location} - Rs.${vendorData.vendor_price}</option>
 													</c:if>
 												</c:forEach>
 												<option id="photo_none" value="none">None</option>
@@ -172,7 +172,7 @@
 												<option value="">Choose the Disc Jokey</option>
 												<c:forEach var="vendorData" items="${vendor_for_booking}">
 													<c:if test = "${vendorData.vendor_desc == 'DJ'}">
-														<option id="${vendorData.id}" value="${vendorData.vendorname} - ${vendorData.vendor_desc}">${vendorData.vendorname} - ${vendorData.vendor_location}  - Rs.${vendorData.vendor_price}</option>
+														<option id="${vendorData.id}" value="${vendorData.vendor_desc} : ${vendorData.vendorname}">${vendorData.vendorname} - ${vendorData.vendor_location}  - Rs.${vendorData.vendor_price}</option>
 													</c:if>
 												</c:forEach>
 												<option id="dj_none" value="none">None</option>
@@ -188,7 +188,7 @@
 												<option value="">Choose the MakeUpArtist</option>
 												<c:forEach var="vendorData" items="${vendor_for_booking}">
 													<c:if test = "${vendorData.vendor_desc == 'Makeupartisit'}">
-														<option id="${vendorData.id}" value="${vendorData.vendorname} - ${vendorData.vendor_desc}">${vendorData.vendorname} - ${vendorData.vendor_location} - Rs.${vendorData.vendor_price}</option>
+														<option id="${vendorData.id}" value="${vendorData.vendor_desc} : ${vendorData.vendorname}">${vendorData.vendorname} - ${vendorData.vendor_location} - Rs.${vendorData.vendor_price}</option>
 													</c:if>
 												</c:forEach>
 												<option id="makeup_none" value="none">None</option>
@@ -204,7 +204,7 @@
 												<option value="">Choose the Decorator</option>
 												<c:forEach var="vendorData" items="${vendor_for_booking}">
 													<c:if test = "${vendorData.vendor_desc == 'Decorator'}">
-														<option id="${vendorData.id}" value="${vendorData.vendorname} - ${vendorData.vendor_desc}">${vendorData.vendorname} - ${vendorData.vendor_location} -Rs.${vendorData.vendor_price} </option>
+														<option id="${vendorData.id}" value="${vendorData.vendor_desc} : ${vendorData.vendorname}">${vendorData.vendorname} - ${vendorData.vendor_location} -Rs.${vendorData.vendor_price} </option>
 													</c:if>
 												</c:forEach>
 												<option id="decorator_none" value="none">None</option>

@@ -51,7 +51,9 @@ public class GeneralController {
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logout(HttpSession session) {
-		session.invalidate();
+	    if (session != null) {
+	        session.invalidate();
+	    }
 	    return "redirect:/signin"; 
 	}
 	

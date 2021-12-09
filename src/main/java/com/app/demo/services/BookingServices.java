@@ -42,4 +42,30 @@ public class BookingServices {
 		// TODO Auto-generated method stub
 		return bookingrepo.findAllByUser(user);
 	}
+	
+	
+	public void bookingcancelByUser(int id) {
+		bookingrepo.bookcancelByUser(id);
+	}
+
+	public void bookingPayment(int id) {
+		// TODO Auto-generated method stub
+		bookingrepo.bookingPaymentCompleted(id);
+	}
+
+	public List<Booking> findAll() {
+		return bookingrepo.findAll();
+	}
+
+
+	public void bookingcancelByAdmin(int booking_id) {
+		// TODO Auto-generated method stub
+		bookingrepo.bookcancelByadmin(booking_id);
+		
+	}
+
+	public void bookingacceptByAdmin(int booking_id) {
+		// TODO Auto-generated method stub
+		bookingrepo.bookacceptByadmin(booking_id);
+	}
 }

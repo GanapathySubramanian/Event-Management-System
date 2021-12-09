@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.app.demo.model.Booking;
 import com.app.demo.model.Catering;
 import com.app.demo.model.Event;
 import com.app.demo.model.Hotel;
@@ -28,6 +29,7 @@ import com.app.demo.model.Vendor;
 import com.app.demo.repository.CateringRepo;
 import com.app.demo.repository.HotelRepo;
 import com.app.demo.repository.VendorRepo;
+import com.app.demo.services.BookingServices;
 import com.app.demo.services.CateringServices;
 import com.app.demo.services.EventServices;
 import com.app.demo.services.HotelServices;
@@ -52,6 +54,9 @@ public class AdminController {
 
 	@Autowired
 	private EventServices eventservice;
+	
+	@Autowired
+	private BookingServices bookingservice;
 	
 
 	
@@ -358,7 +363,9 @@ public class AdminController {
 	
 	//Booking details
 	@RequestMapping(value="/adminbookingdetails",method=RequestMethod.GET)
-	public String adminBookingDetails() {
+	public String adminBookingDetails(ModelMap model) {
+		List<Booking> booking=bookingservice.findAll();
+		model.addAttribute("admin_booking",booking);
 	    return "AdminBookingDetails";  
 	}
 	
@@ -443,6 +450,24 @@ public class AdminController {
 					}
 					
 				}
-
+				
+				
+				
+				@RequestMapping(value="/bookcancelbyadmin",method= RequestMethod.POST)
+				public String UserBookingCancelAdmin(@RequestParam("booking_id") int booking_id)
+				{
+						bookingservice.bookingcancelByAdmin(booking_id);
+						return "redirect:/adminbookingdetails";
+				
+				}
+				
+				
+				@RequestMapping(value="/bookacceptbyadmin",method= RequestMethod.POST)
+				public String UserBookingAcceptAdmin(@RequestParam("booking_id") int booking_id)
+				{
+						bookingservice.bookingacceptByAdmin(booking_id);
+						return "redirect:/adminbookingdetails";
+				
+				}
 
 }

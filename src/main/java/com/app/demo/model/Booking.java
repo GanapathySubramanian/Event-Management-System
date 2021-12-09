@@ -1,4 +1,4 @@
-package com.app.demo.model;
+	package com.app.demo.model;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -21,7 +21,7 @@ public class Booking {
 	@Column(name="event_date")
 	private Date event_date;
 	
-	@Column(name="start_at")
+	@Column(name="event_start_time")
 	private String start_at;
 	
 	@Column(name="max_total_hour")
@@ -45,7 +45,7 @@ public class Booking {
 	@Column(name="decorator_name_desc")
 	private String decorator_name_desc;
 	
-	@Column(name="currentdate")
+	@Column(name="bookedon")
 	private String current_date;
 	
 	@Column(name="accept_status")
@@ -213,8 +213,12 @@ public class Booking {
 				+ max_total_hour + ", amount=" + amount + ", no_of_guest=" + no_of_guest + ", photographer_name_desc="
 				+ photographer_name_desc + ", dj_name_desc=" + dj_name_desc + ", makeupartist_name_desc="
 				+ makeupartist_name_desc + ", decorator_name_desc=" + decorator_name_desc + ", current_date="
-				+ current_date + ", accept_status=" + accept_status + ", payment_status=" + payment_status + "]";
+				+ current_date + ", accept_status=" + accept_status + ", payment_status=" + payment_status + ", user="
+				+ user + "]";
 	}
+
+
+
 
 	
 	

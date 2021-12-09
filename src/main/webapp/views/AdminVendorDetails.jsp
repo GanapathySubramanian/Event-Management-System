@@ -33,17 +33,15 @@
 
     <div>
     
-<nav class="navbar navbar-light">
-    <a class="navbar-brand text-info font-weight-bold" ><h3>VENDOR LIST</h3></a>
-
-    <form class="d-flex">
-        <button type="button" class="btn btn-info ml-2" name="add_vendor" data-toggle="modal" data-target="#AddvendorModal" data-whatever="@mdo">Add vendor</button>
-    </form>
-
-
+<nav class="d-flex justify-content-between">
+ 
     <form class="d-flex"  action="" method="POST" autocomplete="off">
         <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
         <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
+    </form>
+
+   <form class="d-flex">
+        <button type="button" class="btn btn-info ml-2" name="add_vendor" data-toggle="modal" data-target="#AddvendorModal" data-whatever="@mdo">Add vendor</button>
     </form>
 
 
@@ -95,7 +93,7 @@
         </div>
 
 </nav>
-
+<br/><br/>
 
     <label class="text-info font-weight-bold"> Select No.of.rows to display :</label>
       <select class  ="form-control" name="state" id="maxRows">
@@ -127,7 +125,7 @@
 			            <tr>
 			            <td>${allvendor.vendorname}</td>
 			            <td>${allvendor.vendor_desc}</td>
-			           <td ><img src="data:image/jpeg;base64,${allvendor.vendor_img}" width="100" height="100"/></td>
+			           <td ><img src="data:image/jpeg;base64,${allvendor.vendor_img}" class="rounded-circle" width="100" height="100"/></td>
 			            <td>${allvendor.vendor_price}</td>
 			            <td>${allvendor.vendor_location}</td>
                         <td class="d-flex">
