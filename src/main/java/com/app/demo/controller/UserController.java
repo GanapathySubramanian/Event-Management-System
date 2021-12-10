@@ -87,7 +87,9 @@ public class UserController {
 					session.setAttribute("Admin_address", userDetail.getAddress());
 					session.setAttribute("Admin_gender", userDetail.getGender());
 					session.setAttribute("Admin_id", userDetail.getId());
-					
+					session.setAttribute("Admin_cpassword", userDetail.getConfirmPassword());
+					session.setAttribute("Admin_password", userDetail.getPassword());
+					session.setAttribute("Admin_role", userDetail.getRole());
 					return "redirect:/adminhome";
 				}
 					
@@ -101,7 +103,9 @@ public class UserController {
 					session.setAttribute("User_address", userDetail.getAddress());
 					session.setAttribute("User_gender", userDetail.getGender());
 					session.setAttribute("User_id", userDetail.getId());
-					
+					session.setAttribute("User_cpassword", userDetail.getConfirmPassword());
+					session.setAttribute("User_password", userDetail.getPassword());
+					session.setAttribute("User_role", userDetail.getRole());
 					return "redirect:/userhome";
 				}
 				else if(userDetail.getRole().equals("SubAdmin")) {
@@ -112,6 +116,9 @@ public class UserController {
 					session.setAttribute("Subadmin_address", userDetail.getAddress());
 					session.setAttribute("Subadmin_gender", userDetail.getGender());
 					session.setAttribute("Subadmin_id", userDetail.getId());
+					session.setAttribute("Subadmin_cpassword", userDetail.getConfirmPassword());
+					session.setAttribute("Subadmin_password", userDetail.getPassword());
+					session.setAttribute("Subadmin_role", userDetail.getRole());
 					return "redirect:/subadminhome";
 				}
 				else if(userDetail.getRole().equals("SuperAdmin")) {
@@ -122,6 +129,9 @@ public class UserController {
 					session.setAttribute("Superadmin_address", userDetail.getAddress());
 					session.setAttribute("Superadmin_gender", userDetail.getGender());
 					session.setAttribute("Superadmin_id", userDetail.getId());
+					session.setAttribute("Superadmin_cpassword", userDetail.getConfirmPassword());
+					session.setAttribute("Superadmin_password", userDetail.getPassword());
+					session.setAttribute("Superadmin_role", userDetail.getRole());
 					return "redirect:/superadminhome";
 				}
 			}
@@ -131,15 +141,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="/subadminhome",method=RequestMethod.GET)
-	public String subAdminHome() {
-	    return "SubAdminHome";  
-	}
 	
-	@RequestMapping(value="/superadminhome",method=RequestMethod.GET)
-	public String superAdminHome() {
-	    return "SuperAdminHome";  
-	}
 	
 	@RequestMapping(value="/usernewbooking",method=RequestMethod.GET)
 	public String userBookingForm(ModelMap model) {
@@ -183,6 +185,27 @@ public class UserController {
 	    return "UserAccount";  
 	}
 
+	@RequestMapping(value="/EdituserProfile",method=RequestMethod.POST)
+	public String updateUserProfile(@ModelAttribute("userEditProfile") User user ,HttpSession session) {
+		System.out.println(user);
+		
+		userservice.updateUserProfile(user.getEmail(),user.getFirstName(),user.getLastName(),user.getGender(),user.getContactno(),user.getAddress(),user.getRole(),user.getPassword(),user.getConfirmPassword(),user.getId());
+		session.setAttribute("User_firstname",user.getFirstName());
+		session.setAttribute("User_lastname", user.getLastName());
+		session.setAttribute("User_email", user.getEmail());
+		session.setAttribute("User_phone", user.getContactno());
+		session.setAttribute("User_address", user.getAddress());
+		session.setAttribute("User_gender", user.getGender());
+		session.setAttribute("User_id", user.getId());
+		session.setAttribute("User_role", user.getRole());
+		session.setAttribute("User_cpassword", user.getConfirmPassword());
+		session.setAttribute("User_password", user.getPassword());
+	
+		return "redirect:/useraccount";
+		
+	}
+
+	
 	
 	@RequestMapping(value="/usercateringdetails",method=RequestMethod.GET)
 	public String userCateringDetails(ModelMap model) {

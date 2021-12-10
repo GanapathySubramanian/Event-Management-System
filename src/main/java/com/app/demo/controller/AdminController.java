@@ -3,6 +3,8 @@ package com.app.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -59,7 +61,6 @@ public class AdminController {
 	private BookingServices bookingservice;
 	
 
-	
 	//User Registration
 	@RequestMapping(value="/adduserForm",method= RequestMethod.POST)
 	public String UserRegister(@ModelAttribute("registerForm") User user,Model model)
@@ -89,7 +90,6 @@ public class AdminController {
 	//User Table Delete
 	@RequestMapping(value="/admindeleteuser/{email}",method=RequestMethod.GET)
 	public String admindeleteUser(@PathVariable String email) {
-		
 		User user=userservice.findByEmail(email);
 		System.out.println(user);
 		if(user.getEmail()!=null) {
@@ -315,8 +315,6 @@ public class AdminController {
 		}
 		else {
 			return "redirect:/adminvendordetails";
-
-			
 		}
 		
 	}
@@ -371,11 +369,31 @@ public class AdminController {
 	
 	//Admin Account
 	@RequestMapping(value="/adminaccount",method=RequestMethod.GET)
-	public String adminAccount() {
+	public String adminAccount(HttpSession session) {
+		System.out.println(session.getAttribute("Admin_email"));
 	    return "AdminAccount";  
 	}
 	
+	@RequestMapping(value="/editadminprofile",method=RequestMethod.POST)
+	public String updateAdminProfile(@ModelAttribute("adminEditProfile") User admin ,HttpSession session) {
+		System.out.println(admin);
+		
+		userservice.updateUserProfile(admin.getEmail(),admin.getFirstName(),admin.getLastName(),admin.getGender(),admin.getContactno(),admin.getAddress(),admin.getRole(),admin.getPassword(),admin.getConfirmPassword(),admin.getId());
+		session.setAttribute("Admin_firstname",admin.getFirstName());
+		session.setAttribute("Admin_lastname", admin.getLastName());
+		session.setAttribute("Admin_email", admin.getEmail());
+		session.setAttribute("Admin_phone", admin.getContactno());
+		session.setAttribute("Admin_address", admin.getAddress());
+		session.setAttribute("Admin_gender", admin.getGender());
+		session.setAttribute("Admin_id", admin.getId());
+		session.setAttribute("Admin_role", admin.getRole());
+		session.setAttribute("Admin_cpassword", admin.getConfirmPassword());
+		session.setAttribute("Admin_password", admin.getPassword());
 	
+	
+		return "redirect:/adminaccount";
+		
+	}
 	
 	
 	//Event Table

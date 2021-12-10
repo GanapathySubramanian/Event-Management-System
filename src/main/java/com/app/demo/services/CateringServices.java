@@ -96,5 +96,10 @@ public class CateringServices {
 		cateringrepo.updateCater(catername, caterdesc, caterloc, caterprice, id);
 	}
 
+	public long cateringcount() {
+		// TODO Auto-generated method stub
+		return cateringrepo.count();
+	}
+
 	
 }

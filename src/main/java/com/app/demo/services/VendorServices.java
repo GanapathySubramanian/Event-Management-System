@@ -87,6 +87,11 @@ public class VendorServices {
 		vendorrepo.updatevendor(vendorname, vendordesc, vendorloc, vendorprice, id);
 	}
 
+	public long vendorcount() {
+		// TODO Auto-generated method stub
+		return vendorrepo.count();
+	}
+
 
 	
 }

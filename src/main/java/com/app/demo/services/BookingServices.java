@@ -68,4 +68,56 @@ public class BookingServices {
 		// TODO Auto-generated method stub
 		bookingrepo.bookacceptByadmin(booking_id);
 	}
+
+	public long bookingcount() {
+		// TODO Auto-generated method stub
+		return bookingrepo.count();
+	}
+	
+	public long bookingcountPaid() {
+		return bookingrepo.bookingcountPaid();
+	}
+
+	public long bookingcountunPaid() {
+		// TODO Auto-generated method stub
+		return bookingrepo.bookingcountunPaid();
+	}
+
+	public long bookingcountByUser(User user) {
+		// TODO Auto-generated method stub
+		return bookingrepo.bookingcountByUser(user);
+	}
+
+	public long bookingcountById(int id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.bookingcountById(id);
+	}
+
+	public long bookingcountPaidById(int id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.bookingcountPaidById(id);
+	}
+
+	public long bookingcountunPaidById(int id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.bookingcountunPaidById(id);
+	}
+
+	public long bookingcountcancelByAdmin() {
+		// TODO Auto-generated method stub
+		return bookingrepo.bookingcountcancelByAdmin();
+	}
+	public long bookingcountcancelByUser() {
+		return bookingrepo.bookingcountcancelByUser();
+	}
+
+	public long bookingcountcancelByAdminById(int id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.bookingcountcancelByAdminById(id);
+	}
+
+	public long bookingcountcancelByUserById(int id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.bookingcountcancelByUserById(id);
+	}
 }

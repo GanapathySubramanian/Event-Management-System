@@ -73,5 +73,10 @@ public class HotelServices {
 			hotelrepo.updateHotelwithImage(hotelName, hotelDesc,  location, price ,image, id);
 			
 		}
+
+		public long hotelCount() {
+			// TODO Auto-generated method stub
+			return hotelrepo.count();
+		}
 		
 }

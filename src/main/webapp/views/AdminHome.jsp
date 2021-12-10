@@ -3,7 +3,14 @@
 	
 	<jsp:include page="includes/adminNav.jsp" />  
 	
-	
+	<style>
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+      transition: 0.3s ease-in-out;
+      cursor:pointer;
+  }
+    </style>
 	    <!-- Page Content  -->
         <div id="content">
 
@@ -47,11 +54,11 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="align-self-center">
-                  <i class="icon-pencil primary font-large-2 float-left"></i>
+                  <i class="fas fa-users primary fa-3x"></i>
                 </div>
                 <div class="media-body text-right">
-                  <h3>278</h3>
-                  <span>New Posts</span>
+                  <h3 class="success">${admin_user_count}</h3>
+                  <span>Total Users</span>
                 </div>
               </div>
             </div>
@@ -64,11 +71,11 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="align-self-center">
-                  <i class="icon-speech warning font-large-2 float-left"></i>
+                  <i class="fas fa-concierge-bell warning fa-3x"></i>
                 </div>
                 <div class="media-body text-right">
-                  <h3>156</h3>
-                  <span>New Comments</span>
+                  <h3 class="danger">${admin_hotel_count}</h3>
+                  <span>Total Hotels</span>
                 </div>
               </div>
             </div>
@@ -81,11 +88,11 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="align-self-center">
-                  <i class="icon-graph success font-large-2 float-left"></i>
+                  <i class="fas fa-birthday-cake success fa-3x"></i>
                 </div>
                 <div class="media-body text-right">
-                  <h3>64.89 %</h3>
-                  <span>Bounce Rate</span>
+                  <h3 class="primary">${admin_event_count}</h3>
+                  <span>Total Events</span>
                 </div>
               </div>
             </div>
@@ -98,11 +105,11 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="align-self-center">
-                  <i class="icon-pointer danger font-large-2 float-left"></i>
+                  <i class="fas fa-french-fries danger fa-3x"></i>
                 </div>
                 <div class="media-body text-right">
-                  <h3>423</h3>
-                  <span>Total Visits</span>
+                  <h3 class="warning">${admin_catering_count}</h3>
+                  <span>Total Caterings</span>
                 </div>
               </div>
             </div>
@@ -118,11 +125,11 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="danger">278</h3>
-                  <span>New Projects</span>
+                  <h3 class="danger">${admin_vendor_count}</h3>
+                  <span>Total Vendors</span>
                 </div>
                 <div class="align-self-center">
-                  <i class="icon-rocket danger font-large-2 float-right"></i>
+                  <i class="far fa-user-hard-hat fa-3x" style="color: orange;"></i>
                 </div>
               </div>
             </div>
@@ -135,11 +142,11 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="success">156</h3>
-                  <span>New Clients</span>
+                  <h3 class="success">${admin_booking_count}</h3>
+                  <span>Total Booking</span>
                 </div>
                 <div class="align-self-center">
-                  <i class="icon-user success font-large-2 float-right"></i>
+                  <i class="fas fa-calendar-check info fa-3x"></i>
                 </div>
               </div>
             </div>
@@ -153,11 +160,11 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="warning">64.89 %</h3>
-                  <span>Conversion Rate</span>
+                  <h3 class="warning">${admin_bookingpaid_count}</h3>
+                  <span>Paid Bookings</span>
                 </div>
                 <div class="align-self-center">
-                  <i class="icon-pie-chart warning font-large-2 float-right"></i>
+                  <i class="fab fa-paypal secondary fa-3x"></i>
                 </div>
               </div>
             </div>
@@ -170,11 +177,11 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="primary">423</h3>
-                  <span>Support Tickets</span>
+                  <h3 class="primary">${admin_bookingunpaid_count}</h3>
+                  <span>UnPaid Bookings</span>
                 </div>
                 <div class="align-self-center">
-                  <i class="icon-support primary font-large-2 float-right"></i>
+                  <i class="fab fa-amazon-pay primary fa-3x"></i>
                 </div>
               </div>
             </div>
@@ -182,195 +189,65 @@
         </div>
       </div>
     </div>
-  
+
+
     <div class="row">
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="media-body text-left">
-                  <h3 class="primary">278</h3>
-                  <span>New Posts</span>
-                </div>
-                <div class="align-self-center">
-                  <i class="icon-book-open primary font-large-2 float-right"></i>
-                </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex">
+              <div class="media-body text-left">
+                <h3 class="warning">${admin_bookingcancelbyadmin_count}</h3>
+                <span>Bookings Cancelled by Admin</span>
               </div>
-              <div class="progress mt-1 mb-0" style="height: 7px;">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="media-body text-left">
-                  <h3 class="warning">156</h3>
-                  <span>New Comments</span>
-                </div>
-                <div class="align-self-center">
-                  <i class="icon-bubbles warning font-large-2 float-right"></i>
-                </div>
-              </div>
-              <div class="progress mt-1 mb-0" style="height: 7px;">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="media-body text-left">
-                  <h3 class="success">64.89 %</h3>
-                  <span>Bounce Rate</span>
-                </div>
-                <div class="align-self-center">
-                  <i class="icon-cup success font-large-2 float-right"></i>
-                </div>
-              </div>
-              <div class="progress mt-1 mb-0" style="height: 7px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="media-body text-left">
-                  <h3 class="danger">423</h3>
-                  <span>Total Visits</span>
-                </div>
-                <div class="align-self-center">
-                  <i class="icon-direction danger font-large-2 float-right"></i>
-                </div>
-              </div>
-              <div class="progress mt-1 mb-0" style="height: 7px;">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="align-self-center">
+                <i class="fal fa-calendar-check warning fa-3x"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  
-  <section id="stats-subtitle">
-  <div class="row">
-    <div class="col-12 mt-3 mb-1">
-      <h4 class="text-uppercase">Statistics With Subtitle</h4>
-      <p>Statistics on minimal cards with Title &amp; Sub Title.</p>
+
+    <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex">
+              <div class="media-body text-left">
+                <h3 class="danger">${admin_bookingcancelbyuser_count}</h3>
+                <span>Bookings Cancelled by User</span>
+              </div>
+              <div class="align-self-center">
+                <i class="fad fa-calendar-check danger fa-3x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+
+
+
+    
+
   </div>
 
-  <div class="row">
-    <div class="col-xl-6 col-md-12">
-      <div class="card overflow-hidden">
-        <div class="card-content">
-          <div class="card-body cleartfix">
-            <div class="media align-items-stretch">
-              <div class="align-self-center">
-                <i class="icon-pencil primary font-large-2 mr-2"></i>
-              </div>
-              <div class="media-body">
-                <h4>Total Posts</h4>
-                <span>Monthly blog posts</span>
-              </div>
-              <div class="align-self-center">
-                <h1>18,000</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-xl-6 col-md-12">
-      <div class="card">
-        <div class="card-content">
-          <div class="card-body cleartfix">
-            <div class="media align-items-stretch">
-              <div class="align-self-center">
-                <i class="icon-speech warning font-large-2 mr-2"></i>
-              </div>
-              <div class="media-body">
-                <h4>Total Comments</h4>
-                <span>Monthly blog comments</span>
-              </div>
-              <div class="align-self-center"> 
-                <h1>84,695</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <div class="row">
-    <div class="col-xl-6 col-md-12">
-      <div class="card">
-        <div class="card-content">
-          <div class="card-body cleartfix">
-            <div class="media align-items-stretch">
-              <div class="align-self-center">
-                <h1 class="mr-2">$76,456.00</h1>
-              </div>
-              <div class="media-body">
-                <h4>Total Sales</h4>
-                <span>Monthly Sales Amount</span>
-              </div>
-              <div class="align-self-center">
-                <i class="icon-heart danger font-large-2"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-6 col-md-12">
-      <div class="card">
-        <div class="card-content">
-          <div class="card-body cleartfix">
-            <div class="media align-items-stretch">
-              <div class="align-self-center">
-                <h1 class="mr-2">$36,000.00</h1>
-              </div>
-              <div class="media-body">
-                <h4>Total Cost</h4>
-                <span>Monthly Cost</span>
-              </div>
-              <div class="align-self-center">
-                <i class="icon-wallet success font-large-2"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
+</div>  
+ 
+
+   
+  </div>
 </div>
-        
-        
-        
-        
-        </div>
-    </div>
+</div>
+</div>
 	
 	
 

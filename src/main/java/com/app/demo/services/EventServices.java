@@ -76,5 +76,10 @@ public class EventServices {
 			eventrepo.updateeventwithImage(eventName, eventDesc,image, id);
 			
 		}
+
+		public long eventCount() {
+			// TODO Auto-generated method stub
+			return eventrepo.count();
+		}
 		
 }

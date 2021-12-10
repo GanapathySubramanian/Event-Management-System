@@ -41,4 +41,43 @@ public interface BookingRepo extends JpaRepository<Booking,Integer>{
 	public void bookacceptByadmin(int booking_id);
 
 
+	@Query("select count(id) from bookings where payment_status=1 and accept_status=1")
+	public long bookingcountPaid();
+
+	
+	@Query("select count(id) from bookings where accept_status=1 and payment_status=0")
+	public long bookingcountunPaid();
+
+	@Query("select count(id) from bookings where accept_status=2 and payment_status=0")
+	public long bookingcountcancelByAdmin();
+
+
+	@Query("select count(id) from bookings where accept_status=3 and payment_status=0")
+	public long bookingcountcancelByUser();
+
+	@Query("select count(id) from bookings where user=?1")
+	public long bookingcountByUser(User user);
+
+
+	@Query("select count(id) from bookings where user_id=?1")
+	public long bookingcountById(int id);
+
+
+	@Query("select count(id) from bookings where user_id=?1 and payment_status=1 and accept_status=1")
+	public long bookingcountPaidById(int id);
+
+
+	@Query("select count(id) from bookings where user_id=?1 and accept_status=1 and payment_status=0")
+	public long bookingcountunPaidById(int id);
+
+
+	@Query("select count(id) from bookings where user_id=?1 and accept_status=2 and payment_status=0")
+	public long bookingcountcancelByAdminById(int id);
+
+
+	@Query("select count(id) from bookings where user_id=?1 and accept_status=3 and payment_status=0")
+	public long bookingcountcancelByUserById(int id);
+
+
+
 }

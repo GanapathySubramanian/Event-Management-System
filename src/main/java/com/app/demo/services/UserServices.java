@@ -55,9 +55,18 @@ public class UserServices {
 		return userrepo.findById(id).orElse(null);
 	}
 	
+	
 	public void updateUserDetails(String email,String firstName,String lastName,String gender,String contactno,String address,String role,int id) {
 		userrepo.updateUser(email, firstName, lastName, gender, contactno, address, role, id);
+		
 	}
-	
+	public void updateUserProfile(String email,String firstName,String lastName,String gender,String contactno,String address,String role,String password,String cpassword,int id) {
+		userrepo.updateUserpro(email, firstName, lastName, gender, contactno, address, role,password,cpassword ,id);
+	}
+
+	public long userCount() {
+		// TODO Auto-generated method stub
+		return userrepo.count();
+	}
 	
 }

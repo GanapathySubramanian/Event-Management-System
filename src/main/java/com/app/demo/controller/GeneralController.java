@@ -4,15 +4,43 @@ package com.app.demo.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.app.demo.model.User;
+import com.app.demo.services.BookingServices;
+import com.app.demo.services.CateringServices;
+import com.app.demo.services.EventServices;
+import com.app.demo.services.HotelServices;
+import com.app.demo.services.UserServices;
+import com.app.demo.services.VendorServices;
 
 
 @Controller
 public class GeneralController {
 	
-
+	@Autowired
+	private UserServices userservice;
+	
+	@Autowired
+	private HotelServices hotelservice;
+	
+	@Autowired
+	private EventServices eventservice;
+	
+	@Autowired
+	private CateringServices caterservice;
+	
+	@Autowired
+	private VendorServices vendorservice;
+	
+	@Autowired
+	private BookingServices bookingservice;
+	
+	
 	@RequestMapping(value="/",method= RequestMethod.GET)
 	public String home() {
 		return "index";
@@ -40,13 +68,151 @@ public class GeneralController {
 	}
 	
 	@RequestMapping(value="/userhome",method=RequestMethod.GET)
-	public String userhome() {
+	public String userhome(ModelMap model,HttpSession session) {
+		if(session.getAttribute("User_id")==null) {
+			return "redirect:/signin";
+		}else {
+		int id=(int) session.getAttribute("User_id");
+//		User user=userservice.findById(id);
+		
+		long Hotelcount=hotelservice.hotelCount();
+		model.addAttribute("user_hotel_count",Hotelcount);
+		
+		long Eventcount=eventservice.eventCount();
+		model.addAttribute("user_event_count",Eventcount);
+		
+		long Cateringcount=caterservice.cateringcount();
+		model.addAttribute("user_catering_count",Cateringcount);
+		
+		long Vendorcount=vendorservice.vendorcount();
+		model.addAttribute("user_vendor_count",Vendorcount);
+		
+		long Bookingcount=bookingservice.bookingcountById(id);
+		model.addAttribute("user_booking_count",Bookingcount);
+		
+		long BookingcountPaid=bookingservice.bookingcountPaidById(id);
+		model.addAttribute("user_bookingpaid_count",BookingcountPaid);
+		
+		long BookingcountunPaid=bookingservice.bookingcountunPaidById(id);
+		model.addAttribute("user_bookingunpaid_count",BookingcountunPaid);
+		
+		long BookingcanceledbyAdmin=bookingservice.bookingcountcancelByAdminById(id);
+		model.addAttribute("user_bookingcancelbyadmin_count",BookingcanceledbyAdmin);
+		
+		long BookingcanceledbyUser=bookingservice.bookingcountcancelByUserById(id);
+		model.addAttribute("user_bookingcancelbyuser_count",BookingcanceledbyUser);
+		
+		
 		return "Userhome";
+		}
 	}
 	
 	@RequestMapping(value="/adminhome",method=RequestMethod.GET)
-	public String adminhome() {
+	public String adminhome(ModelMap model) {
+		
+		long Usercount=userservice.userCount();
+		model.addAttribute("admin_user_count",Usercount);
+		
+		long Hotelcount=hotelservice.hotelCount();
+		model.addAttribute("admin_hotel_count",Hotelcount);
+		
+		long Eventcount=eventservice.eventCount();
+		model.addAttribute("admin_event_count",Eventcount);
+		
+		long Cateringcount=caterservice.cateringcount();
+		model.addAttribute("admin_catering_count",Cateringcount);
+		
+		long Vendorcount=vendorservice.vendorcount();
+		model.addAttribute("admin_vendor_count",Vendorcount);
+		
+		long Bookingcount=bookingservice.bookingcount();
+		model.addAttribute("admin_booking_count",Bookingcount);
+		
+		long BookingcountPaid=bookingservice.bookingcountPaid();
+		model.addAttribute("admin_bookingpaid_count",BookingcountPaid);
+		
+		long BookingcountunPaid=bookingservice.bookingcountunPaid();
+		model.addAttribute("admin_bookingunpaid_count",BookingcountunPaid);
+		
+		long BookingcanceledbyAdmin=bookingservice.bookingcountcancelByAdmin();
+		model.addAttribute("admin_bookingcancelbyadmin_count",BookingcanceledbyAdmin);
+		
+		long BookingcanceledbyUser=bookingservice.bookingcountcancelByUser();
+		model.addAttribute("admin_bookingcancelbyuser_count",BookingcanceledbyUser);
+		
 		return "AdminHome";
+	}
+	
+	@RequestMapping(value="/subadminhome",method=RequestMethod.GET)
+	public String subAdminHome(ModelMap model) {
+		long Usercount=userservice.userCount();
+		model.addAttribute("subadmin_user_count",Usercount);
+		
+		long Hotelcount=hotelservice.hotelCount();
+		model.addAttribute("subadmin_hotel_count",Hotelcount);
+		
+		long Eventcount=eventservice.eventCount();
+		model.addAttribute("subadmin_event_count",Eventcount);
+		
+		long Cateringcount=caterservice.cateringcount();
+		model.addAttribute("subadmin_catering_count",Cateringcount);
+		
+		long Vendorcount=vendorservice.vendorcount();
+		model.addAttribute("subadmin_vendor_count",Vendorcount);
+		
+		long Bookingcount=bookingservice.bookingcount();
+		model.addAttribute("subadmin_booking_count",Bookingcount);
+		
+		long BookingcountPaid=bookingservice.bookingcountPaid();
+		model.addAttribute("subadmin_bookingpaid_count",BookingcountPaid);
+		
+		long BookingcountunPaid=bookingservice.bookingcountunPaid();
+		model.addAttribute("subadmin_bookingunpaid_count",BookingcountunPaid);
+		
+		long BookingcanceledbyAdmin=bookingservice.bookingcountcancelByAdmin();
+		model.addAttribute("subadmin_bookingcancelbyadmin_count",BookingcanceledbyAdmin);
+		
+		long BookingcanceledbyUser=bookingservice.bookingcountcancelByUser();
+		model.addAttribute("subadmin_bookingcancelbyuser_count",BookingcanceledbyUser);
+		
+	    return "SubAdminHome";  
+	}
+	
+	@RequestMapping(value="/superadminhome",method=RequestMethod.GET)
+	public String superAdminHome(ModelMap model) {
+		
+		long Usercount=userservice.userCount();
+		model.addAttribute("superadmin_user_count",Usercount);
+		
+		long Hotelcount=hotelservice.hotelCount();
+		model.addAttribute("superadmin_hotel_count",Hotelcount);
+		
+		long Eventcount=eventservice.eventCount();
+		model.addAttribute("superadmin_event_count",Eventcount);
+		
+		long Cateringcount=caterservice.cateringcount();
+		model.addAttribute("superadmin_catering_count",Cateringcount);
+		
+		long Vendorcount=vendorservice.vendorcount();
+		model.addAttribute("superadmin_vendor_count",Vendorcount);
+		
+		long Bookingcount=bookingservice.bookingcount();
+		model.addAttribute("superadmin_booking_count",Bookingcount);
+		
+		long BookingcountPaid=bookingservice.bookingcountPaid();
+		model.addAttribute("superadmin_bookingpaid_count",BookingcountPaid);
+		
+		long BookingcountunPaid=bookingservice.bookingcountunPaid();
+		model.addAttribute("superadmin_bookingunpaid_count",BookingcountunPaid);
+		
+		
+		long BookingcanceledbyAdmin=bookingservice.bookingcountcancelByAdmin();
+		model.addAttribute("superadmin_bookingcancelbyadmin_count",BookingcanceledbyAdmin);
+		
+		long BookingcanceledbyUser=bookingservice.bookingcountcancelByUser();
+		model.addAttribute("superadmin_bookingcancelbyuser_count",BookingcanceledbyUser);
+		
+	    return "SuperAdminHome";  
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)

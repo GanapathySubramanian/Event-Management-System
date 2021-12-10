@@ -1,11 +1,15 @@
+
 package com.app.demo.controller;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,11 +19,13 @@ import com.app.demo.model.Booking;
 import com.app.demo.model.Catering;
 
 import com.app.demo.model.Hotel;
+import com.app.demo.model.User;
 import com.app.demo.model.Vendor;
 import com.app.demo.services.BookingServices;
 import com.app.demo.services.CateringServices;
 import com.app.demo.services.EventServices;
 import com.app.demo.services.HotelServices;
+import com.app.demo.services.UserServices;
 import com.app.demo.services.VendorServices;
 
 
@@ -37,6 +43,10 @@ public class SuperAdminController {
 	
 	@Autowired
 	private EventServices eventservices;
+	
+	@Autowired
+	private UserServices userservice;
+	
 	
 	@Autowired
 	private BookingServices	bookingservice;
@@ -81,6 +91,27 @@ public class SuperAdminController {
 	public String adminAccount() {
 	    return "SuperAdminAccount";  
 	}
+	
+	@RequestMapping(value="/editsuperadminprofile",method=RequestMethod.POST)
+	public String updateUserProfile(@ModelAttribute("superadminEditProfile") User superadmin ,HttpSession session) {
+		System.out.println(superadmin);
+		
+		userservice.updateUserProfile(superadmin.getEmail(),superadmin.getFirstName(),superadmin.getLastName(),superadmin.getGender(),superadmin.getContactno(),superadmin.getAddress(),superadmin.getRole(),superadmin.getPassword(),superadmin.getConfirmPassword(),superadmin.getId());
+		session.setAttribute("Superadmin_firstname",superadmin.getFirstName());
+		session.setAttribute("Superadmin_lastname", superadmin.getLastName());
+		session.setAttribute("Superadmin_email", superadmin.getEmail());
+		session.setAttribute("Superadmin_phone", superadmin.getContactno());
+		session.setAttribute("Superadmin_address", superadmin.getAddress());
+		session.setAttribute("Superadmin_gender", superadmin.getGender());
+		session.setAttribute("Superadmin_id", superadmin.getId());
+		session.setAttribute("Superadmin_role", superadmin.getRole());
+		session.setAttribute("Superadmin_cpassword", superadmin.getConfirmPassword());
+		session.setAttribute("Superadmin_password", superadmin.getPassword());
+	
+		return "redirect:/superadminaccount";
+		
+	}
+
 	
 	@RequestMapping(value="/bookcancelbysuperadmin",method= RequestMethod.POST)
 	public String UserBookingCancelAdmin(@RequestParam("booking_id") int booking_id)
