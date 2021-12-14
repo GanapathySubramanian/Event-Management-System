@@ -1,8 +1,13 @@
 package com.app.demo.controller;
 
+import java.io.IOException;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.app.demo.UserExcelExporter;
 import com.app.demo.model.Booking;
 import com.app.demo.model.Catering;
 import com.app.demo.model.Event;
@@ -414,10 +421,10 @@ public class AdminController {
 		}
 		
 		
-		//Add event
-		@RequestMapping(value="/addeventForm")
-		public String saveevent(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("eventname") String eventname,@RequestParam("event_desc") String eventDesc,@RequestParam("event_img") MultipartFile file) {
-			eventservice.saveeventtoDB(file, eventname,eventDesc);
+	//Add event
+	@RequestMapping(value="/addeventForm")
+	public String saveevent(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("eventname") String eventname,@RequestParam("event_desc") String eventDesc,@RequestParam("event_img") MultipartFile file) {
+		eventservice.saveeventtoDB(file, eventname,eventDesc);
 			if(role1.equals("subadmin")&& role2.equals("not"))
 			{
 				return "redirect:/subadmineventdetails";
@@ -431,61 +438,80 @@ public class AdminController {
 				return "redirect:/admineventdetails";
 			}
 			
+	}
+		@RequestMapping(value="eventfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+		public ResponseEntity<Event> admineventEditDetails(@PathVariable("id") int id) {
+			try {
+				return new ResponseEntity<Event>(eventservice.findById(id),HttpStatus.OK);
 			}
-				@RequestMapping(value="eventfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
-				public ResponseEntity<Event> admineventEditDetails(@PathVariable("id") int id) {
-					try {
-						return new ResponseEntity<Event>(eventservice.findById(id),HttpStatus.OK);
-					}
-				    catch(Exception e) {
-				    	return new ResponseEntity<Event>(HttpStatus.BAD_REQUEST);
-				    }
-					
-				}
+		    catch(Exception e) {
+		    	return new ResponseEntity<Event>(HttpStatus.BAD_REQUEST);
+		    }
+			
+		}
+		
+		@RequestMapping(value="/EditeventForm",method=RequestMethod.POST)
+		public String updateevent(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("eventname") String eventname,@RequestParam("event_desc") String eventdesc,@RequestParam("event_img") MultipartFile file ,@RequestParam("id") int id)  {
+			
+			if(file.isEmpty())
+			{
+				eventservice.updateeventDetails(eventname,eventdesc,id);
+			}
+			else {
+				eventservice.updateeventDetailswithImage(eventname,eventdesc,file,id);
+			}
+			if(role1.equals("subadmin")&& role2.equals("not"))
+			{
+				return "redirect:/subadmineventdetails";
+			}
+			else if(role1.equals("not")&& role2.equals("superadmin"))
+			{
+				return "redirect:/superadmineventdetails";
+			}
+			else {
+				return "redirect:/admineventdetails";
+	
 				
-				@RequestMapping(value="/EditeventForm",method=RequestMethod.POST)
-				public String updateevent(@RequestParam("subadmin") String role1,@RequestParam("superadmin") String role2,@RequestParam("eventname") String eventname,@RequestParam("event_desc") String eventdesc,@RequestParam("event_img") MultipartFile file ,@RequestParam("id") int id)  {
-					
-					if(file.isEmpty())
-					{
-						eventservice.updateeventDetails(eventname,eventdesc,id);
-					}
-					else {
-						eventservice.updateeventDetailswithImage(eventname,eventdesc,file,id);
-					}
-					if(role1.equals("subadmin")&& role2.equals("not"))
-					{
-						return "redirect:/subadmineventdetails";
-					}
-					else if(role1.equals("not")&& role2.equals("superadmin"))
-					{
-						return "redirect:/superadmineventdetails";
-					}
-					else {
-						return "redirect:/admineventdetails";
-
-						
-					}
-					
-				}
-				
-				
-				
-				@RequestMapping(value="/bookcancelbyadmin",method= RequestMethod.POST)
-				public String UserBookingCancelAdmin(@RequestParam("booking_id") int booking_id)
-				{
-						bookingservice.bookingcancelByAdmin(booking_id);
-						return "redirect:/adminbookingdetails";
-				
-				}
-				
-				
-				@RequestMapping(value="/bookacceptbyadmin",method= RequestMethod.POST)
-				public String UserBookingAcceptAdmin(@RequestParam("booking_id") int booking_id)
-				{
-						bookingservice.bookingacceptByAdmin(booking_id);
-						return "redirect:/adminbookingdetails";
-				
-				}
+			}
+			
+		}
+		
+		
+		
+		@RequestMapping(value="/bookcancelbyadmin",method= RequestMethod.POST)
+		public String UserBookingCancelAdmin(@RequestParam("booking_id") int booking_id)
+		{
+				bookingservice.bookingcancelByAdmin(booking_id);
+				return "redirect:/adminbookingdetails";
+		
+		}
+		
+		
+		@RequestMapping(value="/bookacceptbyadmin",method= RequestMethod.POST)
+		public String UserBookingAcceptAdmin(@RequestParam("booking_id") int booking_id)
+		{
+				bookingservice.bookingacceptByAdmin(booking_id);
+				return "redirect:/adminbookingdetails";
+		
+		}
+		
+		
+		 @GetMapping("/downloadExcel")
+		    public void exportToExcel(HttpServletResponse response) throws IOException {
+		        response.setContentType("application/octet-stream");
+		        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		        String currentDateTime = dateFormatter.format(new Date());
+		         
+		        String headerKey = "Content-Disposition";
+		        String headerValue = "attachment; filename=BookingDetails_" + currentDateTime + ".xlsx";
+		        response.setHeader(headerKey, headerValue);
+		         
+		        List<Booking> bookings =bookingservice.findAllandSortBy();
+		         
+//		        System.out.println(listUsers);
+		        UserExcelExporter excelExporter = new UserExcelExporter(bookings);
+		         
+		        excelExporter.export(response);    
+		    }  
 
 }

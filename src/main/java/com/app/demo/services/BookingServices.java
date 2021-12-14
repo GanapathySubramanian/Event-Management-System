@@ -3,6 +3,7 @@ package com.app.demo.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.app.demo.model.Booking;
@@ -36,6 +37,9 @@ public class BookingServices {
 	}
 	
 
+	public List<Booking> findAllandSortBy(){
+		return bookingrepo.findAll();
+	}
 
 
 	public List<Booking> findAllByUser(User user) {

@@ -18,6 +18,8 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 	
 	public User findByEmail(String email);
 	
+	public User findByResetPasswordToken(String token);
+	
 	@Modifying
 	@Transactional
 	@Query("Update user set email=?1,first_name=?2,last_name=?3,gender=?4,contact_no=?5,address=?6,role=?7 where Id=?8 ")

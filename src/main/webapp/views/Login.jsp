@@ -50,6 +50,9 @@
 		            <button type="submit" name="user_login" class="btn btn-primary login-btn btn-block">Sign in</button>
 		        </div>
 		 
+				<div class="text-center w-100">
+					<p class="text-muted font-weight-bold">Forgot Password <a href="/forgot_password" class="text-primary ml-2">Click here!</a></p>
+			   </div>
 				<!-- Divider Text -->
 				<div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
 				    <div class="border-bottom w-100 ml-5"></div>

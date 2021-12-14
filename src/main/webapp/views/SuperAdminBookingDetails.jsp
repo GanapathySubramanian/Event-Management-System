@@ -126,7 +126,7 @@
                                             <form action="/bookcancelbysuperadmin" method="POST">
                                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                                 <input type="hidden" value="${allbooking.id}" name="booking_id">
-                                                <button type="submit" class="btn btn-danger ml-3">Cancel</button>
+                                                <button type="submit" class="btn btn-danger ml-3" onclick='return cancelBooking()'>Cancel</button>
                                             </form>
                                            </div>
                                         </c:if>

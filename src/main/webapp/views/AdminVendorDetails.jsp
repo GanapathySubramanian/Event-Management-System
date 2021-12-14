@@ -66,8 +66,14 @@
                         <input type="text" class="form-control" placeholder="Vendor Name" name="vendorname" id="vendorname" required>
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">vendor Description</label>
-						<textarea class="form-control" name="vendor_desc" placeholder="Vendor Description" id="vendor_desc"></textarea>
+						 <label for="message-text" class="col-form-label">vendor Description</label>
+                        <select id="vendor_desc" name="vendor_desc"  class="form-control" required>
+							<option value="">Choose the Description</option>
+							<option value="Photographer">Photographer</option>
+							<option value="DJ">Disc Jockey</option>
+							<option value="Makeupartisit">Makeup Artisit</option>
+							<option value="Decorator">Decorator</option>
+						</select>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">vendor Image:</label>
@@ -131,7 +137,7 @@
                         <td class="d-flex">
                             <a class="btn btn-info edit" data-toggle="modal" name="edit_vendor" data-target="#EditvendorModal" data-whatever="@mdo">EDIT</a>
 					         <input type="hidden" value="${allvendor.id}" id="edit_id">
-                            <a href="/admindeletevendor/${allvendor.id}" class="btn btn-danger ml-2">DELETE</a>
+                            <a href="/admindeletevendor/${allvendor.id}" class="btn btn-danger ml-2" onclick='return deleteVendor()'>DELETE</a>
                         </td>
                         </tr>
                     </c:forEach>

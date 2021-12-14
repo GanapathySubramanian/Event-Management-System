@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import com.app.demo.UserNotFoundException;
 import com.app.demo.model.User;
 import com.app.demo.repository.UserRepo;
 
@@ -30,11 +31,6 @@ public class UserServices {
 		userrepo.save(user);
 	}
 	
-	public User findByEmail(String email) {
-		User user=userrepo.findByEmail(email);
-		
-		return user;
-	}
 
 
 	public List<User> findAll() {
@@ -68,5 +64,39 @@ public class UserServices {
 		// TODO Auto-generated method stub
 		return userrepo.count();
 	}
+
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userrepo.findByEmail(email);
+	}
+	
+	
+	public void updateResetPasswordToken(String token, String email) throws UserNotFoundException {
+		User user=userrepo.findByEmail(email);
+		
+		if(user!=null) {
+				user.setResetPasswordToken(token);
+				userrepo.save(user);
+		}
+		 else {
+	            throw new UserNotFoundException("Could not find any customer with the email " + email);
+	        }
+	}
+	
+	
+	
+	 public User getByResetPasswordToken(String token) {
+	        return userrepo.findByResetPasswordToken(token);
+	    }
+	     
+	    public void updatePassword(User user, String newPassword) {
+//	        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//	        String encodedPassword = passwordEncoder.encode(newPassword);
+	        user.setPassword(newPassword);
+	        user.setConfirmPassword(newPassword);
+	        user.setResetPasswordToken(null);
+	        userrepo.save(user);
+	    }
+	    
 	
 }

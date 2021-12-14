@@ -44,6 +44,10 @@ public class User {
 		
 		@Column(name="role")
 		private String role;
+		
+		@Column(name="reset_password_token")
+		private String resetPasswordToken;
+		
 
 		@OneToMany(mappedBy="user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 		private List<Booking> booking;
@@ -127,6 +131,15 @@ public class User {
 
 		public void setRole(String role) {
 			this.role = role;
+		}
+
+		
+		public String getResetPasswordToken() {
+			return resetPasswordToken;
+		}
+
+		public void setResetPasswordToken(String resetPasswordToken) {
+			this.resetPasswordToken = resetPasswordToken;
 		}
 
 		@Override

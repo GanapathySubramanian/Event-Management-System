@@ -68,7 +68,13 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">vendor Description</label>
-						<textarea class="form-control" name="vendor_desc" placeholder="Vendor Description" id="vendor_desc"></textarea>
+                        <select id="vendor_desc" name="vendor_desc"  class="form-control" required>
+							<option value="">Choose the Description</option>
+							<option value="Photographer">Photographer</option>
+							<option value="DJ">Disc Jockey</option>
+							<option value="Makeupartisit">Makeup Artisit</option>
+							<option value="Decorator">Decorator</option>
+						</select>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">vendor Image:</label>

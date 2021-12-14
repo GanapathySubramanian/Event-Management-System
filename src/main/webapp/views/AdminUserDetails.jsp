@@ -162,7 +162,7 @@
 					            <td class="d-flex">
 					            	<a class="btn btn-info edit" data-toggle="modal" name="edit_user" data-target="#EdituserModal" data-whatever="@mdo">EDIT</a>
 					            	<input type="hidden" value="${user.id}" id="edit_id">
-									<a href="/admindeleteuser/${user.email}" class="btn btn-danger ml-2">DELETE</a>
+									<a href="/admindeleteuser/${user.email}" class="btn btn-danger ml-2" onclick='return deleteUser()'>DELETE</a>
 					            </td>
 					            </tr>
 		        			</c:forEach>

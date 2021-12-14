@@ -1,22 +1,38 @@
 package com.app.demo.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MimeTypeUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.app.demo.UserNotFoundException;
+import com.app.demo.UserPDFExporter;
+import com.app.demo.Utility;
 import com.app.demo.model.Booking;
 import com.app.demo.model.Catering;
 import com.app.demo.model.Event;
@@ -29,6 +45,10 @@ import com.app.demo.services.EventServices;
 import com.app.demo.services.HotelServices;
 import com.app.demo.services.UserServices;
 import com.app.demo.services.VendorServices;
+import com.lowagie.text.DocumentException;
+
+import net.bytebuddy.utility.RandomString;
+
 
 @Controller
 
@@ -51,6 +71,10 @@ public class UserController {
 	
 	@Autowired
 	private BookingServices bookingservice;
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	     
 	
 	@RequestMapping(value="/registerForm",method= RequestMethod.POST)
 	public String UserRegister(@ModelAttribute("registerForm") User user,Model model)
@@ -321,5 +345,108 @@ public class UserController {
 			return "redirect:/userbookingdetails";
 	
 	}
+	
+	@GetMapping(value="/userbookingdetails/export")
+	public String Bill(@RequestParam("booking_id") int booking_id,HttpServletResponse response) throws DocumentException, IOException {
+	System.out.println("hello");
+		Booking booking=	bookingservice.findById(booking_id);
+		response.setContentType("application/pdf");
+	    DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_HH:mm:ss");
+	    String currentDateTime = dateFormatter.format(new Date());
+	    String headerKey = "Content-Disposition";
+	    String headerValue = "attachment; filename=Inovice generated on:" + currentDateTime + ".pdf";
+	    response.setHeader(headerKey, headerValue);
+	          
+	    UserPDFExporter exporter = new UserPDFExporter(booking.getId(), booking.getUser().getEmail(), booking.getUser().getFirstName(),booking.getUser().getLastName(), booking.getUser().getContactno(),booking.getUser().getGender(),booking.getUser().getAddress(),booking.getHotel().getHotelName(),booking.getHotel().getPrice(),booking.getCatering().getCatername(),booking.getCatering().getCater_price(),booking.getAmount(),booking.getCurrent_date(),booking.getDecorator_name_desc(),booking.getDj_name_desc(),booking.getMakeupartist_name_desc(),booking.getPhotographer_name_desc(),booking.getEvent().getEventname(),booking.getEvent_date(),booking.getMax_total_hour(),booking.getNo_of_guest());
+	    exporter.export(response);
+		
+		System.out.println(booking);
+		
+		return null;
+		
+	}
+	
+		@GetMapping("/forgot_password")
+		public String showForgotPasswordForm() {
+		    return "forgot_password_form";
+		}
+	 
+		@PostMapping("/forgot_password")
+		public String processForgotPassword(HttpServletRequest request, Model model) throws UnsupportedEncodingException, MessagingException {
+		    String email = request.getParameter("email");
+		    String token = RandomString.make(30);
+		     
+		    try {
+		        userservice.updateResetPasswordToken(token, email);
+		        String resetPasswordLink = Utility.getSiteURL(request)   + "/reset_password?token=" + token;
+		 
+		        sendEmail(email, resetPasswordLink);
+		        model.addAttribute("msg", "We have sent a reset password link to your email. Please check.");
+		         
+		    } catch (UserNotFoundException ex) {
+		        model.addAttribute("error", ex.getMessage());
+		    }
+		         
+		    return "forgot_password_form";
+		}
+	     
+		public void sendEmail(String recipientEmail, String link)
+		        throws MessagingException, UnsupportedEncodingException {
+		    MimeMessage msg = mailSender.createMimeMessage();              
+		    MimeMessageHelper helper = new MimeMessageHelper(msg);
+		     
+		    helper.setFrom("ganapathydaprojects@gmail.com", "EXQUISITE");
+		    helper.setTo(recipientEmail);
+		     
+		    String subject = "Here's the link to reset your password";
+		     
+		    String content = "<p>Hello,</p>"
+		            + "<p>You have requested to reset your password.</p>"
+		            + "<p>Click the link below to change your password:</p>"
+		            + "<p><a href=\"" + link + "\">Change my password</a></p>"
+		            + "<br>"
+		            + "<p>Ignore this email if you do remember your password, "
+		            + "or you have not made the request.</p>";
+		     
+		    helper.setSubject(subject);
+		     
+		    helper.setText(content, true);
+		     
+		    mailSender.send(msg);
+		}
+	     
+	     
+		@GetMapping("/reset_password")
+		public String showResetPasswordForm(@RequestParam(value = "token") String token, Model model) {
+		    User customer = userservice.getByResetPasswordToken(token);
+		    model.addAttribute("token", token);
+		     
+		    if (customer == null) {
+		        model.addAttribute("msg", "Invalid Token");
+		        return "forgot_password_form";
+		    }
+		     
+		    return "reset_password_form";
+		}
+	     
+		@PostMapping("/reset_password")
+		public String processResetPassword(HttpServletRequest request, Model model) {
+		    String token = request.getParameter("token");
+		    String password = request.getParameter("password");
+		     
+		    User customer = userservice.getByResetPasswordToken(token);
+		    model.addAttribute("title", "Reset your password");
+		     
+		    if (customer == null) {
+		        model.addAttribute("msg", "Invalid Token");
+		        return "forgot_password_form";
+		    } else {           
+		        userservice.updatePassword(customer, password);
+		         
+		        model.addAttribute("msg", "You have successfully changed your password.");
+		    }
+		     
+		    return "forgot_password_form";
+		}
 	
 }

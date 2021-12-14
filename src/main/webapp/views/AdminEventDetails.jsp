@@ -122,7 +122,7 @@
                         <td class="d-flex">
                             <a class="btn btn-info edit" data-toggle="modal" name="edit_event" data-target="#EditeventModal" data-whatever="@mdo">EDIT</a>
 					         <input type="hidden" value="${allevent.id}" id="edit_id">
-                            <a href="/admindeleteevent/${allevent.id}" class="btn btn-danger ml-2">DELETE</a>
+                            <a href="/admindeleteevent/${allevent.id}" class="btn btn-danger ml-2" onclick='return deleteEvent()'>DELETE</a>
                         </td>
                         </tr>
                     </c:forEach>

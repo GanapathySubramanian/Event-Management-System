@@ -117,7 +117,7 @@
                                                 <li class="widget-49-meeting-item"><span class="font-weight-bold ">No of Guest : ${booking.no_of_guest}</span></li>
                                                 <c:if test = "${booking.photographer_name_desc != 'none'}">
                                                     <li class="widget-49-meeting-item">
-                                                        <span class="font-weight-bold ">${booking.photographer_name_desc}</span>
+                                                        <span class="font-weight-bold ">Photographer : ${booking.photographer_name_desc}</span>
                                                     </li>
                                                 </c:if>
                                                 <c:if test = "${booking.photographer_name_desc == 'none'}">
@@ -127,7 +127,7 @@
                                                 </c:if>
                                                 <c:if test = "${booking.dj_name_desc != 'none'}">
                                                     <li class="widget-49-meeting-item">
-                                                        <span class="font-weight-bold ">${booking.dj_name_desc}</span>
+                                                        <span class="font-weight-bold ">DJ : ${booking.dj_name_desc}</span>
                                                     </li>
                                                 </c:if>
                                                 <c:if test = "${booking.dj_name_desc == 'none'}">
@@ -137,7 +137,7 @@
                                                 </c:if>
                                                 <c:if test = "${booking.makeupartist_name_desc != 'none'}">
                                                     <li class="widget-49-meeting-item">
-                                                        <span class="font-weight-bold ">${booking.makeupartist_name_desc}</span>
+                                                        <span class="font-weight-bold ">Makeupartisit : ${booking.makeupartist_name_desc}</span>
                                                     </li>
                                                 </c:if>
                                                 <c:if test = "${booking.makeupartist_name_desc == 'none'}">
@@ -147,7 +147,7 @@
                                                 </c:if>
                                                 <c:if test = "${booking.decorator_name_desc != 'none'}">
                                                     <li class="widget-49-meeting-item">
-                                                        <span class="font-weight-bold ">${booking.decorator_name_desc}</span>
+                                                        <span class="font-weight-bold ">Decorator : ${booking.decorator_name_desc}</span>
                                                     </li>
                                                 </c:if>
                                                 <c:if test = "${booking.decorator_name_desc == 'none'}">
@@ -164,7 +164,7 @@
                                                         <form action="/bookcancelbyuser" method="POST">
                                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                                             <input type="hidden" value="${booking.id}" name="booking_id">
-                                                            <button type="submit" class="btn btn-danger btn-sm ml-3">Cancel</button>
+                                                            <button type="submit" class="btn btn-danger btn-sm ml-3" onclick='return cancelBooking()'>Cancel</button>
                                                         </form>
                                                        
                                                     </c:if>
@@ -183,7 +183,7 @@
                                                         </div>
                                                     </c:if>
                                                     <c:if test = "${booking.accept_status==1 && booking.payment_status==1}">
-                                                        <form  method="POST">
+                                                         <form action="userbookingdetails/export" method="GET">
                                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                                             <input type="hidden" value="${booking.id}" name="booking_id">
                                                             <button type="submit" class="btn btn-info btn-sm">Bill</button>
