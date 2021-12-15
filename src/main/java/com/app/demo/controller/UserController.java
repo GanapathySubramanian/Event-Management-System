@@ -83,11 +83,18 @@ public class UserController {
 		
 		model.addAttribute("user",user);
 		System.out.println(user.getEmail());
-//		String result=service.findByEmail(user.getEmail());
+		User result=userservice.findByEmail(user.getEmail());
+		if(result != null) {
+			
+			model.addAttribute("reg_error","User Email Already Taken");
+			return "UserRegisteration";
+		}
+		else {
 			userservice.save(user);
 			System.out.println("Success");
-			
 			return "redirect:/signin";
+		}	
+			
 		
 	}
 	

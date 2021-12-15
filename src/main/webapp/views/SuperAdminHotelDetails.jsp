@@ -41,7 +41,7 @@
  
 
 
-      <form class="d-flex"  action="/superadminhotelSearch"  method="post" autocomplete="off">
+      <form class="d-flex"  action="/superadminganhotelSearch"  method="post" autocomplete="off">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="hidden" name="user" value="superadmin" />
 			<input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search" value="${hotel_keyword}">

@@ -1,3 +1,5 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="includes/header.jsp" />
 
 <nav class="navbar navbar-expand-md navbar-dark  bg-dark">
@@ -17,6 +19,9 @@
             			<!-- <img src="assets/picture/icons/thumbs-up.png" alt="" class="img-fluid mb-3 d-none d-md-block"> -->     
        						<h1>Create an Account</h1>
            					<p class="font-italic text-muted mb-0">Fill out the Information provided here to sign in</p>
+           			    	<div c:if="${reg_error != null}">
+								<p class="text-danger">${reg_error}</p>
+							</div>
            			    </div>
 
 				        <!-- Registeration Form -->
