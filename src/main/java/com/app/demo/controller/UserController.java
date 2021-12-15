@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -43,6 +44,7 @@ import com.app.demo.services.BookingServices;
 import com.app.demo.services.CateringServices;
 import com.app.demo.services.EventServices;
 import com.app.demo.services.HotelServices;
+import com.app.demo.services.TwillioService;
 import com.app.demo.services.UserServices;
 import com.app.demo.services.VendorServices;
 import com.lowagie.text.DocumentException;
@@ -74,29 +76,75 @@ public class UserController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	TwillioService twillioService;
+	
+	
+	@Value("${app.twillio.fromPhoneNo}")
+	private String from;
+	
+	@Value("${app.twillio.toPhoneNo}")
+	private String to;
+
 	     
+//	@GetMapping("/sendSms")
+//	public String sendSms() {
+//		
+//		String body = "Hello. Saairam This is ganapathy blah blah!!";
+//		twillioService.sendSms(to, from, body);
+//		return "message sent successfully";
+//		
+//		
+//	}
+	
+	
+//	@GetMapping("/makeCall")
+//	public String makeVoiceCall() {
+//		
+//		twillioService.makeCall(from, to);
+//		return "call initiated..";
+//		
+//		
+//	}
+//	
 	
 	@RequestMapping(value="/registerForm",method= RequestMethod.POST)
 	public String UserRegister(@ModelAttribute("registerForm") User user,Model model)
 	{
 		System.out.println(user);
-		
-		model.addAttribute("user",user);
-		System.out.println(user.getEmail());
-		User result=userservice.findByEmail(user.getEmail());
-		if(result != null) {
-			
-			model.addAttribute("reg_error","User Email Already Taken");
-			return "UserRegisteration";
-		}
-		else {
-			userservice.save(user);
-			System.out.println("Success");
-			return "redirect:/signin";
-		}	
-			
+//		if(user.getPassword()!=user.getConfirmPassword()) {
+//
+//			model.addAttribute("reg_error","Password and confirmpassword mismatch");
+//			
+//			return "UserRegisteration";
+//		}else {
+			model.addAttribute("user",user);
+			System.out.println(user.getEmail());
+			String Fullname=user.getFirstName()+" "+user.getLastName();
+			this.to="+91"+user.getContactno();
+			String email=user.getEmail();
+			String password=user.getPassword();
+			User result=userservice.findByEmail(user.getEmail());
+			if(result != null) {
+				
+				model.addAttribute("reg_error","User Email Already Taken");
+				
+				return "UserRegisteration";
+			}
+			else {
+				userservice.save(user);
+				String body = "Hello "+Fullname+"\n Welcome to EXQUISITE \n Thank you for Registration!!! \n Remember your EmailId and Password \n  Emailid : "+email+" \n Password : "+password;
+				twillioService.sendSms(to, from, body);
+				
+				System.out.println("Success");
+				return "redirect:/signin";
+			}	
+				
+//		}
 		
 	}
+	
 	
 	@RequestMapping(value="/login-validation",method=RequestMethod.POST)
 	public String UserLogin(@ModelAttribute("loginForm") User user,HttpSession session)
@@ -345,13 +393,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value="/userpayment",method= RequestMethod.POST)
-	public String UserBookingPayment(@RequestParam("booking_id") int booking_id)
-	{
-			bookingservice.bookingPayment(booking_id);
-			return "redirect:/userbookingdetails";
-	
-	}
+
 	
 	@GetMapping(value="/userbookingdetails/export")
 	public String Bill(@RequestParam("booking_id") int booking_id,HttpServletResponse response) throws DocumentException, IOException {

@@ -100,20 +100,20 @@
 				                    <div class="input-group col-lg-6 mb-4">
 				                        <div class="input-group-prepend">
 				                            <span class="input-group-text bg-white px-4 border-md border-right-0">
-				                                <i class="fa fa-lock text-muted"></i>
+				                                <i class="fa fa-lock text-muted" id="pass_icon"></i>
 				                            </span>
 				                        </div>
-				                        <input id="password" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md" required>
+				                        <input id="password" type="password" name="password" oninput="checkInputs();" placeholder="Password" class="form-control bg-white border-left-0 border-md" required>
 				                    </div>
 
 				                    <!-- Password Confirmation -->
 				                    <div class="input-group col-lg-6 mb-4">
 				                        <div class="input-group-prepend">
 				                            <span class="input-group-text bg-white px-4 border-md border-right-0">
-				                                <i class="fa fa-lock text-muted"></i>
+				                                <i class="fa fa-lock text-muted" id="c_pass_icon" ></i>
 				                            </span>
 				                        </div>
-				                        <input id="passwordConfirmation" type="password" name="ConfirmPassword" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md" required>
+				                        <input id="confirm_password" type="password" oninput="checkInputs();"name="ConfirmPassword" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md" required>
 				                    </div>
                     
                     
@@ -154,6 +154,22 @@
 			</div>
 
   </section>
+<script>
+var password = document.getElementById("password"),confirm_password = document.getElementById("confirm_password");
 
+function checkInputs(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+
+
+</script>
 
 <jsp:include page="includes/footer.jsp" />  
