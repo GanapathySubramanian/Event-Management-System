@@ -48,6 +48,10 @@ public interface BookingRepo extends JpaRepository<Booking,Integer>{
 	@Query("select count(id) from bookings where accept_status=1 and payment_status=0")
 	public long bookingcountunPaid();
 
+	@Query("select count(id) from bookings where accept_status=0 and payment_status=0")
+	public long allBookingPendingCount();
+
+	
 	@Query("select count(id) from bookings where accept_status=2 and payment_status=0")
 	public long bookingcountcancelByAdmin();
 
@@ -78,6 +82,13 @@ public interface BookingRepo extends JpaRepository<Booking,Integer>{
 	@Query("select count(id) from bookings where user_id=?1 and accept_status=3 and payment_status=0")
 	public long bookingcountcancelByUserById(int id);
 
+
+	@Query("select count(id) from bookings where user_id=?1 and accept_status=0 and payment_status=0")
+	public long bookingpendingcountById(int id);
+
+	
+//	@Query("select b from bookings b where b.user_id LIKE %?1%")
+//	public List<Booking> findbykey(String searchkey);
 
 
 }

@@ -36,10 +36,12 @@
       
 <div class="d-flex justify-content-between">
     
-    <form class="d-flex"  action="" method="POST" autocomplete="off">
-        <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
-        <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
-    </form>
+   <form class="d-flex"  action="/adminhotelSearch"  method="post" autocomplete="off">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		
+			<input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search" value="${hotel_keyword}">
+            <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
+        </form>
 
 
     <form class="d-flex">

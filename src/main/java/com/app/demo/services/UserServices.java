@@ -97,6 +97,11 @@ public class UserServices {
 	        user.setResetPasswordToken(null);
 	        userrepo.save(user);
 	    }
+
+		public List<User> findBykey(String searchkey) {
+			// TODO Auto-generated method stub
+			return userrepo.findbykey(searchkey);
+		}
 	    
 	
 }

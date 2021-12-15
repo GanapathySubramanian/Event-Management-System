@@ -78,5 +78,10 @@ public class HotelServices {
 			// TODO Auto-generated method stub
 			return hotelrepo.count();
 		}
+
+		public List<Hotel> findBykey(String searchkey) {
+			// TODO Auto-generated method stub
+			return hotelrepo.findbykey(searchkey);
+		}
 		
 }

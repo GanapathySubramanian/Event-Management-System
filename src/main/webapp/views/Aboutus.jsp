@@ -13,13 +13,13 @@
 <section class="about-section bg-light p-5" >
             <div class="row">
                 <div class="col-md-12 col-lg-6 col-sm-12 mt-4">
-                    <h1 class="ml-5 mb-3 font-weight-bold text-dark">ABOUT US</h1>
-                    <p class="title-para ml-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-                    <p class="title-para ml-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-                    <p class="title-para ml-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                    <h1 class="ml-3 mb-3 font-weight-bold text-dark">ABOUT US</h1>
+                    <p class="title-para ml-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                    <p class="title-para ml-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                    <p class="title-para ml-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
                 </div>
                 <div class="col-md-12 col-lg-6 col-sm-12 d-flex mt-4 pl-5">
-                    <img width="400px" height="400px" src="../assets/images/hall.jpg" class="rounded-circle text-center ml-5 mt-5">
+                    <img width="450px" height="450px" src="../assets/images/hall.jpeg" class="rounded-circle text-center ml-5 mt-5">
                 </div>
             </div>
  </section>
@@ -31,7 +31,7 @@
     <div class="row align-items-center mb-2">
       <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
         <h2 class="font-weight-light">Meetings, Marriages and BirthdayPartys</h2>
-        <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
+        <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="/signin" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
       </div>
       <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img src="../assets/images/Wedding.png" alt="" class="img-fluid mb-4 mb-lg-0"></div>
     </div>
@@ -39,7 +39,7 @@
       <div class="col-lg-5 px-5 mx-auto"><img src="../assets/images/Catering.png" alt="" class="img-fluid mb-4 mb-lg-0"></div>
       <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
         <h2 class="font-weight-light">Vendors and Catering</h2>
-        <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
+        <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="/signin" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
       </div>
     </div>
   </div>

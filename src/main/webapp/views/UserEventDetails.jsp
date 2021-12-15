@@ -57,7 +57,7 @@
                   <hr>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <div class="text-center my-4"> <a href="#" class="btn btn-info">Book</a> </div>
+                      <div class="text-center my-4"> <a href="/usernewbooking" class="btn btn-info">Book</a> </div>
                     </div>
                   </div>
                 </div>

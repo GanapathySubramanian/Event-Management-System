@@ -36,10 +36,11 @@
 <nav class="d-flex justify-content-between">
    
  
-    <form class="d-flex"  action="" method="POST" autocomplete="off">
-        <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
-        <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
-    </form>
+   <form class="d-flex"  action="/subadminvendorSearch"  method="post" autocomplete="off">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search" value="${vendor_keyword}">
+            <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
+        </form>
 
    <form class="d-flex">
         <button type="button" class="btn btn-info ml-2" name="add_vendor" data-toggle="modal" data-target="#AddvendorModal" data-whatever="@mdo">Add vendor</button>

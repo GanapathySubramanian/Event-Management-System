@@ -102,6 +102,10 @@ public class GeneralController {
 		long BookingcanceledbyUser=bookingservice.bookingcountcancelByUserById(id);
 		model.addAttribute("user_bookingcancelbyuser_count",BookingcanceledbyUser);
 		
+		long BookingPendingByUser=bookingservice.bookingPendingcountById(id);
+		model.addAttribute("user_bookingpending_count",BookingPendingByUser);
+		
+		
 		
 		return "Userhome";
 		}
@@ -140,6 +144,9 @@ public class GeneralController {
 		long BookingcanceledbyUser=bookingservice.bookingcountcancelByUser();
 		model.addAttribute("admin_bookingcancelbyuser_count",BookingcanceledbyUser);
 		
+		long Bookingpending=bookingservice.bookingpendingcount();
+		model.addAttribute("admin_bookingpending_count",Bookingpending);
+		
 		return "AdminHome";
 	}
 	
@@ -174,6 +181,9 @@ public class GeneralController {
 		
 		long BookingcanceledbyUser=bookingservice.bookingcountcancelByUser();
 		model.addAttribute("subadmin_bookingcancelbyuser_count",BookingcanceledbyUser);
+		
+		long Bookingpending=bookingservice.bookingpendingcount();
+		model.addAttribute("subadmin_bookingpending_count",Bookingpending);
 		
 	    return "SubAdminHome";  
 	}
@@ -211,6 +221,9 @@ public class GeneralController {
 		
 		long BookingcanceledbyUser=bookingservice.bookingcountcancelByUser();
 		model.addAttribute("superadmin_bookingcancelbyuser_count",BookingcanceledbyUser);
+		
+		long Bookingpending=bookingservice.bookingpendingcount();
+		model.addAttribute("superadmin_bookingpending_count",Bookingpending);
 		
 	    return "SuperAdminHome";  
 	}

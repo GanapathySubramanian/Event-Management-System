@@ -58,6 +58,22 @@ public class SuperAdminController {
 	    return "SuperAdminCateringDetails"; 
 	}
 	
+	@RequestMapping(value="/superadmincateringSearch",method=RequestMethod.POST)
+	public String superadminCateringSearch(@RequestParam("valueToSearch") String searchkey,ModelMap model) {
+		
+		System.out.println(searchkey);
+		if(searchkey.equals("")) {
+			List<Catering> cater =caterservice.findAll();
+			model.addAttribute("caterlist", cater);
+		    return "SuperAdminCateringDetails"; 
+		}
+		else {
+			model.addAttribute("catering_keyword",searchkey);
+			List<Catering> cater =caterservice.findBykey(searchkey);
+			model.addAttribute("caterlist", cater);
+		    return "SuperAdminCateringDetails";  
+		}
+	}
 	@RequestMapping(value="/superadminhoteldetails",method=RequestMethod.GET)
 	public String superAdminHotelDetails(ModelMap model) {
 		List<Hotel> hotel = hotelservice.findAll();
@@ -65,6 +81,23 @@ public class SuperAdminController {
 	    return "SuperAdminHotelDetails"; 
 	}
 	
+	@RequestMapping(value="/superadminhotelSearch",method=RequestMethod.POST)
+	public String superadminHotelSearch(@RequestParam("valueToSearch") String searchkey,ModelMap model) {
+		
+		System.out.println(searchkey);
+		if(searchkey.equals("")) {
+			List<Hotel> hotel = hotelservice.findAll();
+			model.addAttribute("hotellist", hotel);
+		    return "SuperAdminHotelDetails";
+		}
+		else {
+			model.addAttribute("hotel_keyword",searchkey);
+			List<Hotel> hotel = hotelservice.findBykey(searchkey);
+			model.addAttribute("hotellist", hotel);
+		    return "SuperAdminHotelDetails";   
+			
+		}
+	}
 	@RequestMapping(value="/superadminvendordetails",method=RequestMethod.GET)
 	public String superAdminVendorDetails(ModelMap model) {
 		List<Vendor> vendor=vendorservice.findAll();
@@ -72,6 +105,23 @@ public class SuperAdminController {
 	    return "SuperAdminVendorDetails";  
 	}
 	
+	@RequestMapping(value="/superadminvendorSearch",method=RequestMethod.POST)
+	public String superadminVendorSearch(@RequestParam("valueToSearch") String searchkey,ModelMap model) {
+		
+		System.out.println(searchkey);
+		if(searchkey.equals("")) {
+			List<Vendor> vendor=vendorservice.findAll();
+			model.addAttribute("vendorlist",vendor);		
+		    return "SuperAdminVendorDetails"; 
+		}
+		else {
+			model.addAttribute("vendor_keyword",searchkey);
+			List<Vendor> vendor=vendorservice.findBykey(searchkey);
+			model.addAttribute("vendorlist",vendor);		
+		    return "SuperAdminVendorDetails";  
+			
+		}
+	}
 	@RequestMapping(value="/superadminbookingdetails",method=RequestMethod.GET)
 	public String superAdminBookingDetails(ModelMap model) {
 		List<Booking> booking=bookingservice.findAll();
@@ -87,6 +137,24 @@ public class SuperAdminController {
 	    return "SuperAdminEventDetails";  
 	}
 	
+	
+	@RequestMapping(value="/superadmineventSearch",method=RequestMethod.POST)
+	public String superadminEventSearch(@RequestParam("valueToSearch") String searchkey,ModelMap model) {
+		
+		System.out.println(searchkey);
+		if(searchkey.equals("")) {
+			List<Event> event = eventservices.findAll();
+			model.addAttribute("eventlist", event);
+		    return "SuperAdminEventDetails"; 
+		}
+		else {
+			model.addAttribute("event_keyword",searchkey);
+			List<Event> event = eventservices.findBykey(searchkey);
+			model.addAttribute("eventlist", event);
+		    return "SuperAdminEventDetails"; 
+			
+		}
+	}
 	@RequestMapping(value="/superadminaccount",method=RequestMethod.GET)
 	public String adminAccount() {
 	    return "SuperAdminAccount";  

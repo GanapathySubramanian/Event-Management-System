@@ -21,7 +21,9 @@
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-                   
+                   <div>
+                    	<h3 class="text-info">ADMIN DASHBOARD</h3>
+                    </div>
                    <div>
                     	<p>Welcome 
                     	<% if(session.getAttribute("Admin_gender").equals("male")){ %> 
@@ -154,6 +156,23 @@
         </div>
       </div>
   
+       <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex">
+              <div class="media-body text-left">
+                <h3 class="warning">${admin_bookingpending_count}</h3>
+                <span>Pending Bookings</span>
+              </div>
+              <div class="align-self-center">
+                <i class="fal fa-calendar-check info fa-3x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
       <div class="col-xl-3 col-sm-6 col-12">
         <div class="card">
           <div class="card-content">
@@ -171,6 +190,7 @@
           </div>
         </div>
       </div>
+      
       <div class="col-xl-3 col-sm-6 col-12">
         <div class="card">
           <div class="card-content">
@@ -192,6 +212,10 @@
 
 
     <div class="row">
+    
+
+    
+    
     <div class="col-xl-3 col-sm-6 col-12">
       <div class="card">
         <div class="card-content">

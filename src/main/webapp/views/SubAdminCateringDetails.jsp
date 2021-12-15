@@ -36,10 +36,11 @@
 
    
 
-    <form class="d-flex"  action="" method="POST" autocomplete="off">
-        <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
-        <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
-    </form>
+     <form class="d-flex"  action="/subadmincateringSearch"  method="post" autocomplete="off">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search" value="${catering_keyword}">
+            <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
+        </form>
 
  <form class="d-flex">
         <button type="button" class="btn btn-info ml-2" name="add_cater" data-toggle="modal" data-target="#AddcaterModal" data-whatever="@mdo">Add cater</button>

@@ -101,5 +101,10 @@ public class CateringServices {
 		return cateringrepo.count();
 	}
 
+	public List<Catering> findBykey(String searchkey) {
+		// TODO Auto-generated method stub
+		return cateringrepo.findbykey(searchkey);
+	}
+
 	
 }

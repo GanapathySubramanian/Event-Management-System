@@ -21,7 +21,9 @@
                           <i class="fas fa-align-left"></i>
                           <span>Toggle Sidebar</span>
                       </button>
-                     
+                      <div>
+                    	<h3 class="text-info">USER DASHBOARD</h3>
+                    </div>
                      <div>
                         <p>Welcome 
                         <% if(session.getAttribute("User_gender").equals("male")){ %> 
@@ -168,6 +170,25 @@
                   </div>
                   <div class="align-self-center">
                     <i class="fab fa-amazon-pay primary fa-3x"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      
+        <div class="col-xl-3 col-sm-6 col-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="media d-flex">
+                  <div class="media-body text-left">
+                    <h3 class="primary">${user_bookingpending_count}</h3>
+                    <span>Pending Bookings</span>
+                  </div>
+                   <div class="align-self-center">
+                    <i class="fas fa-calendar-check success fa-3x"></i>
                   </div>
                 </div>
               </div>

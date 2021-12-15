@@ -18,7 +18,7 @@
                             <span>Toggle Sidebar</span>
                         </button>
                         <div>
-                            <h3 class="text-info">USER DETAILS</h3>
+                            <h3 class="text-info">ADMIN BOOKINGDETAILS</h3>
                         </div>
                        <div>
                             <p>Welcome 
@@ -35,10 +35,13 @@
              
 	<div class="d-flex justify-content-between">
 	    
-		    <form class="d-flex"  action="" method="POST" autocomplete="off">
-		        <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
-		        <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
-		    </form>
+		  <!--
+		  <form class="d-flex"  action="/bookingSearch"  method="post" autocomplete="off">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search" value="${booking_keyword}">
+            <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
+        </form>
+		    --> 
 			
 			<form>
 				<a href="/downloadExcel" class="btn btn-info">Download Report</a>

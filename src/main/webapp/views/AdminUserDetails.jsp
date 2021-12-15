@@ -38,9 +38,10 @@
 
        
 		
-		<form class="d-flex"  action="" modelAttribute="searchValue" method="POST" autocomplete="off">
+		<form class="d-flex"  action="/adminuserSearch"  method="post" autocomplete="off">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			<input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
+			
+			<input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search" value="${user_keyword}">
             <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
         </form>
         
@@ -146,7 +147,7 @@
 		                    <th>CONTACT_NO</th>
 		                    <th>ADDRESS</th>
 		                    <th>ROLE</th>
-		                    <th>Action</th>
+		                    <th>ACTION</th>
 		                </tr>
 		            </thead>
 		                <tbody>

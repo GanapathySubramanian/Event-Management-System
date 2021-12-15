@@ -27,7 +27,7 @@
                         <span>Toggle Sidebar</span>
                     </button>
                     <div>
-                    	<h3 class="text-info">CATER DETAILS</h3>
+                    	<h3 class="text-info">CATERING DETAILS</h3>
                     </div>
                    <div>
                     	<p>Welcome 
@@ -63,7 +63,7 @@
                   <hr>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <div class="text-center my-4"> <a href="#" class="btn btn-info">Book</a> </div>
+                      <div class="text-center my-4"> <a href="/usernewbooking" class="btn btn-info">Book</a> </div>
                     </div>
                   </div>
                 </div>

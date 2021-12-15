@@ -62,11 +62,13 @@
                   <p class="pricing-text mb-3 ml-3 text-center">
                     <span>Location : ${allvendor.vendor_location}</span>                     
                   </p>
-                  <span class="text-muted text-center"> ${allvendor.vendor_desc}</span> 
+                  <p class="text-center">
+                   <span class="text-muted text-center"> ${allvendor.vendor_desc}</span>
+                  </p>	 
                   <hr>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <div class="text-center my-4"> <a href="#" class="btn btn-info">Book</a> </div>
+                      <div class="text-center my-4"> <a href="/usernewbooking" class="btn btn-info">Book</a> </div>
                     </div>
                   </div>
 

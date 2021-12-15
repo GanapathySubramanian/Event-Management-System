@@ -92,6 +92,11 @@ public class VendorServices {
 		return vendorrepo.count();
 	}
 
+	public List<Vendor> findBykey(String searchkey) {
+		// TODO Auto-generated method stub
+		return vendorrepo.findbykey(searchkey);
+	}
+
 
 	
 }

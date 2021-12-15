@@ -31,14 +31,10 @@
             </nav>
 
 			<nav class="d-flex justify-content-between">
-			   
-			 
-			    <form class="d-flex"  action="" method="POST" autocomplete="off">
-			        <input class="form-control" type="search" name="valueToSearch" placeholder="Value To Search" aria-label="Search">
-			        <button class="btn ml-2 btn-info" type="submit" name="search">Search</button>
-			    </form>
-			
-			  
+			  	
+			<form>
+				<a href="/downloadExcel" class="btn btn-info">Download Report</a>
+			</form>
 			
 			</nav>
 <br/>

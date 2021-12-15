@@ -124,4 +124,21 @@ public class BookingServices {
 		// TODO Auto-generated method stub
 		return bookingrepo.bookingcountcancelByUserById(id);
 	}
+
+
+
+	public long bookingpendingcount() {
+		// TODO Auto-generated method stub
+		return bookingrepo.allBookingPendingCount();
+	}
+
+	public long bookingPendingcountById(int id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.bookingpendingcountById(id);
+	}
+
+//	public List<Booking> findBykey(String searchkey) {
+//		// TODO Auto-generated method stub
+//		return bookingrepo.findbykey(searchkey);
+//	}
 }

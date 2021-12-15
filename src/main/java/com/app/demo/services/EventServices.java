@@ -81,5 +81,10 @@ public class EventServices {
 			// TODO Auto-generated method stub
 			return eventrepo.count();
 		}
+
+		public List<Event> findBykey(String searchkey) {
+			// TODO Auto-generated method stub
+			return eventrepo.findbykey(searchkey);
+		}
 		
 }
