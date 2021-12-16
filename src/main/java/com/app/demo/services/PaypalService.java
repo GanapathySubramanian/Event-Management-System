@@ -28,7 +28,7 @@ public class PaypalService {
 			
 			
 		Amount amount1 = new Amount();
-		amount1.setCurrency("INR");
+		amount1.setCurrency("USD");
 		amount = (int) new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		amount1.setTotal(String.valueOf( amount));
 

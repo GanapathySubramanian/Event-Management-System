@@ -58,6 +58,7 @@ public class PaypalController {
 	    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
 	        try {
 	            Payment payment = service.executePayment(paymentId, payerId);
+	            
 	            System.out.println(payment.toJSON());
 	            if (payment.getState().equals("approved")) {
 	            	bookingservice.bookingPayment(booking_id);
