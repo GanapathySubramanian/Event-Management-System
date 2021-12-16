@@ -1,83 +1,31 @@
-# EVENT MANAGEMNET SYSTEM
-## SETUP GUIDE
-you have download 2 files
+# EVENT-MANAGEMNET-SYSTEM
 
+## Steps to run the project in your machine
+1. Download and install spring tool suite in your machine
+2. Clone or download the repository
+3. Extract all the files
+4. After Extracting the file,download the [.sql](https://github.com/GanapathySubramanian/Event-Management-System/tree/master/db_sql) file,the database file consists of predumped table data and structure ,you have to import the sql file in mysql workbench 
+5. then open the extracted file in spring tool suite
+6. Then open the file EventManagementSystemApplication.java in src/main/java/com/app/demo and run the file as spring boot App
+7. Open your web browser and type 'localhost:8080'
+8. Hurray! That's it!
 
+# login credentials
+## USER-LOGIN
+<p>Email : ganapathy2000subramanian@gmail.com</p>
+<p>password : 123</p>
 
-1.databasse sql file  
+## ADMIN-LOGIN
+<p>Email : admin@gmail.com</p>
+<p>password : admin@123</p>
 
+## SUBADMIN-LOGIN
+<p>Email : venky777@gmail.com</p>
+<p>password : admin@123</p>
 
-2.projecct file
-
-
-## DATABASE FILE
-
-download the [sql file](https://github.com/GanapathySubramanian/Event-Management-System/tree/master/db_sql)
-
-
-the database file consists of predumped table data and structure 
-
-
-you have to import the sql file in sql workbench 
-
-
-## PROJECT FILE
-
-download the zip file or clone the project in the github desktop 
-
-
-go to the 
-###### com.app.demo 
-then to 
-##### EventManagementSystemApplication   file
-and then run it
-
-
-
-Then go to any web browser and type 
-##### http://localhost:8080 
-and then sign in with the details in the database
-
-
-## USER login
-
-{Username:kameshbabu@gmail.com
-
-
-pasword:123}
-
-{Username:ganapathy2000subramanian@gmail.com
-
-
-password:123}
-
-
-{Username:magesh@gmail.com
-
-
-password:123}
-
-## ADMIN login
-
-Username:admin@gmail.com
-
-
-password:admin@123
-
-
-
-## SUBADMIN login
-Username:venky777@gmail.com
-
-
-password:123
-
-
-## SUPERADMIN login
-Username:gana@gmail.com
-
-
-password:123
+## SUPERADMIN-LOGIN
+<p>Email : gana@gmail.com</p>
+<p>password : 123</p>
 
 
 

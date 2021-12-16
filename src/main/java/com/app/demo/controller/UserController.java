@@ -444,7 +444,7 @@ public class UserController {
 		    MimeMessage msg = mailSender.createMimeMessage();              
 		    MimeMessageHelper helper = new MimeMessageHelper(msg);
 		     
-		    helper.setFrom("exquisiteweddingplannerrocks@gmail.com", "EXQUISITE");
+		    helper.setFrom("ganapathydaprojects@gmail.com", "EXQUISITE");
 		    helper.setTo(recipientEmail);
 		     
 		    String subject = "Here's the link to reset your password";
