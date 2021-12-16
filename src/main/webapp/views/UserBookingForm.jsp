@@ -232,7 +232,7 @@
 			
 							<!-- Submit Button -->
 							<div class="form-group col-lg-12 mx-auto mb-0">
-								<button type="submit" class="btn btn-info btn-block py-2" name="adduser">
+								<button type="submit" class="btn btn-info btn-block py-2" name="adduser" onclick="return calc();">
 									<span class="font-weight-bold">Book your Event</span>
 								</button>
 							</div>
