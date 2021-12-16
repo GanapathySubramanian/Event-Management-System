@@ -444,7 +444,7 @@ public class UserController {
 		    MimeMessage msg = mailSender.createMimeMessage();              
 		    MimeMessageHelper helper = new MimeMessageHelper(msg);
 		     
-		    helper.setFrom("ganapathydaprojects@gmail.com", "EXQUISITE");
+		    helper.setFrom("exquisiteweddingplannerrocks@gmail.com", "EXQUISITE");
 		    helper.setTo(recipientEmail);
 		     
 		    String subject = "Here's the link to reset your password";
@@ -497,5 +497,26 @@ public class UserController {
 		     
 		    return "forgot_password_form";
 		}
+		
+		
+		
+
+		 @RequestMapping(value="/userlogout",method=RequestMethod.GET)
+			public String userlogout(HttpSession session) {
+			    if (session != null) {
+			        // session.removeAttribute(null)
+			        session.removeAttribute("User_firstname");
+					session.removeAttribute("User_lastname");
+					session.removeAttribute("User_email");
+					session.removeAttribute("User_phone");
+					session.removeAttribute("User_address");
+					session.removeAttribute("User_gender");
+					session.removeAttribute("User_id");
+					session.removeAttribute("User_cpassword");
+					session.removeAttribute("User_password");
+					session.removeAttribute("User_role");
+			    }
+			    return "redirect:/signin"; 
+			}
 	
 }

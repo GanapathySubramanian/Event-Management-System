@@ -53,7 +53,7 @@
                     <a href="/adminaccount" class="download"><img src="../../assets/images/icons/editprofile.png"  width="30" height="30">Accounts</a>
                 </li>
                 <li>
-                    <a href="/logout" class="article"><img src="../../assets/images/icons/logout.png" width="30" height="30"><span class="ml-2"></span><span class="mr-3">Logout</span></a>
+                    <a href="/adminlogout" class="article"><img src="../../assets/images/icons/logout.png" width="30" height="30"><span class="ml-2"></span><span class="mr-3">Logout</span></a>
                 </li>
             </ul>
         </nav>

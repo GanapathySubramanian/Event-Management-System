@@ -179,4 +179,22 @@ public class SubAdminController {
 		
 	}
 	
+	 @RequestMapping(value="/subadminlogout",method=RequestMethod.GET)
+		public String subadminlogout(HttpSession session) {
+		    if (session != null) {
+		        // session.removeAttribute(null)
+		        session.removeAttribute("Subadmin_firstname");
+				session.removeAttribute("Subadmin_lastname");
+				session.removeAttribute("Subadmin_email");
+				session.removeAttribute("Subadmin_phone");
+				session.removeAttribute("Subadmin_address");
+				session.removeAttribute("Subadmin_gender");
+				session.removeAttribute("Subadmin_id");
+				session.removeAttribute("Subadmin_cpassword");
+				session.removeAttribute("Subadmin_password");
+				session.removeAttribute("Subadmin_role");
+		    }
+		    return "redirect:/signin"; 
+		}
+	
 }

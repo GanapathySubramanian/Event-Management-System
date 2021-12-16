@@ -30,7 +30,7 @@
                     <a href="/subadminaccount" class="download"><img src="../../assets/images/icons/editprofile.png"  width="30" height="30"> <span class="ml-2">Accounts</span></a>
                 </li>
                 <li>
-                    <a href="/logout" class="article"><img src="../../assets/images/icons/logout.png" width="30" height="30"><span class="ml-2"></span><span class="mr-3">Logout</span></a>
+                    <a href="/subadminlogout" class="article"><img src="../../assets/images/icons/logout.png" width="30" height="30"><span class="ml-2"></span><span class="mr-3">Logout</span></a>
                 </li>
             </ul>
         </nav>

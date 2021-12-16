@@ -618,5 +618,22 @@ public class AdminController {
 		    }  
 		 
 		 
+		 @RequestMapping(value="/adminlogout",method=RequestMethod.GET)
+			public String adminlogout(HttpSession session) {
+			    if (session != null) {
+			        // session.removeAttribute(null)
+			        session.removeAttribute("Admin_firstname");
+					session.removeAttribute("Admin_lastname");
+					session.removeAttribute("Admin_email");
+					session.removeAttribute("Admin_phone");
+					session.removeAttribute("Admin_address");
+					session.removeAttribute("Admin_gender");
+					session.removeAttribute("Admin_id");
+					session.removeAttribute("Admin_cpassword");
+					session.removeAttribute("Admin_password");
+					session.removeAttribute("Admin_role");
+			    }
+			    return "redirect:/signin"; 
+			}
 
 }

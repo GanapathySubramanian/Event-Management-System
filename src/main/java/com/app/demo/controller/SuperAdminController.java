@@ -196,5 +196,23 @@ public class SuperAdminController {
 			return "redirect:/superadminbookingdetails";
 	
 	}
+	
+	 @RequestMapping(value="/superadminlogout",method=RequestMethod.GET)
+		public String superadminlogout(HttpSession session) {
+		    if (session != null) {
+		        // session.removeAttribute(null)
+		        session.removeAttribute("Superadmin_firstname");
+				session.removeAttribute("Superadmin_lastname");
+				session.removeAttribute("Superadmin_email");
+				session.removeAttribute("Superadmin_phone");
+				session.removeAttribute("Superadmin_address");
+				session.removeAttribute("Superadmin_gender");
+				session.removeAttribute("Superadmin_id");
+				session.removeAttribute("Superadmin_cpassword");
+				session.removeAttribute("Superadmin_password");
+				session.removeAttribute("Superadmin_role");
+		    }
+		    return "redirect:/signin"; 
+		}
 
 }
