@@ -24,7 +24,7 @@ public class PaypalService {
 	private APIContext apiContext;
 	
 	
-	public Payment createPayment(int id, int amount,int  paymentId,String cancelUrl, String successUrl) throws PayPalRESTException{
+	public Payment createPayment(int id,long amount,int  paymentId,String cancelUrl, String successUrl) throws PayPalRESTException{
 			
 			
 		Amount amount1 = new Amount();

@@ -112,7 +112,7 @@ public class UserController {
 	@RequestMapping(value="/registerForm",method= RequestMethod.POST)
 	public String UserRegister(@ModelAttribute("registerForm") User user,Model model)
 	{
-		System.out.println(user);
+//		System.out.println(user);
 //		if(user.getPassword()!=user.getConfirmPassword()) {
 //
 //			model.addAttribute("reg_error","Password and confirmpassword mismatch");
@@ -120,7 +120,7 @@ public class UserController {
 //			return "UserRegisteration";
 //		}else {
 			model.addAttribute("user",user);
-			System.out.println(user.getEmail());
+//			System.out.println(user.getEmail());
 			String Fullname=user.getFirstName()+" "+user.getLastName();
 			this.to="+91"+user.getContactno();
 			String email=user.getEmail();
@@ -137,7 +137,7 @@ public class UserController {
 				String body = "Hello "+Fullname+"\n Welcome to EXQUISITE \n Thank you for Registration!!! \n Remember your EmailId and Password \n  Emailid : "+email+" \n Password : "+password;
 				twillioService.sendSms(to, from, body);
 				
-				System.out.println("Success");
+//				System.out.println("Success");
 				return "redirect:/signin";
 			}	
 				
@@ -150,13 +150,13 @@ public class UserController {
 	public String UserLogin(@ModelAttribute("loginForm") User user,HttpSession session)
 	{
 		
-		System.out.println(user);
+//		System.out.println(user);
 		User userDetail=userservice.findByEmail(user.getEmail());
 		
 		
 		if(userDetail!=null) {
 			if(userDetail.getPassword().equals(user.getPassword())) {
-				System.out.println(userDetail.toString());
+//				System.out.println(userDetail.toString());
 				
 				if(userDetail.getRole().equals("Admin")) {
 					session.setAttribute("Admin_firstname",userDetail.getFirstName());
@@ -252,9 +252,9 @@ public class UserController {
 			
 		
 			
-			System.out.println(id);
+//			System.out.println(id);
 			
-			System.out.println(bookings);
+//			System.out.println(bookings);
 		    session.setAttribute("User_bookings",bookings);
 			return "UserBookingDetails"; 
 		}
@@ -266,7 +266,7 @@ public class UserController {
 
 	@RequestMapping(value="/EdituserProfile",method=RequestMethod.POST)
 	public String updateUserProfile(@ModelAttribute("userEditProfile") User user ,HttpSession session) {
-		System.out.println(user);
+//		System.out.println(user);
 		
 		userservice.updateUserProfile(user.getEmail(),user.getFirstName(),user.getLastName(),user.getGender(),user.getContactno(),user.getAddress(),user.getRole(),user.getPassword(),user.getConfirmPassword(),user.getId());
 		session.setAttribute("User_firstname",user.getFirstName());
@@ -375,7 +375,7 @@ public class UserController {
 			booking.setCatering(catering);
 			booking.setEvent(event);
 			booking.setUser(user);
-			System.out.println(booking);
+//			System.out.println(booking);
 			bookingservice.save(booking);
 			System.out.println("Success");
 			
@@ -397,7 +397,7 @@ public class UserController {
 	
 	@GetMapping(value="/userbookingdetails/export")
 	public String Bill(@RequestParam("booking_id") int booking_id,HttpServletResponse response) throws DocumentException, IOException {
-	System.out.println("hello");
+//	System.out.println("hello");
 		Booking booking=	bookingservice.findById(booking_id);
 		response.setContentType("application/pdf");
 	    DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_HH:mm:ss");
@@ -409,7 +409,7 @@ public class UserController {
 	    UserPDFExporter exporter = new UserPDFExporter(booking.getId(), booking.getUser().getEmail(), booking.getUser().getFirstName(),booking.getUser().getLastName(), booking.getUser().getContactno(),booking.getUser().getGender(),booking.getUser().getAddress(),booking.getHotel().getHotelName(),booking.getHotel().getPrice(),booking.getCatering().getCatername(),booking.getCatering().getCater_price(),booking.getAmount(),booking.getCurrent_date(),booking.getDecorator_name_desc(),booking.getDj_name_desc(),booking.getMakeupartist_name_desc(),booking.getPhotographer_name_desc(),booking.getEvent().getEventname(),booking.getEvent_date(),booking.getMax_total_hour(),booking.getNo_of_guest());
 	    exporter.export(response);
 		
-		System.out.println(booking);
+//		System.out.println(booking);
 		
 		return null;
 		

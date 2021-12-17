@@ -41,14 +41,6 @@ public class UserPDFExporter {
 	private String max_hour;
 	private String no_guest;
 
-
-
-
-
-
-
-
-
 	public UserPDFExporter(int id, String email, String firstName, String lastName, String contactno, String gender,
 			String address, String hotelName, int hotelPrice, String caterName, int caterPrice, int total_amount,
 			String booked_date, String decorator_name_desc, String dj_name_desc, String makeupartist_name_desc,
@@ -190,6 +182,7 @@ public class UserPDFExporter {
         
         document.close();
 
+        
          
     }
 }

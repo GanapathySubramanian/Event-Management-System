@@ -29,7 +29,7 @@ public class PaypalController {
 	private int booking_id;
 
 	@PostMapping("/pay")
-	public String payment(@RequestParam("booking_userid") int userid,@RequestParam("total_amt") int amount,@RequestParam("booking_id") int bookingid) {
+	public String payment(@RequestParam("booking_userid") int userid,@RequestParam("total_amt") long amount,@RequestParam("booking_id") int bookingid) {
 		
 		this.booking_id=bookingid;
 		
@@ -46,12 +46,12 @@ public class PaypalController {
 		
 			e.printStackTrace();
 		}
-		return "redirect:/userbookingsdetails";
+		return "redirect:/userbookingdetails";
 	}
 	
 	 @GetMapping(value = CANCEL_URL)
 	    public String cancelPay() {
-	        return "redirect:/userbookingdetails";
+	        return "Paymentfail";
 	    }
 
 	    @GetMapping(value = SUCCESS_URL)
@@ -62,7 +62,7 @@ public class PaypalController {
 	            System.out.println(payment.toJSON());
 	            if (payment.getState().equals("approved")) {
 	            	bookingservice.bookingPayment(booking_id);
-	    			return "redirect:/userbookingdetails";
+	    			return "Paymentsuccess";
 	            }
 	        } catch (PayPalRESTException e) {
 	         System.out.println(e.getMessage());
