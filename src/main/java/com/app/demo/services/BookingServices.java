@@ -137,8 +137,37 @@ public class BookingServices {
 		return bookingrepo.bookingpendingcountById(id);
 	}
 
-//	public List<Booking> findBykey(String searchkey) {
-//		// TODO Auto-generated method stub
-//		return bookingrepo.findbykey(searchkey);
-//	}
+	public List<Booking> findByHotelId(int id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.findHotelById(id);
+	}
+
+	public List<Booking> findByCateringId(int id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.findCateringById(id);
+	}
+
+	public List<Booking> findByPhotoNameId(String name_id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.findPhotoByNameId(name_id);
+	}
+
+	public List<Booking> findByDjNameId(String name_id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.findDjByNameId(name_id);
+	}
+
+	public List<Booking> findByMakeupNameId(String name_id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.findMakeupByNameId(name_id);
+	}
+
+	public List<Booking> findByDecoratorNameId(String name_id) {
+		// TODO Auto-generated method stub
+		return bookingrepo.findDecoratorByNameId(name_id);
+	}
+
+	
+	
+
 }

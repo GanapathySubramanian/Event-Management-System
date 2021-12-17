@@ -350,7 +350,6 @@ public class UserController {
 	    }
 	}
 	
-	
 	@RequestMapping(value="vendorbookfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Vendor> vendorPriceDetails(@PathVariable("id") int id) {
 		try {
@@ -361,6 +360,66 @@ public class UserController {
 	    }
 	}
 	
+	@RequestMapping(value="hotelbookingfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Booking>> hotelbookingDetails(@PathVariable("id") int id) {
+		try {
+			return new ResponseEntity<List<Booking>>(bookingservice.findByHotelId(id),HttpStatus.OK);
+		}
+	    catch(Exception e) {
+	    	return new ResponseEntity<List<Booking>>(HttpStatus.BAD_REQUEST);
+	    }
+	}
+	
+	@RequestMapping(value="cateringbookingfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Booking>> cateringbookingDetails(@PathVariable("id") int id) {
+		try {
+			return new ResponseEntity<List<Booking>>(bookingservice.findByCateringId(id),HttpStatus.OK);
+		}
+	    catch(Exception e) {
+	    	return new ResponseEntity<List<Booking>>(HttpStatus.BAD_REQUEST);
+	    }
+	}
+	
+	
+	@RequestMapping(value="photobookingfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Booking>> photobookingDetails(@PathVariable("id") String name_id) {
+		try {
+			return new ResponseEntity<List<Booking>>(bookingservice.findByPhotoNameId(name_id),HttpStatus.OK);
+		}
+	    catch(Exception e) {
+	    	return new ResponseEntity<List<Booking>>(HttpStatus.BAD_REQUEST);
+	    }
+	}
+	
+	@RequestMapping(value="djbookingfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Booking>> djbookingDetails(@PathVariable("id") String name_id) {
+		try {
+			return new ResponseEntity<List<Booking>>(bookingservice.findByDjNameId(name_id),HttpStatus.OK);
+		}
+	    catch(Exception e) {
+	    	return new ResponseEntity<List<Booking>>(HttpStatus.BAD_REQUEST);
+	    }
+	}
+	
+	@RequestMapping(value="makeupbookingfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Booking>> makeupbookingDetails(@PathVariable("id") String name_id) {
+		try {
+			return new ResponseEntity<List<Booking>>(bookingservice.findByMakeupNameId(name_id),HttpStatus.OK);
+		}
+	    catch(Exception e) {
+	    	return new ResponseEntity<List<Booking>>(HttpStatus.BAD_REQUEST);
+	    }
+	}
+	
+	@RequestMapping(value="decoratorbookingfind/{id}",method=RequestMethod.GET,produces =MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Booking>> decoratorbookingDetails(@PathVariable("id") String name_id) {
+		try {
+			return new ResponseEntity<List<Booking>>(bookingservice.findByDecoratorNameId(name_id),HttpStatus.OK);
+		}
+	    catch(Exception e) {
+	    	return new ResponseEntity<List<Booking>>(HttpStatus.BAD_REQUEST);
+	    }
+	}
 	
 	@RequestMapping(value="/makeBookingForm",method= RequestMethod.POST)
 	public String UserBooking(@ModelAttribute("makeBookingForm") Booking booking,@RequestParam("user_id") int user_id,@RequestParam("hotel_id") int hotel_id,@RequestParam("event_id") int event_id,@RequestParam("catering_id") int catering_id)

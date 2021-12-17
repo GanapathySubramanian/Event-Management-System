@@ -9,6 +9,7 @@ function deleteVendor(){
 }
 function deleteHotel(){
     return confirm('Are You Sure You Want to delete this Hotel');
+    
 }
 function deleteCatering(){
     return confirm('Are You Sure You Want to delete this Catering');

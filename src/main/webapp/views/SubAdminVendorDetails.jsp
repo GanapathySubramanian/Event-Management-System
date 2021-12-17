@@ -186,7 +186,13 @@
 								</div>
 								<div class="form-group">
 									<label for="message-text" class="col-form-label">vendor Description:</label>
-									<input type="text" class="form-control" placeholder="vendorDesc" name="vendor_desc" id="vendorDesc1" required>
+									<select id="vendorDesc1" name="vendor_desc"  class="form-control" required>
+										<option value="">Choose the Description</option>
+										<option value="Photographer">Photographer</option>
+										<option value="DJ">Disc Jockey</option>
+										<option value="Makeupartisit">Makeup Artisit</option>
+										<option value="Decorator">Decorator</option>
+									</select>
 								</div>
 								<div class="form-group">
 									<label for="message-text" class="col-form-label">vendor price:</label>

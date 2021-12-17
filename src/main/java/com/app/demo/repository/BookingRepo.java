@@ -86,6 +86,25 @@ public interface BookingRepo extends JpaRepository<Booking,Integer>{
 	@Query("select count(id) from bookings where user_id=?1 and accept_status=0 and payment_status=0")
 	public long bookingpendingcountById(int id);
 
+	@Query("Select b from bookings b where hotel_id=?1 and accept_status=1")
+	public List<Booking> findHotelById(int id);
+
+	@Query("Select b from bookings b where catering_id=?1 and accept_status=1")
+	public List<Booking> findCateringById(int id);
+
+	@Query("Select b from bookings b where photographer=?1 and accept_status=1")
+	public List<Booking> findPhotoByNameId(String name_id);
+
+	@Query("Select b from bookings b where dj=?1 and accept_status=1")
+	public List<Booking> findDjByNameId(String name_id);
+
+
+	@Query("Select b from bookings b where makeupartist=?1 and accept_status=1")
+	public List<Booking> findMakeupByNameId(String name_id);
+
+	@Query("Select b from bookings b where decorator=?1 and accept_status=1")
+	public List<Booking> findDecoratorByNameId(String name_id);
+
 	
 //	@Query("select b from bookings b where b.user_id LIKE %?1%")
 //	public List<Booking> findbykey(String searchkey);

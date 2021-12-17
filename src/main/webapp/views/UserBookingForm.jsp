@@ -66,6 +66,33 @@
 									  </div>
 								</div>
 								
+								<div class="col-lg-5 col-md-5 col-sm-5 mb-2 ml-3">
+									<div class="form-group">
+										<label for="exampleInputPassword1">Select Event Date</label>
+										<input type="date" id="event_date" name="event_date" class="form-control" onchange="validatedate();" required>
+									</div>
+								</div>
+
+								<div class="col-lg-5 col-md-5 col-sm-5 mb-2 ml-3">
+									<div class="form-group">
+										<label for="exampleInputPassword1">Select Event	Starting Time</label>
+										<input type="time" id="start_at" name="start_at" class="form-control" required>
+									</div>
+								</div>
+
+								
+								<div class="col-lg-10 col-md-10 col-sm-12 mb-2 ml-2">
+									<div class="form-group">
+										<label for="exampleInputPassword1">Select Event Type</label>
+										<select id="event_book" name="event_id" class="form-control" required>
+											<option value="">Choose the Event</option>
+											<c:forEach var="eventData" items="${event_for_booking}">
+												<option id="${eventData.id}" value="${eventData.id}">${eventData.eventname}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+
 								<div class="col-lg-5 col-md-5 col-sm-12 mb-2 ml-3">
 									<div class="form-group">
 										<label for="exampleInputPassword1">Select Hotel</label>
@@ -91,32 +118,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-10 col-md-10 col-sm-12 mb-2 ml-2">
-									<div class="form-group">
-										<label for="exampleInputPassword1">Select Event Type</label>
-										<select id="event_book" name="event_id" class="form-control" required>
-											<option value="">Choose the Event</option>
-											<c:forEach var="eventData" items="${event_for_booking}">
-												<option id="${eventData.id}" value="${eventData.id}">${eventData.eventname}</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-
-
-								<div class="col-lg-5 col-md-5 col-sm-5 mb-2 ml-3">
-									<div class="form-group">
-										<label for="exampleInputPassword1">Select Event Date</label>
-										<input type="date" id="event_date" name="event_date" class="form-control" onchange="validatedate()" required>
-									</div>
-								</div>
-
-								<div class="col-lg-5 col-md-5 col-sm-5 mb-2 ml-3">
-									<div class="form-group">
-										<label for="exampleInputPassword1">Select Event	Starting Time</label>
-										<input type="time" id="start_at" name="start_at" class="form-control" required>
-									</div>
-								</div>
+								
 								
 								<div class="col-lg-5 col-md-5 col-sm-5 mb-2 ml-3">
 									<div class="form-group">
@@ -279,20 +281,37 @@ function testMessage(){
 	
 	var id = $(this).children(":selected").attr("id");
 	console.log(id);
-
+	var hotel_name="";
 	$.ajax({
 			type: "GET",
 			url: "${pageContext.request.contextPath}/hotelbookfind/"+id, //this is my servlet
 			data: "input=" +$('#ip1').val()+"&output="+$('#op1').val(),
 			success: function(hotel){      
 				  //var result=$('#amt').val(hotel.price);
-				  hotel_amt=hotel.price;
-			
+				hotel_amt=hotel.price;
+				hotel_name=hotel.hotelName;
 				// alert(hotel_amt);
 				$('#hotel_price').text(hotel_amt);
 			
 				
 			}
+	});
+
+	var e_date=$("#event_date").val();
+	$.ajax({
+		type:"GET",
+		url: "${pageContext.request.contextPath}/hotelbookingfind/"+id, //this is my servlet
+		data: "input=" +$('#ip15').val()+"&output="+$('#op15').val(),
+		success: function(book){
+			console.log(e_date)
+		      
+			for(let i=0;i<book.length;i++){
+					console.log(book[i].event_date);
+					if(e_date==book[i].event_date){
+						swal("Alert!", "The Hotel "+hotel_name+" is already booked at the date "+e_date+" Please choose other hotel !", "error");
+					}
+			}
+		}
 	});
 }
 function testMessage2(){
@@ -300,6 +319,7 @@ function testMessage2(){
 	var id = $(this).children(":selected").attr("id");
 	console.log(id);
 
+	var cater_name="";
 	$.ajax({
 			type: "GET",
 			url: "${pageContext.request.contextPath}/cateringbookfind/"+id, //this is my servlet
@@ -308,11 +328,31 @@ function testMessage2(){
 				//  $('#amt').val(cater.price);
 				  catering_amt=cater.cater_price;
 					// alert(catering_amt);
+					cater_name=cater.catername;
 				  $('#catering_price').text(catering_amt)
 				  
 				//   $('#amt').val(result);
 			}
 	});
+
+
+	var e_date=$("#event_date").val();
+	$.ajax({
+		type:"GET",
+		url: "${pageContext.request.contextPath}/cateringbookingfind/"+id, //this is my servlet
+		data: "input=" +$('#ip16').val()+"&output="+$('#op16').val(),
+		success: function(book){
+			console.log(e_date)
+		      
+			for(let i=0;i<book.length;i++){
+					console.log(book[i].event_date);
+					if(e_date==book[i].event_date){
+						swal("Alert!", "The Catering "+cater_name+" is already booked at the date "+e_date+" Please choose other Catering", "error");
+					}
+			}
+		}
+	});
+
 }
 
 function textMessage3(){
@@ -332,6 +372,7 @@ function textMessage5(){
 	
 	var id = $(this).children(":selected").attr("id");
 	console.log(id);
+	var photo_name="";
 	if(id=="photo_none"){
 		photo=0;
 		$('#photo_price').text(photo);
@@ -343,6 +384,7 @@ function textMessage5(){
 				success: function(Photographer){      
 					photo=Photographer.vendor_price;
 					// alert(photo);
+					photo_name=Photographer.vendor_name;
 					$('#photo_price').text(photo);
 					//  $('#amt').val(cater.price);
 					//   catering_amt=cater.cater_price;
@@ -352,6 +394,26 @@ function textMessage5(){
 					//   $('#amt').val(result);
 				}
 		});
+
+		var e_date=$("#event_date").val();
+		var photo_name_id=$("#"+id+"").val();
+		$.ajax({
+			type:"GET",
+			url: "${pageContext.request.contextPath}/photobookingfind/"+photo_name_id, //this is my servlet
+			data: "input=" +$('#ip17').val()+"&output="+$('#op17').val(),
+			success: function(photobook){
+				console.log(e_date)
+				// console.log(photobook)
+				for(let i=0;i<photobook.length;i++){
+					console.log(photobook[i].event_date);
+					if(e_date==photobook[i].event_date){
+						swal("Alert!", "The Vendor  "+photo_name_id+" is already have an appointment at the date "+e_date+" Please choose other PhotoGrapher", "error");
+					}
+			}
+			}
+		});
+
+
 	}
 }
 function textMessage6(){
@@ -372,6 +434,24 @@ function textMessage6(){
 					// alert(dj);
 					$('#dj_price').text(' + '+dj);
 				}
+		});
+
+		var e_date=$("#event_date").val();
+		var dj_name_id=$("#"+id+"").val();
+		$.ajax({
+			type:"GET",
+			url: "${pageContext.request.contextPath}/djbookingfind/"+dj_name_id, //this is my servlet
+			data: "input=" +$('#ip18').val()+"&output="+$('#op18').val(),
+			success: function(djbook){
+				console.log(e_date)
+				// console.log(photobook)
+				for(let i=0;i<djbook.length;i++){
+					console.log(djbook[i].event_date);
+					if(e_date==djbook[i].event_date){
+						swal("Alert!", "The Vendor  "+dj_name_id+" is already have an appointment at the date "+e_date+" Please choose other Disc Jockey", "error");
+					}
+			}
+			}
 		});
 	}
 	
@@ -397,6 +477,25 @@ function textMessage7(){
 				$('#makeup_price').text(' + '+makeup);
 			}
 	});
+
+
+	var e_date=$("#event_date").val();
+		var makeup_name_id=$("#"+id+"").val();
+		$.ajax({
+			type:"GET",
+			url: "${pageContext.request.contextPath}/makeupbookingfind/"+makeup_name_id, //this is my servlet
+			data: "input=" +$('#ip18').val()+"&output="+$('#op18').val(),
+			success: function(makeupbook){
+				console.log(e_date)
+				// console.log(photobook)
+				for(let i=0;i<makeupbook.length;i++){
+					console.log(makeupbook[i].event_date);
+					if(e_date==makeupbook[i].event_date){
+						swal("Alert!", "The Vendor  "+makeup_name_id+" is already have an appointment at the date "+e_date+" Please choose other MakeupArtist", "error");
+					}
+			}
+			}
+		});
 	}
 	
 }
@@ -419,6 +518,24 @@ function textMessage8(){
 				$('#deco_price').text(' + '+deco);
 			}
 	});
+
+	var e_date=$("#event_date").val();
+		var deco_name_id=$("#"+id+"").val();
+		$.ajax({
+			type:"GET",
+			url: "${pageContext.request.contextPath}/decoratorbookingfind/"+deco_name_id, //this is my servlet
+			data: "input=" +$('#ip19').val()+"&output="+$('#op19').val(),
+			success: function(decobook){
+				console.log(e_date)
+				// console.log(photobook)
+				for(let i=0;i<decobook.length;i++){
+					console.log(decobook[i].event_date);
+					if(e_date==decobook[i].event_date){
+						swal("Alert!", "The Vendor  "+deco_name_id+" is already have an appointment at the date "+e_date+" Please choose other Decorator", "error");
+					}
+			}
+			}
+		});
 	}
 }
 
@@ -438,30 +555,39 @@ function calc(){
 }
 
 function validatedate(){    
+	
+
     today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1; //As January is 0.
     var yy = today.getFullYear();
+
     var  e = document.getElementById('event_date');
-    var  dateformat = e.value.split('-');
+    
+	var  dateformat = e.value.split('-');
     var  cin=dateformat[2];
     var  cinmonth=dateformat[1];
     var  cinyear=dateformat[0];
     if (yy==cinyear && mm==cinmonth && dd<=cin) { 
-    return true;
+   		return true;
+		   
     }
     else if(yy<cinyear){
         return true;
+		
     }
     else if(mm<cinmonth && yy<=cinyear){
         return true;
+		
     }
     
     else {    
-    alert("Please select valid appointment date from today");
-    e.value ='';
+		alert("Please select valid appointment date from today");
+		e.value ='';
     }    
+	
 }
+
 
 </script>
 <jsp:include page="includes/footer.jsp" /> 
