@@ -24,26 +24,27 @@ public class PaypalService {
 	private APIContext apiContext;
 	
 	
-	public Payment createPayment(int id,long amount,int  paymentId,String cancelUrl, String successUrl) throws PayPalRESTException{
+
+	public Payment createPayment(long amount,String currency,String method,String intent,int description,String cancelUrl, String successUrl) throws PayPalRESTException{
 			
 			
 		Amount amount1 = new Amount();
-		amount1.setCurrency("USD");
+		amount1.setCurrency(currency);
 		amount = (int) new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		amount1.setTotal(String.valueOf( amount));
 
 		Transaction transaction = new Transaction();
-		transaction.setDescription("payment");
+		transaction.setDescription(String.valueOf( description));
 		transaction.setAmount(amount1);
 
 		List<Transaction> transactions = new ArrayList<>();
 		transactions.add(transaction);
 
 		Payer payer = new Payer();
-		payer.setPaymentMethod("paypal");
+		payer.setPaymentMethod(method.toString());
 
 		Payment payment = new Payment();
-		payment.setIntent("sale");
+		payment.setIntent(intent.toString());
 		payment.setPayer(payer);  
 		payment.setTransactions(transactions);
 		RedirectUrls redirectUrls = new RedirectUrls();
@@ -61,6 +62,8 @@ public class PaypalService {
 		paymentExecute.setPayerId(payerId);
 		return payment.execute(apiContext, paymentExecute);
 	}
+
+	
 
 
 }

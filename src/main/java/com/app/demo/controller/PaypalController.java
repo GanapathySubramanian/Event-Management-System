@@ -1,5 +1,7 @@
 package com.app.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +31,15 @@ public class PaypalController {
 	private int booking_id;
 
 	@PostMapping("/pay")
-	public String payment(@RequestParam("booking_userid") int userid,@RequestParam("total_amt") long amount,@RequestParam("booking_id") int bookingid) {
+	public String payment(@RequestParam("booking_userid") int userid,@RequestParam("total_amt") long amount,@RequestParam("booking_id") int bookingid,HttpServletRequest request) {
 		
 		this.booking_id=bookingid;
 		
 		try {
-			Payment payment = service.createPayment(userid,amount,bookingid ,"http://localhost:8080/" + CANCEL_URL,
+			Payment payment = service.createPayment(amount,"USD","PayPal","SALE",userid,"http://localhost:8080/" + CANCEL_URL,
 					"http://localhost:8080/" + SUCCESS_URL);
+			
+			System.out.println(payment.getLinks());
 			for(Links link:payment.getLinks()) {
 				if(link.getRel().equals("approval_url")) {
 					return "redirect:"+link.getHref();
@@ -55,11 +59,13 @@ public class PaypalController {
 	    }
 
 	    @GetMapping(value = SUCCESS_URL)
-	    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+	    public String successPay(@RequestParam("paymentId") String payId, @RequestParam("PayerID") String payerId) {
+	    	System.out.println(payId);
+	    	System.out.println(payerId);
 	        try {
-	            Payment payment = service.executePayment(paymentId, payerId);
+	            Payment payment = service.executePayment(payId,payerId);
 	            
-	            System.out.println(payment.toJSON());
+//	            System.out.println(payment.toJSON());
 	            if (payment.getState().equals("approved")) {
 	            	bookingservice.bookingPayment(booking_id);
 	    			return "Paymentsuccess";
