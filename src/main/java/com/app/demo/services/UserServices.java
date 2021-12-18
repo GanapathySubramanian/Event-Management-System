@@ -102,6 +102,11 @@ public class UserServices {
 			// TODO Auto-generated method stub
 			return userrepo.findbykey(searchkey);
 		}
+
+		public User findByRole(String role) {
+			// TODO Auto-generated method stub
+			return userrepo.findbyRole(role);
+		}
 	    
 	
 }

@@ -46,7 +46,6 @@ import com.app.demo.services.UserServices;
 import com.app.demo.services.VendorServices;
 
 @Controller
-
 public class AdminController {
 		
 	@Autowired

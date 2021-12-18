@@ -170,11 +170,12 @@
                                                     </c:if>
                                                     <c:if test = "${booking.accept_status==1 && booking.payment_status==0}">
                                                         <div class="d-flex">
-                                                             <form action="/pay"  method="POST">
+                                                             <form action="/paytmuser"  method="POST">
                                                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                                                 <input type="hidden" value="${User_id}" name="booking_userid">
                                                                   <input type="hidden" value="${booking.amount}" name="total_amt">
              														  <input type="hidden" value="${booking.id}" name="booking_id">
+             													
                                                                 <button type="submit" value="Continue to checkout" class="btn btn-primary btn-sm">Pay</button>
                                                             </form>
                                                             <form action="/bookcancelbyuser" method="POST" class="ml-3">
@@ -211,7 +212,7 @@
         
         </div>
      
-     
+   
 <jsp:include page="includes/footer.jsp" />  
 
 <%}%>

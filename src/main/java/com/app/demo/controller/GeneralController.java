@@ -1,14 +1,22 @@
 package com.app.demo.controller;
 
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.demo.model.User;
 import com.app.demo.services.BookingServices;
@@ -40,6 +48,8 @@ public class GeneralController {
 	@Autowired
 	private BookingServices bookingservice;
 	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@RequestMapping(value="/",method= RequestMethod.GET)
 	public String home() {
@@ -239,6 +249,45 @@ public class GeneralController {
 	@RequestMapping(value="/loginfailed",method=RequestMethod.GET)
 	public String loginfailed() {
 	    return "LoginFailed";
+	}
+	
+	@RequestMapping(value="/contactForm",method=RequestMethod.POST)
+	public String Contactus(@RequestParam("FirstName") String f_name,@RequestParam("LastName") String l_name,@RequestParam("Email") String email,@RequestParam("Message") String msg,ModelMap model) throws MessagingException, UnsupportedEncodingException {
+		
+		try {
+			
+	    MimeMessage message= mailSender.createMimeMessage();              
+	    MimeMessageHelper helper = new MimeMessageHelper(message);
+	    
+	    User user=userservice.findByRole("Admin");
+	    
+	    
+	    helper.setFrom(email, "EXQUISITE");
+	    helper.setTo(user.getEmail());
+	     
+	    String subject = "User Query";
+	     
+	    String content = "<p>First Name : "+f_name+"</p>"
+	            + "<p>Last Name : "+l_name+"</p>"
+	            + "<p> Email : "+email+"</p>"
+	            + "<br>"
+	            + "<p>Message / Query / FeedBack : </p>"
+	            + "<br>"
+	            + "<h1 style='color:orange'>"+msg+"</h1>";
+	     
+	    helper.setSubject(subject);
+	     
+	    helper.setText(content, true);
+	     
+	    mailSender.send(message);
+		}
+	    catch(Exception e) {
+	    model.addAttribute("error","Your Message/Query/Feedback  Send is Failed !!");
+	    	return "ContactUs";
+	    }
+		model.addAttribute("success","your Message is sended successfully please wait we will get back to you as soon as possible");
+		return "ContactUs";
+		
 	}
 	
 	

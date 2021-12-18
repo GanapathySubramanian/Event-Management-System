@@ -16,6 +16,12 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+	<repositories>
+    <repository>
+        <id>my-repo1</id>
+        <url> http://artifactorypg.paytm.in/artifactory/libs-release </url>
+    </repository>
+</repositories>
 	<dependencies>
 	
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -53,6 +59,11 @@
 		</dependency>
 
 		<dependency>
+    		<groupId>com.paytm</groupId>
+    		<artifactId>paytm-checksum</artifactId>
+    		<version>1.2.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -74,12 +85,17 @@
 		  <version>8.23.0</version>
 		</dependency>
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>com.paypal.sdk</groupId>
 			<artifactId>rest-api-sdk</artifactId>
 			<version>1.4.2</version>
 		</dependency>
 	</dependencies>
-
+	
 	<build>
 		<plugins>
 			<plugin>

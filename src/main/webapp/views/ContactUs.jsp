@@ -1,4 +1,6 @@
 <jsp:include page="includes/header.jsp" />  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><i class="fas fa-backward"></i> Back</a>
@@ -18,7 +20,14 @@
 			<div class="contact-form">
 				<h1>Contact Us</h1>
 				<p class="hint-text">We'd love to hear from you, please drop us a line if you've any query.</p>
-				<form id="contact-form"  method="post"  >
+				<div c:if="${error != null}">
+						<p class="text-danger">${error}</p>
+					</div>
+					<div c:if="${success != null}">
+					    <p class="text-success">${success}</p>
+					</div>
+				<form action="/contactForm" modelAttribute="contactForm" method="POST">
+				     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
@@ -43,9 +52,11 @@
 					</div>
 					<button type="submit" class="btn btn-primary" name = "contact" > Submit </button>
 				</form>
+				
 			</div>
 		</div>
 	</div>
 </section>
+
 <!--Section: Contact v.2-->
 <jsp:include page="includes/footer.jsp" />  
