@@ -309,6 +309,7 @@ function testMessage(){
 					console.log(book[i].event_date);
 					if(e_date==book[i].event_date){
 						swal("Alert!", "The Hotel "+hotel_name+" is already booked at the date "+e_date+" Please choose other hotel !", "error");
+						$("#hotel_book").val("");
 					}
 			}
 		}
@@ -348,6 +349,7 @@ function testMessage2(){
 					console.log(book[i].event_date);
 					if(e_date==book[i].event_date){
 						swal("Alert!", "The Catering "+cater_name+" is already booked at the date "+e_date+" Please choose other Catering", "error");
+						$("#catering_book").val("");
 					}
 			}
 		}
@@ -408,6 +410,7 @@ function textMessage5(){
 					console.log(photobook[i].event_date);
 					if(e_date==photobook[i].event_date){
 						swal("Alert!", "The Vendor  "+photo_name_id+" is already have an appointment at the date "+e_date+" Please choose other PhotoGrapher", "error");
+						$("#photo_book").val("");
 					}
 			}
 			}
@@ -449,6 +452,7 @@ function textMessage6(){
 					console.log(djbook[i].event_date);
 					if(e_date==djbook[i].event_date){
 						swal("Alert!", "The Vendor  "+dj_name_id+" is already have an appointment at the date "+e_date+" Please choose other Disc Jockey", "error");
+						$("#dj_book").val("");
 					}
 			}
 			}
@@ -492,6 +496,7 @@ function textMessage7(){
 					console.log(makeupbook[i].event_date);
 					if(e_date==makeupbook[i].event_date){
 						swal("Alert!", "The Vendor  "+makeup_name_id+" is already have an appointment at the date "+e_date+" Please choose other MakeupArtist", "error");
+						$("#makeup_book").val("");
 					}
 			}
 			}
@@ -532,6 +537,7 @@ function textMessage8(){
 					console.log(decobook[i].event_date);
 					if(e_date==decobook[i].event_date){
 						swal("Alert!", "The Vendor  "+deco_name_id+" is already have an appointment at the date "+e_date+" Please choose other Decorator", "error");
+						$("#decorator_book").val("");
 					}
 			}
 			}
