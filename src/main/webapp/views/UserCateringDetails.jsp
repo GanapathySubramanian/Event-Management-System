@@ -56,7 +56,7 @@
                     <span class="price mb-2">
                       <sup>Rs</sup> 
                       <span class="number h1 text-info ">${allcater.cater_price}</span> 
-                      <sub>/per hour</sub>
+                      <sub>/per person</sub>
                     </span>
                   </p>
                   <span class="text-muted"> ${allcater.cater_desc}</span> 

@@ -56,7 +56,7 @@
                     <span class="price mb-2">
                       <sup>Rs</sup> 
                       <span class="number h1 text-info ">${allvendor.vendor_price}</span> 
-                      <sub>/per hour</sub>
+                      <sub>/per event</sub>
                     </span>
                   </p>
                   <p class="pricing-text mb-3 ml-3 text-center">
