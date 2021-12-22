@@ -26,7 +26,7 @@ public class Vendor {
 	@Column(name="vendor_price")
 	private int vendor_price;
 	
-	@Column(name="vendor_img")
+	@Column(name="vendor_img",columnDefinition = "longblob")
 	private String vendor_img;
 
 	public String getVendor_img() {

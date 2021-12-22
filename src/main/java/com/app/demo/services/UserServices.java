@@ -62,7 +62,7 @@ public class UserServices {
 
 	public long userCount() {
 		// TODO Auto-generated method stub
-		return userrepo.count();
+		return userrepo.countByRole("User");
 	}
 
 	public User findByEmail(String email) {

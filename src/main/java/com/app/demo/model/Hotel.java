@@ -27,7 +27,7 @@ public class Hotel {
     @Column(name="hotel_desc")
 	private String hotelDesc;
     
-    @Column(name="hotel_img1")
+    @Column(name="hotel_img1",columnDefinition = "longblob")
 	private String hotelImg1;
 
     @Column(name="price")

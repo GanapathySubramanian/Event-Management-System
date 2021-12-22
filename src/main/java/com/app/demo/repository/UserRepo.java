@@ -36,4 +36,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 	@Query("select u from user u where role=?1")
 	public User findbyRole(String role);
 
+	@Query("select count(u) from user u where role=?1")
+	public long countByRole(String string);
+
 }

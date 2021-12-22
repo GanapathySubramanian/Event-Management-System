@@ -27,7 +27,7 @@ public class Event {
 	@Column(name="event_desc")
 	private String event_desc;
 	
-	@Column(name="event_img")
+	@Column(name="event_img",columnDefinition = "longblob")
 	private String event_img;
 
 	

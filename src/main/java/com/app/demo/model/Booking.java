@@ -33,16 +33,16 @@ public class Booking {
 	@Column(name="no_of_guest")
 	private String no_of_guest;
 	
-	@Column(name="photographer")
+	@Column(name="photographer",columnDefinition = "text")
 	private String photographer_name_desc;
 	
-	@Column(name="dj")
+	@Column(name="dj",columnDefinition = "text")
 	private String dj_name_desc;
 	
-	@Column(name="makeupartist")
+	@Column(name="makeupartist",columnDefinition = "text")
 	private String makeupartist_name_desc;
 	
-	@Column(name="decorator")
+	@Column(name="decorator",columnDefinition = "text")
 	private String decorator_name_desc;
 	
 	@Column(name="bookedon")

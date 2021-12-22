@@ -31,7 +31,7 @@ public class Catering {
 	@Column(name="cater_price")
 	private int cater_price;
 	
-	@Column(name="cater_img")
+	@Column(name="cater_img",columnDefinition = "longblob")
 	private String cater_img;
 
 	@OneToMany(mappedBy="catering",cascade = CascadeType.ALL,fetch = FetchType.EAGER)

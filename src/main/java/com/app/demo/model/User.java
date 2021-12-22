@@ -28,7 +28,7 @@ public class User {
 		@Column(name="last_name")
 		private String lastName;
 		
-		@Column(name="Address")
+		@Column(name="Address",columnDefinition = "text")
 		private String address;
 		
 		@Column(name="contact_no")

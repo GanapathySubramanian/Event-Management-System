@@ -1,0 +1,36 @@
+html,body{
+    width:100%;
+    height:100%;
+    padding:0%;
+    margin:0%;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+    overflow-x:hidden;
+}
+
+
+
+/* ===== FOOTER =====*/
+.footer{
+background-color: #0E2431;
+color: #fff;
+text-align: center;
+font-weight: 600;
+padding: 2rem 0;
+margin-right:-25px;
+}
+.footer_title{
+font-size: 2rem;
+margin-bottom: 2rem;
+}
+.footer_social{
+margin-bottom: 2rem;
+}
+.footer_icon{
+font-size: 1.5rem;
+color: #fff;
+margin: 0 1rem;
+}
+.footer_icon:hover{
+  color:#048dfe;
+}
