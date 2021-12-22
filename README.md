@@ -29,7 +29,7 @@ Live Demo Video : [Visit here](https://clipchamp.com/watch/qZ726cMrv92)
 <p>password : 123</p>
 
 ## SUPERADMIN-LOGIN
-<p>Email : saairaamprasad@gmail.com</p>
+<p>Email : sai@gmail.com</p>
 <p>password : 123</p>
 
 
