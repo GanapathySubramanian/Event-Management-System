@@ -12,7 +12,7 @@ Live Demo Video : [Visit here](https://clipchamp.com/watch/qZ726cMrv92)
 4. After Extracting the file, create a database event_management_system
 5. then open the extracted file in spring tool suite
 6. open the file EventManagementSystemApplication.java in src/main/java/com/app/demo and run the file as spring boot App
-7. Then you have to import the [.sql](https://github.com/GanapathySubramanian/Event-Management-System/tree/master/db_sql) file in mysql workbench, the database file consists of predumped table data and structure
+7. Then you have to import the [.sql](https://github.com/GanapathySubramanian/Event-Management-System/tree/master/db_sql) file in mysql workbench, the sql file consists of predumped table data and structure
 8. Open your web browser and type 'localhost:8080'
 9. Hurray! That's it!
 
