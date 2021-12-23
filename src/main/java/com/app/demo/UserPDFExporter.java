@@ -79,7 +79,7 @@ public class UserPDFExporter {
         
         document.add(new Paragraph(" ", parafont));
         
-        document.add(new Paragraph("Event :  "+booking.getEvent(), parafont));
+        document.add(new Paragraph("Event :  "+booking.getEvent().getEventname(), parafont));
        
         document.add(new Paragraph(" ", parafont));
         
@@ -142,8 +142,12 @@ public class UserPDFExporter {
         
         document.add(new Paragraph("Total Price : Rs."+booking.getAmount(), parafont));
         
-
-        
+        Font endfont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        endfont.setSize(20);
+        endfont.setColor(Color.PINK);
+        Paragraph end = new Paragraph("Enjoy your  "+booking.getEvent().getEventname()+" Event", endfont);
+        end.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(end);
         document.close();
 
         
