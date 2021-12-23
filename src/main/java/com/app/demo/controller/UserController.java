@@ -465,7 +465,7 @@ public class UserController {
 	    String headerValue = "attachment; filename=Inovice generated on:" + currentDateTime + ".pdf";
 	    response.setHeader(headerKey, headerValue);
 	          
-	    UserPDFExporter exporter = new UserPDFExporter(booking.getId(), booking.getUser().getEmail(), booking.getUser().getFirstName(),booking.getUser().getLastName(), booking.getUser().getContactno(),booking.getUser().getGender(),booking.getUser().getAddress(),booking.getHotel().getHotelName(),booking.getHotel().getPrice(),booking.getCatering().getCatername(),booking.getCatering().getCater_price(),booking.getAmount(),booking.getCurrent_date(),booking.getDecorator_name_desc(),booking.getDj_name_desc(),booking.getMakeupartist_name_desc(),booking.getPhotographer_name_desc(),booking.getEvent().getEventname(),booking.getEvent_date(),booking.getMax_total_hour(),booking.getNo_of_guest());
+	    UserPDFExporter exporter = new UserPDFExporter(booking);
 	    exporter.export(response);
 		
 //		System.out.println(booking);
