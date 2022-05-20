@@ -2,29 +2,40 @@
 
 You can use the [editor on GitHub](https://github.com/GanapathySubramanian/Event-Management-System/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# EXQUISITE - EVENT-MANAGEMNET-SYSTEM
 
-### Markdown
+PPT : [Click Here](https://docs.google.com/presentation/d/1ChT6H6wb5OIiYuz-tZQBNC8b2-ZIeDcy/edit#slide=id.p1)
+<br>
+Presentation Video : [Click Here](https://fluvid.com/videos/detail/xqrExu_jGks1E4k8Z)
+<br>
+Live Demo Video : [Click Here](https://clipchamp.com/watch/qZ726cMrv92)
+## Steps to run the project in your machine
+1. Download and install spring tool suite in your machine
+2. Clone or download the repository
+3. Extract all the files
+4. After Extracting the file, create a database event_management_system
+5. then open the extracted file in spring tool suite
+6. open the file EventManagementSystemApplication.java in src/main/java/com/app/demo and run the file as spring boot App
+7. Then you have to import the [.sql](https://github.com/GanapathySubramanian/Event-Management-System/tree/master/db_sql) file in mysql workbench, the sql file consists of predumped table data and structure
+8. Open your web browser and type 'localhost:8080'
+9. Hurray! That's it!
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+# login credentials
+## ADMIN-LOGIN
+<p>Email : ganapathy2000subramanian@gmail.com</p>
+<p>password : admin@123</p>
 
-```markdown
-Syntax highlighted code block
+## USER-LOGIN
+<p>Email : ganapathydaprojects@gmail.com</p>
+<p>password : 123</p>
 
-# Header 1
-## Header 2
-### Header 3
+## SUBADMIN-LOGIN
+<p>Email : venky777@gmail.com</p>
+<p>password : 123</p>
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
+## SUPERADMIN-LOGIN
+<p>Email : sai@gmail.com</p>
+<p>password : 123</p>
 
 For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
