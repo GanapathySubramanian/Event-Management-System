@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Event Management System
 
 You can use the [editor on GitHub](https://github.com/GanapathySubramanian/Event-Management-System/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
