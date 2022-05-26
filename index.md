@@ -1,7 +1,5 @@
 ## Event Management System
 
-You can use the [editor on GitHub](https://github.com/GanapathySubramanian/Event-Management-System/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
 # EXQUISITE - EVENT-MANAGEMNET-SYSTEM
 
 PPT : [Click Here](https://docs.google.com/presentation/d/1ChT6H6wb5OIiYuz-tZQBNC8b2-ZIeDcy/edit#slide=id.p1)
